@@ -201,13 +201,27 @@ class LandingPageManager {
         this.setActiveNavLink(navLinks[0]);
         
         const observer = new IntersectionObserver((entries) => {
+            // Find the section that's most visible in the viewport
             let activeEntry = null;
-            let maxRatio = 0;
+            let maxVisibility = 0;
             
             entries.forEach(entry => {
-                if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
-                    maxRatio = entry.intersectionRatio;
-                    activeEntry = entry;
+                if (entry.isIntersecting) {
+                    // Calculate how much of the section is visible
+                    const rect = entry.boundingClientRect;
+                    const viewportHeight = window.innerHeight;
+                    const headerHeight = 80;
+                    
+                    // Calculate visible portion considering header offset
+                    const visibleTop = Math.max(0, headerHeight - rect.top);
+                    const visibleBottom = Math.min(viewportHeight, rect.bottom);
+                    const visibleHeight = Math.max(0, visibleBottom - Math.max(headerHeight, rect.top));
+                    const visibility = visibleHeight / (rect.height || 1);
+                    
+                    if (visibility > maxVisibility) {
+                        maxVisibility = visibility;
+                        activeEntry = entry;
+                    }
                 }
             });
             
@@ -218,8 +232,8 @@ class LandingPageManager {
                 }
             }
         }, {
-            threshold: [0.1, 0.3, 0.5, 0.7],
-            rootMargin: '-80px 0px -50% 0px'
+            threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
+            rootMargin: '-80px 0px -20% 0px'
         });
         
         sections.forEach(section => observer.observe(section));
@@ -801,8 +815,10 @@ class LandingPageManager {
             
             if (element.tagName === 'INPUT' && element.type === 'submit') {
                 element.value = translation;
-            } else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            } else if ((element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') && key.includes('placeholder')) {
                 element.placeholder = translation;
+            } else if (element.tagName === 'OPTION') {
+                element.textContent = translation;
             } else {
                 element.textContent = translation;
             }

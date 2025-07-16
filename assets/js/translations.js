@@ -117,6 +117,24 @@ class TranslationManager {
                 contact_workshop: "Zostaw kontakt, aby umówić warsztat",
                 leave_contact: "Zostaw kontakt",
                 
+                // Contact Section
+                contact_title: "Skontaktuj się z nami!",
+                contact_subtitle: "Pierwszy krok jest prosty — napisz do nas. Z przyjemnością odpowiemy na Twoje pytania i pokażemy, jak wygląda dzień w naszym przedszkolu.",
+                contact_form_title: "Zostaw wiadomość",
+                
+                // Form fields
+                form_name: "Imię i nazwisko",
+                form_email: "Email",
+                form_phone: "Telefon",
+                form_message: "Wiadomość",
+                form_submit: "Wyślij wiadomość",
+                
+                // Form placeholders
+                form_name_placeholder: "Wprowadź swoje imię i nazwisko",
+                form_email_placeholder: "Wprowadź swój adres email",
+                form_phone_placeholder: "Wprowadź swój numer telefonu (opcjonalnie)",
+                form_message_placeholder: "Opisz w czym możemy Ci pomóc...",
+                
                 // Form validation
                 error_name: "Imię musi mieć co najmniej 2 znaki",
                 error_email: "Proszę wprowadzić prawidłowy adres email",
@@ -223,6 +241,24 @@ class TranslationManager {
                 book_workshop: "Call to book workshop",
                 contact_workshop: "Leave contact to book workshop",
                 leave_contact: "Leave contact",
+                
+                // Contact Section
+                contact_title: "Contact us!",
+                contact_subtitle: "The first step is simple — write to us. We will be happy to answer your questions and show you what a day at our preschool looks like.",
+                contact_form_title: "Leave a message",
+                
+                // Form fields
+                form_name: "Name and surname",
+                form_email: "Email",
+                form_phone: "Phone",
+                form_message: "Message",
+                form_submit: "Send message",
+                
+                // Form placeholders
+                form_name_placeholder: "Enter your name and surname",
+                form_email_placeholder: "Enter your email address",
+                form_phone_placeholder: "Enter your phone number (optional)",
+                form_message_placeholder: "Describe how we can help you...",
                 
                 // Form validation
                 error_name: "Name must be at least 2 characters long",
