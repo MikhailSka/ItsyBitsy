@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ItsyBitsy - Przedszkole Montessori</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="header-logo">
+                    <img src="assets/images/logo.png" alt="ItsyBitsy Logo" />
+                </div>
+                
+                <nav class="header-nav" id="headerNav">
+                    <div class="mobile-menu-header">
+                        <button class="mobile-menu-close" id="mobileMenuClose">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#hero" data-translate="nav_home">Strona Główna</a></li>
+                        <li><a href="#about" data-translate="nav_about">O Nas</a></li>
+                        <li><a href="#uniqueness" data-translate="nav_services">Nasza Wyjątkowość</a></li>
+                        <li><a href="#testimonials" data-translate="nav_testimonials">Opinie</a></li>
+                        <li><a href="#contact" data-translate="nav_contact">Kontakt</a></li>
+                    </ul>
+                    
+                    <div class="language-switcher">
+                        <button class="lang-toggle-btn" id="langToggle">
+                            <span class="current-lang">PL</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="2" y1="12" x2="22" y2="12"></line>
+                                <path d="m4.93 4.93 4.24 4.24"></path>
+                                <path d="m14.83 9.17 4.24-4.24"></path>
+                                <path d="m14.83 14.83 4.24 4.24"></path>
+                                <path d="m9.17 14.83-4.24 4.24"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-image">
+                        <img src="assets/images/hero.png" alt="Teacher with children celebrating" />
+                        <div class="hero-logo-overlay">
+                            <img src="assets/images/logo.png" alt="ItsyBitsy Logo" />
+                        </div>
+                    </div>
+                    <div class="hero-text">
+                        <h1 data-translate="hero_title">Międzynarodowe przedszkole dwujęzyczne Montessori. Zanurzenie w angielskim, przez cały dzień, codziennie.</h1>
+                        <button class="btn-primary" data-translate="schedule_meeting">Umów spotkanie</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Only the Best -->
+        <section class="only-best-section" id="about">
+            <div class="container">
+                <div class="only-best-content">
+                    <div class="only-best-image">
+                        <img src="assets/images/with-flags.png" alt="Teacher with children holding flags" />
+                    </div>
+                    <div class="only-best-text">
+                        <h2 data-translate="only_best_title">Tylko to, co najlepsze dla Twojego dziecka!</h2>
+                        <ul class="only-best-list">
+                            <li data-translate="only_best_point_1">Pełen program akademicki Montessori dla dzieci 3-6 lat.</li>
+                            <li data-translate="only_best_point_2">Dwujęzyczność - codzienne zanurzenie w języku angielskim, program edukacyjny po polsku i angielsku.</li>
+                            <li data-translate="only_best_point_3">Native speaker przez cały dzień.</li>
+                            <li data-translate="only_best_point_4">Bez presji, z uważnością i szacunkiem.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Grid Layout -->
+        <section class="grid-section" id="uniqueness">
+            <div class="container">
+                <div class="grid-buttons">
+                    <div class="button-row">
+                        <button class="btn-primary" data-translate="schedule_meeting">Umów spotkanie</button>
+                        <button class="btn-primary" data-translate="call_us">Zadzwoń</button>
+                        <button class="btn-primary" data-translate="send_email">Wyślij mail</button>
+                        <button class="btn-primary" data-translate="leave_contact_yourself">Zostaw kontakt do siebie</button>
+                        <button class="btn-primary" data-translate="get_to_know_us">Poznaj nas bliżej</button>
+                    </div>
+                </div>
+                
+                <div class="grid-images">
+                    <div class="grid-image-item">
+                        <img src="assets/images/uniqueness_1.jpeg" alt="Education" />
+                        <h3 data-translate="grid_education_title">Edukacja oparta na wiedzy i zrozumieniu dziecka</h3>
+                        <p data-translate="grid_education_text">Realizujemy pełny program Montessori, wspierający rozwój poznawczy, emocjonalny i społeczny dzieci. Nasze klasy są wyposażone w oryginalne materiały Montessori, a wszechstronnie wykształceni nauczyciele codziennie towarzyszą dzieciom w ich indywidualnym rozwoju – bez pośpiechu, z uważnością i szacunkiem.</p>
+                    </div>
+                    <div class="grid-image-item">
+                        <img src="assets/images/uniqueness_2.png" alt="Authentic bilingualism" />
+                        <h3 data-translate="grid_authentic_title">Autentyczna dwujęzyczność</h3>
+                        <p data-translate="grid_authentic_text">Angielski przez cały dzień – naturalnie i bez presji. Dzieci codziennie funkcjonują w środowisku dwujęzycznym – polskiego i angielskiego. Nasi anglojęzyczni nauczyciele są obecni w grupie przez cały dzień, dzięki czemu język angielski przyswajany jest w sposób naturalny, poprzez relacje, zabawę i codzienne sytuacje. To zanurzenie, a nie lekcje.</p>
+                    </div>
+                    <div class="grid-image-item">
+                        <img src="assets/images/uniqueness_3.png" alt="Relationships and closeness" />
+                        <h3 data-translate="grid_relationships_title">Podejście relacyjne i bliskościowe</h3>
+                        <p data-translate="grid_relationships_text">Bezpieczne relacje są fundamentem rozwoju. W centrum naszej pracy są relacje – z dzieckiem, z rodzicem, w zespole. Tworzymy przestrzeń, w której każde dziecko czuje się widziane, słyszane i ważne. Adaptacja, codzienne rytuały, rozwiązywanie konfliktów – wszystko opieramy na empatii, uważności i komunikacji bez przemocy (NVC).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Testimonials -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <h2 class="testimonials-title" data-translate="testimonials_title">Prawdziwi ludzie, prawdziwe doświadczenia!</h2>
+                <p class="testimonials-subtitle" data-translate="testimonials_subtitle">Przez ponad 10 lat wypuściliśmy w świat setki szczęśliwych i świetnie przygotowanych do życia i do szkoły przedszkolaków!</p>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <h3 data-translate="testimonial_1_name">pani Joanna:</h3>
+                        <p data-translate="testimonial_1_text">Przygoda z przedszkolem Itsy Bitsy trwa już kilka lat - najpierw uczęszczała tam córka, a teraz żerówka kończy syn. I gdybym stała ponownie przed wyborem placówki to podjęłabym taką samą decyzję. Itsy Bitsy to najlepsze miejsce, do którego mogły trafić moje dzieci.</p>
+                        <p data-translate="testimonial_1_text_2">Zawsze mogliśmy liczyć na najlepszą opiekę, dużo ciepła i empatii - córka na tyle tego, że skończyła przedszkole prawie 2 lata temu chętnie tam wraca.</p>
+                        <p data-translate="testimonial_1_text_3">Itsy Bitsy świetnie przygotowuje dzieci do szkoły - nie tylko pod kątem merytorycznym, ale również emocjonalnym. Wszystko to za sprawą kadry - zarówno nauczycieli jak i Dyrekcji. Ogromnym plusem jest rodzinna atmosfera oraz native speaker, który jest bardzo naturalny z opiekunów każdej z grup - dzięki temu dzieci w naturalny sposób mogą uczyć się angielskiego. Efekt? Kończąc przedszkole dzieci nie tylko rozumieją, ale również potrafią się komunikować w tym języku.</p>
+                        <p data-translate="testimonial_1_text_4">Jeśli zastanawiacie się, czy to miejsce dla Was - przyjdźcie i sprawdźcie - jestem pewna, że dzieci pokochają to miejsce.</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <h3 data-translate="testimonial_2_name">pani Ilona:</h3>
+                        <p data-translate="testimonial_2_text">Do przedszkola od kilku lat chodzą dwójka moich dzieci - zawsze mogłam liczyć na najlepszą opiekę i zaangażowanie - wiem, co mówię bo mam porównanie z innymi placówkami. To co było dla mnie ważne, to to, że zespół Itsy Bitsy nie jest po to, żeby odpowiadać na potrzeby rodzica, tylko na potrzeby dziecka. Współpraca z rodzicem jest zawsze partnerska, a zespół - zawsze dostępny i otwarty. Moje dzieciaki kochają chodzić do Itsy Bitsy, gorąco polecam</p>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <h3 data-translate="testimonial_3_name">pani Nadieżda:</h3>
+                        <p data-translate="testimonial_3_text">Chciałabym podkreślić naszą szczerą wdzięczność nauczycielom i dyrektorowi ItsyBitsy za życzliwość, profesjonalizm, opiekę i wsparcie, jakie zapewniliście naszej rodzinie w okresie adaptacyjnym. Przyjechaliśmy z innego kraju i doświadczyliśmy strasznego stresu i niepokoju, bariery językowej i niepewności we wszystkim, ale dzięki Wam i Waszej opiece nasza adaptacja była tak łatwa i komfortowa, jak to tylko możliwe. Nasza córka szybko się zaaklimatyzowała i poczuła się bezpiecznie.</p>
+                        <p data-translate="testimonial_3_text_2">Szczególnie poruszyła mnie miłość i uwaga, z jaką traktowaliście naszą córkę. Wasza życzliwość i profesjonalizm pomagały jej nie tylko pokonać trudności adaptacyjne, ale także nawiązać nowe przyjaźnie, rozwijać pewność siebie i zainteresowanie nauką.</p>
+                        <p data-translate="testimonial_3_text_3">System Montessori, z którego korzystacie w swoim przedszkolu, okazał się dla nas prawdziwym odkryciem. Widzimy, jak dzięki Waszym zajęciom nasza córka staje się coraz bardziej samodzielna, pracowita i przygotowana do nauki w szkole. To nieoceniony wkład w jej przyszłość, za co jesteśmy Państwu szczerze wdzięczni.</p>
+                        <p data-translate="testimonial_3_text_4">Z pełnym przekonaniem polecamy Państwa przedszkole wszystkim rodzicom, którzy szukają ciepłego, troskliwego i opiekuńczego środowiska dla swoich dzieci. Tworzycie niesamowitą atmosferę, w której każde dziecko czuje się wyjątkowo i kochane.</p>
+                        <p data-translate="testimonial_3_text_5">Na zawsze pozostaniemy w naszych sercach. Z miłością i wielką wdzięcznością ukochanej ItsyBitsy</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Why Us -->
+        <section class="why-us-section">
+            <div class="container">
+                <div class="why-us-content">
+                    <div class="why-us-video">
+                        <div class="video-container">
+                            <video 
+                                controls 
+                                preload="auto"
+                                playsinline
+                                muted>
+                                <source src="assets/videos/itsybitsy-short.mov" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje elementu video.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="why-us-text">
+                        <h2 data-translate="why_us_title">Dlaczego właśnie my?</h2>
+                        <p class="why-us-subtitle" data-translate="why_us_subtitle">Bo chcesz tylko tego, co najlepsze dla swojego dziecka!</p>
+                        <ul class="why-us-list">
+                            <li data-translate="why_us_point_1">Pełen program akademicki Montessori– dzieci uczą się we własnym tempie, rozwijają kluczowe kompetencje przyszłości.</li>
+                            <li data-translate="why_us_point_2">Bliskość – budujemy relacje oparte na szacunku i i zaufaniu.</li>
+                            <li data-translate="why_us_point_3">Dwujęzyczność przez immersję – język angielski naturalnie towarzyszy dzieciom każdego dnia, przez cały dzień.</li>
+                            <li data-translate="why_us_point_4">Zespół z misją i sercem– doświadczona, stała i świetnie wykształcona kadra, która naprawdę lubi dzieci i swoją pracę</li>
+                            <li data-translate="why_us_point_5">Nauczyciel-native speaker w każdej grupie, komunikujący się wyłącznie po angielsku.</li>
+                            <li data-translate="why_us_point_6">Piękne, spokojne wnętrza – naturalne materiały, światło, harmonia i czystość.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Visit Us -->
+        <section class="visit-us-section">
+            <div class="container">
+                <div class="visit-us-content">
+                    <div class="visit-us-text">
+                        <h2 data-translate="visit_us_title">Zajrzuj do nas!</h2>
+                        <p data-translate="visit_us_text">Zobacz, jak wygląda dzień w naszym przedszkolu. Nasza codzienność to zadowolone, bezpieczne, skupione dzieci, ciepłe relacje, spokojna przestrzeń i zaangażowani nauczyciele. Tak właśnie wygląda u nas edukacja w duchu Montessori i bliskości.</p>
+                        <p class="visit-us-question" data-translate="visit_us_question">Chcesz wiedzieć, czy to miejsce dla Was?</p>
+                        <p class="visit-us-cta" data-translate="visit_us_cta">Najlepiej zobaczyć wszystko na własne oczy!</p>
+                        <button class="btn-primary" data-translate="schedule_meeting">Umów spotkanie</button>
+                    </div>
+                    <div class="visit-us-video">
+                        <div class="video-container">
+                            <video 
+                                controls 
+                                preload="auto"
+                                playsinline
+                                muted>
+                                <source src="assets/videos/itsybitsy-cycle.mov" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje elementu video.
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Listen to Children -->
+        <section class="listen-children-section">
+            <div class="container">
+                <div class="listen-children-content">
+                    <div class="listen-children-video">
+                        <div class="video-container">
+                            <video 
+                                controls 
+                                preload="auto"
+                                playsinline
+                                muted>
+                                <source src="assets/videos/itsybitsy-kids.mov" type="video/mp4">
+                                Twoja przeglądarka nie obsługuje elementu video.
+                            </video>
+                        </div>
+                    </div>
+                    <div class="listen-children-text">
+                        <h2 data-translate="listen_children_title">Posłuchaj dzieci!</h2>
+                        <p class="listen-children-subtitle" data-translate="listen_children_subtitle">Przedszkole widziane z najważniejszej perspektywy, z poziomu około 116cm!</p>
+                        <p data-translate="listen_children_text_1">To, co naprawdę liczy się w przedszkolu, najlepiej widać w spojrzeniu dziecka.</p>
+                        <p data-translate="listen_children_text_2">W radości odkrywania, w pewności siebie, gdy samo sięga po materiały, w swobodzie, z jaką wita nauczyciela.</p>
+                        <p data-translate="listen_children_text_3">To dzieci wiedzą najlepiej, co daje im poczucie bezpieczeństwa, co lubią najbardziej, gdzie czują się jak u siebie.</p>
+                        <p data-translate="listen_children_text_4">W tej przestrzeni nie ma przypadków – każde miejsce, materiał, rytuał i relacja wspiera ich naturalny rozwój.</p>
+                        <p data-translate="listen_children_text_5">A dzieci to czują.</p>
+                        <p class="listen-children-highlight" data-translate="listen_children_highlight">To nie tylko przedszkole. To ich miejsce mocy.</p>
+                        <button class="btn-primary" data-translate="contact_us">Zostaw kontakt, zadzwonimy!</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Let's Meet -->
+        <section class="lets-meet-section">
+            <div class="container">
+                <div class="lets-meet-content">
+                    <div class="lets-meet-image">
+                        <img src="assets/images/lets-know-each-other.png" alt="Teacher with children in Montessori classroom" />
+                    </div>
+                    <div class="lets-meet-text">
+                        <h2 data-translate="lets_meet_title">Poznajmy się.</h2>
+                        <p data-translate="lets_meet_subtitle">Umów dziecko na bezpłatny warsztat i zrelaksuj się przy kawie!</p>
+                        <button class="btn-primary" data-translate="book_workshop">Zadzwoń, aby umówić warsztat</button>
+                        <button class="btn-primary" data-translate="contact_workshop">Zostaw kontakt, aby umówić warsztat</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Join Us -->
+        <section class="join-us-section" id="contact">
+            <div class="container">
+                <div class="join-us-content">
+                    <div class="join-us-logo">
+                        <img src="assets/images/logo.png" alt="ItsyBitsy Logo" />
+                    </div>
+                    <div class="join-us-text">
+                        <h2 data-translate="join_us_text">Dołącz do naszej społeczności już dziś!</h2>
+                        <p class="join-us-description" data-translate="join_us_description">Pierwszy krok jest prosty — skontaktuj się z nami. Z przyjemnością odpowiemy na Twoje pytania i pokażemy, jak wygląda dzień w naszym przedszkolu.</p>
+                        <p class="join-us-availability" data-translate="join_us_availability">Nie czekaj — miejsca szybko się kończą!</p>
+                        <p class="join-us-cta" data-translate="join_us_cta">ZADZWOŃ, NAPISZ LUB ZOSTAW KONTAKT – JESTEŚMY TU DLA CIEBIE!</p>
+                        <div class="join-us-buttons">
+                            <button class="btn-primary" data-translate="call_us">Zadzwoń</button>
+                            <button class="btn-primary" data-translate="leave_contact">Zostaw kontakt</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <script src="assets/js/translations.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
