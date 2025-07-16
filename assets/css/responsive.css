@@ -39,19 +39,14 @@
         right: 0;
     }
     
-    /* Show mobile menu header and close button */
-    .mobile-menu-header {
-        display: flex;
-    }
-    
-    /* Mobile menu overlay */
+    /* Mobile menu overlay - no darkening */
     .mobile-menu-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background-color: rgba(0, 0, 0, 0.2);
+        background-color: transparent;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
@@ -63,11 +58,11 @@
         visibility: visible;
     }
     
-    /* Only blur/dim content that's not in header or nav */
+    /* Remove body darkening/blurring when mobile menu is open */
     body.menu-open main {
-        filter: blur(1px);
-        opacity: 0.5;
-        pointer-events: none;
+        filter: none;
+        opacity: 1;
+        pointer-events: auto;
     }
     
     /* Keep header fully functional */
@@ -80,7 +75,7 @@
     .nav-menu {
         flex-direction: column;
         gap: 0;
-        padding: 0 var(--spacing-lg);
+        padding: var(--spacing-lg) var(--spacing-lg) 0 var(--spacing-lg);
         margin-bottom: var(--spacing-xl);
         width: 100%;
     }
@@ -102,12 +97,24 @@
         border-radius: 0;
         transition: all 0.3s ease;
         display: block;
+        color: var(--gray-text);
+        background-color: transparent;
+    }
+    
+    .nav-menu a:hover {
+        background-color: var(--light-gray);
+        color: var(--primary-orange);
+    }
+    
+    .nav-menu a.active {
+        background-color: var(--primary-orange);
+        color: var(--white);
+        font-weight: 600;
     }
     
     .nav-menu a:focus {
         outline: 2px solid var(--primary-orange);
         outline-offset: 2px;
-        background-color: var(--light-gray);
     }
     
     .nav-menu a:focus:not(:focus-visible) {
@@ -115,13 +122,24 @@
     }
     
     .nav-menu a:active {
-        background-color: var(--primary-orange);
-        color: var(--white);
         transform: scale(0.98);
     }
     
+    /* Reset desktop active state for mobile */
     .nav-menu a.active::after {
         display: none;
+    }
+    
+    /* Mobile specific active states */
+    .nav-menu a.active {
+        background-color: var(--primary-orange) !important;
+        color: var(--white) !important;
+        font-weight: 600 !important;
+    }
+    
+    .nav-menu a.active:hover {
+        background-color: var(--primary-orange) !important;
+        color: var(--white) !important;
     }
     
     .mobile-menu-toggle {
@@ -485,20 +503,88 @@
     }
     
     .nav-menu {
+        flex-direction: row;
         gap: var(--spacing-md);
+        padding: 0;
+        margin-bottom: 0;
+        width: auto;
     }
     
     .nav-menu a {
         font-size: var(--font-size-small);
         padding: var(--spacing-xs);
+        border-radius: var(--border-radius);
+        background-color: transparent;
+        border-bottom: none;
+        font-weight: 600;
+        position: relative;
+    }
+    
+    .nav-menu li {
+        width: auto;
+        border-bottom: none;
+    }
+    
+    .nav-menu a.active {
+        background-color: var(--primary-orange) !important;
+        color: var(--white) !important;
+    }
+    
+    .nav-menu a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background-color: var(--white);
+        border-radius: 1px;
     }
     
     .mobile-menu-toggle {
-        display: none;
+        display: flex;
     }
     
-    .mobile-menu-header {
-        display: none;
+    /* Reset mobile navigation styles for desktop */
+    .nav-menu {
+        flex-direction: row;
+        gap: var(--spacing-md);
+        padding: 0;
+        margin-bottom: 0;
+        width: auto;
+    }
+    
+    .nav-menu a {
+        font-size: var(--font-size-small);
+        padding: var(--spacing-xs);
+        border-radius: var(--border-radius);
+        background-color: transparent;
+        border-bottom: none;
+        font-weight: 600;
+        position: relative;
+    }
+    
+    .nav-menu li {
+        width: auto;
+        border-bottom: none;
+    }
+    
+    .nav-menu a.active {
+        background-color: var(--primary-orange) !important;
+        color: var(--white) !important;
+    }
+    
+    .nav-menu a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background-color: var(--white);
+        border-radius: 1px;
     }
     
     /* Grid Section - Tablet */
@@ -638,6 +724,47 @@
 @media (min-width: 1024px) {
     .container {
         padding: 0 var(--spacing-xl);
+    }
+    
+    /* Desktop navigation styling */
+    .nav-menu {
+        flex-direction: row;
+        gap: var(--spacing-lg);
+        padding: 0;
+        margin-bottom: 0;
+        width: auto;
+    }
+    
+    .nav-menu a {
+        font-size: var(--font-size-base);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--border-radius);
+        background-color: transparent;
+        border-bottom: none;
+        font-weight: 600;
+        position: relative;
+    }
+    
+    .nav-menu li {
+        width: auto;
+        border-bottom: none;
+    }
+    
+    .nav-menu a.active {
+        background-color: var(--primary-orange) !important;
+        color: var(--white) !important;
+    }
+    
+    .nav-menu a.active::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background-color: var(--white);
+        border-radius: 1px;
     }
     
     /* Enhanced spacing for large screens */

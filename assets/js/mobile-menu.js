@@ -8,7 +8,6 @@ class MobileMenuManager {
     constructor() {
         this.isMenuOpen = false;
         this.menuToggle = null;
-        this.menuCloseButton = null;
         this.menuOverlay = null;
         this.navMenu = null;
         this.focusableElements = [];
@@ -32,7 +31,6 @@ class MobileMenuManager {
      */
     setupElements() {
         this.menuToggle = document.getElementById('mobileMenuToggle');
-        this.menuCloseButton = document.getElementById('mobileMenuClose');
         this.navMenu = document.getElementById('headerNav');
         
         if (!this.menuToggle || !this.navMenu) {
@@ -71,11 +69,6 @@ class MobileMenuManager {
 
         // Toggle button click
         this.menuToggle.addEventListener('click', this.toggleMenu.bind(this));
-        
-        // Close button click
-        if (this.menuCloseButton) {
-            this.menuCloseButton.addEventListener('click', this.closeMenu.bind(this));
-        }
         
         // Overlay click to close menu
         if (this.menuOverlay) {
@@ -139,11 +132,6 @@ class MobileMenuManager {
         this.navMenu.setAttribute('aria-hidden', 'true');
         this.navMenu.setAttribute('role', 'navigation');
         this.navMenu.setAttribute('aria-labelledby', 'mobileMenuToggle');
-        
-        // Setup close button accessibility
-        if (this.menuCloseButton) {
-            this.menuCloseButton.setAttribute('aria-label', 'Close navigation menu');
-        }
     }
 
     /**
@@ -212,13 +200,9 @@ class MobileMenuManager {
             this.menuOverlay.setAttribute('aria-hidden', 'false');
         }
         
-        // Focus close button or first menu item
+        // Focus first menu item
         setTimeout(() => {
-            if (this.menuCloseButton) {
-                this.menuCloseButton.focus();
-            } else {
-                this.focusFirstMenuItem();
-            }
+            this.focusFirstMenuItem();
         }, 100);
         
         // Prevent body scroll
@@ -467,10 +451,6 @@ class MobileMenuManager {
             this.menuToggle.removeEventListener('click', this.toggleMenu);
         }
         
-        if (this.menuCloseButton) {
-            this.menuCloseButton.removeEventListener('click', this.closeMenu);
-        }
-        
         if (this.menuOverlay) {
             this.menuOverlay.removeEventListener('click', this.closeMenu);
             this.menuOverlay.remove();
@@ -489,7 +469,6 @@ class MobileMenuManager {
         
         // Clean up
         this.menuToggle = null;
-        this.menuCloseButton = null;
         this.navMenu = null;
         this.menuOverlay = null;
         this.focusableElements = [];

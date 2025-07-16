@@ -25,6 +25,16 @@ class LandingPageManager {
         this.setupLanguageSwitcher();
         this.setupNavigation();
         this.checkUrlHash();
+        
+        // Set initial active state after a short delay
+        setTimeout(() => {
+            if (!window.location.hash) {
+                const firstNavLink = document.querySelector('.nav-menu a[href^="#"]');
+                if (firstNavLink) {
+                    this.setActiveNavLink(firstNavLink);
+                }
+            }
+        }, 200);
     }
 
     /**
@@ -187,24 +197,49 @@ class LandingPageManager {
         
         if (sections.length === 0) return;
         
+        // Set initial active state
+        this.setActiveNavLink(navLinks[0]);
+        
         const observer = new IntersectionObserver((entries) => {
+            let activeEntry = null;
+            let maxRatio = 0;
+            
             entries.forEach(entry => {
-                const navLink = document.querySelector(`.nav-menu a[href="#${entry.target.id}"]`);
-                if (navLink) {
-                    if (entry.isIntersecting) {
-                        // Remove active class from all links
-                        navLinks.forEach(link => link.classList.remove('active'));
-                        // Add active class to current link
-                        navLink.classList.add('active');
-                    }
+                if (entry.isIntersecting && entry.intersectionRatio > maxRatio) {
+                    maxRatio = entry.intersectionRatio;
+                    activeEntry = entry;
                 }
             });
+            
+            if (activeEntry) {
+                const activeNavLink = document.querySelector(`.nav-menu a[href="#${activeEntry.target.id}"]`);
+                if (activeNavLink) {
+                    this.setActiveNavLink(activeNavLink);
+                }
+            }
         }, {
-            threshold: 0.3,
+            threshold: [0.1, 0.3, 0.5, 0.7],
             rootMargin: '-80px 0px -50% 0px'
         });
         
         sections.forEach(section => observer.observe(section));
+    }
+
+    /**
+     * Set active navigation link
+     */
+    setActiveNavLink(activeLink) {
+        const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+        
+        // Remove active class from all links
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        // Add active class to current link
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
     }
 
     /**
@@ -233,6 +268,9 @@ class LandingPageManager {
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
+            // Set active state immediately
+            this.setActiveNavLink(target);
+            
             // Get current header height
             const header = document.querySelector('.header');
             const headerHeight = header ? header.offsetHeight : 80;
@@ -846,7 +884,14 @@ class LandingPageManager {
         if (hash) {
             setTimeout(() => {
                 const target = document.querySelector(hash);
+                const navLink = document.querySelector(`.nav-menu a[href="${hash}"]`);
+                
                 if (target) {
+                    // Set active state
+                    if (navLink) {
+                        this.setActiveNavLink(navLink);
+                    }
+                    
                     const header = document.querySelector('.header');
                     const headerHeight = header ? header.offsetHeight : 80;
                     const targetPosition = target.offsetTop - headerHeight - 20;
@@ -857,6 +902,12 @@ class LandingPageManager {
                     });
                 }
             }, 100);
+        } else {
+            // Set first nav link as active by default
+            const firstNavLink = document.querySelector('.nav-menu a[href^="#"]');
+            if (firstNavLink) {
+                this.setActiveNavLink(firstNavLink);
+            }
         }
     }
 
