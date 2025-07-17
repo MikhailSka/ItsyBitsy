@@ -4,46 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ItsyBitsy - Przedszkole Montessori</title>
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header class="header">
+    <header class="header navbar navbar-expand-lg fixed-top" role="banner">
         <div class="container">
             <div class="header-content">
-                <div class="header-logo">
-                    <img src="assets/images/logo.png" alt="ItsyBitsy Logo" />
-                </div>
+                <!-- Logo -->
+                <a class="navbar-brand header-logo" href="#hero" aria-label="ItsyBitsy Montessori Homepage">
+                    <img src="assets/images/logo.png" alt="ItsyBitsy Logo" class="logo-img" />
+                </a>
                 
-                <nav class="header-nav" id="headerNav">
-                    <ul class="nav-menu" id="navMenu">
-                        <li><a href="#hero" data-translate="nav_home">Strona Główna</a></li>
-                        <li><a href="#about" data-translate="nav_about">O Nas</a></li>
-                        <li><a href="#uniqueness" data-translate="nav_services">Nasza Wyjątkowość</a></li>
-                        <li><a href="#testimonials" data-translate="nav_testimonials">Opinie</a></li>
-                        <li><a href="#contact" data-translate="nav_contact">Kontakt</a></li>
-                    </ul>
-                    
+                <!-- Desktop Navigation -->
+                <nav class="header-nav navbar-nav" id="headerNav" role="navigation" aria-label="Main navigation">
+                    <div class="nav-menu" id="navMenu">
+                        <a class="nav-link" href="#hero" data-translate="nav_home" aria-label="Navigate to home section">Strona Główna</a>
+                        <a class="nav-link" href="#about" data-translate="nav_about" aria-label="Navigate to about section">O Nas</a>
+                        <a class="nav-link" href="#uniqueness" data-translate="nav_services" aria-label="Navigate to services section">Nasza Wyjątkowość</a>
+                        <a class="nav-link" href="#testimonials" data-translate="nav_testimonials" aria-label="Navigate to testimonials section">Opinie</a>
+                        <a class="nav-link" href="#contact" data-translate="nav_contact" aria-label="Navigate to contact section">Kontakt</a>
+                        
+                        <!-- Language Switcher (moved inside mobile menu) -->
                     <div class="language-switcher">
-                        <button class="lang-toggle-btn" id="langToggle">
+                            <button class="btn btn-outline-primary lang-toggle-btn" id="langToggle" aria-label="Switch language between Polish and English">
                             <span class="current-lang">PL</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="2" y1="12" x2="22" y2="12"></line>
-                                <path d="m4.93 4.93 4.24 4.24"></path>
-                                <path d="m14.83 9.17 4.24-4.24"></path>
-                                <path d="m14.83 14.83 4.24 4.24"></path>
-                                <path d="m9.17 14.83-4.24 4.24"></path>
-                            </svg>
+                                <i class="fas fa-globe ms-1" aria-hidden="true"></i>
                         </button>
+                        </div>
                     </div>
                 </nav>
                 
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <!-- Mobile Menu Toggle -->
+                <button class="navbar-toggler mobile-menu-toggle" 
+                        type="button" 
+                        id="mobileMenuToggle" 
+                        aria-label="Toggle mobile navigation menu"
+                        aria-expanded="false"
+                        aria-controls="navMenu">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -52,160 +65,370 @@
         </div>
     </header>
 
+    <div id="content-wrapper">
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
         <section class="hero-section" id="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-image">
-                        <img src="assets/images/hero.png" alt="Teacher with children celebrating" />
-                        <div class="hero-logo-overlay">
-                            <img src="assets/images/logo.png" alt="ItsyBitsy Logo" />
+            <div class="hero-bg">
+                <img src="assets/images/hero.png" alt="Montessori Classroom">
+            </div>
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <div class="col-12 col-lg-6 col-xl-5">
+                        <!-- Text Content with White Background -->
+                        <div class="hero-content-box mb-4" data-aos="fade-up">
+                            <span class="hero-badge badge bg-primary-gradient text-white mb-3">
+                                <i class="fas fa-star me-2"></i>
+                                <span data-translate="hero_badge">Przedszkole Montessori</span>
+                            </span>
+                            
+                            <h1 class="hero-title mb-4" data-translate="hero_title">
+                                Międzynarodowe przedszkole dwujęzyczne Montessori. 
+                                <span class="text-primary">Zanurzenie w angielskim</span>, 
+                                przez cały dzień, codziennie.
+                            </h1>
+                            
+                            <p class="hero-subtitle mb-0" data-translate="hero_subtitle">
+                                Odkryj magię edukacji Montessori w dwujęzycznym środowisku, gdzie Twoje dziecko rozwija się naturalnie i z radością.
+                            </p>
                         </div>
-                    </div>
-                    <div class="hero-text">
-                        <h1 data-translate="hero_title">Międzynarodowe przedszkole dwujęzyczne Montessori. Zanurzenie w angielskim, przez cały dzień, codziennie.</h1>
-                        <a href="#contact" class="btn-primary" data-translate="schedule_meeting">Umów spotkanie</a>
+                        
+                        <!-- Buttons Outside White Background -->
+                        <div class="hero-buttons-external mb-4" data-aos="fade-up" data-aos-delay="200">
+                            <a href="#contact" class="btn btn-primary btn-lg me-3 mb-2" data-translate="schedule_meeting">
+                                <i class="fas fa-calendar-check me-2"></i>
+                                Umów spotkanie
+                            </a>
+                            <a href="https://www.itsybitsy.pl/" target="_blank" class="btn btn-outline-light btn-lg mb-2" data-translate="learn_more">
+                                <i class="fas fa-external-link-alt me-2"></i>
+                                Dowiedz się więcej
+                            </a>
+                        </div>
+                        
+                        <!-- Stats Outside White Background -->
+                        <div class="hero-stats-external" data-aos="fade-up" data-aos-delay="300">
+                            <div class="row g-3">
+                                <div class="col-4">
+                                    <div class="stat-item-external text-center">
+                                        <div class="stat-number-external text-white fw-bold fs-3">10+</div>
+                                        <div class="stat-text-external text-white-50 small" data-translate="hero_stat_experience">Lat doświadczenia</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-item-external text-center">
+                                        <div class="stat-number-external text-white fw-bold fs-3">500+</div>
+                                        <div class="stat-text-external text-white-50 small" data-translate="hero_stat_children">Szczęśliwych dzieci</div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="stat-item-external text-center">
+                                        <div class="stat-number-external text-white fw-bold fs-3">100%</div>
+                                        <div class="stat-text-external text-white-50 small" data-translate="hero_stat_bilingual">Dwujęzyczność</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+
+
         <!-- Section: Only the Best -->
-        <section class="only-best-section" id="about">
+        <section class="only-best-section py-5" id="about">
             <div class="container">
-                <div class="only-best-content">
-                    <div class="only-best-image">
-                        <img src="assets/images/with-flags.png" alt="Teacher with children holding flags" />
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
+                        <div class="only-best-image position-relative">
+                            <img src="assets/images/with-flags.png" alt="Teacher with children holding flags" class="img-fluid rounded-4 shadow" />
+                        </div>
                     </div>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
                     <div class="only-best-text">
-                        <h2 data-translate="only_best_title">Tylko to, co najlepsze dla Twojego dziecka!</h2>
-                        <ul class="only-best-list styled-list">
-                            <li data-translate="only_best_point_1">Pełen program akademicki Montessori dla dzieci 3-6 lat.</li>
-                            <li data-translate="only_best_point_2">Dwujęzyczność - codzienne zanurzenie w języku angielskim, program edukacyjny po polsku i angielsku.</li>
-                            <li data-translate="only_best_point_3">Native speaker przez cały dzień.</li>
-                            <li data-translate="only_best_point_4">Bez presji, z uważnością i szacunkiem.</li>
-                        </ul>
+                            <div class="section-badge mb-3">
+                                <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                                    <i class="fas fa-heart me-1"></i>
+                                    <span data-translate="about_badge">Nasza misja</span>
+                                </span>
+                            </div>
+                            <h2 class="display-5 fw-bold mb-4" data-translate="only_best_title">
+                                Tylko to, co <span class="text-primary">najlepsze</span> dla Twojego dziecka!
+                            </h2>
+                            <div class="features-list">
+                                <div class="feature-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-graduation-cap text-primary"></i>
+                                    </div>
+                                    <div class="feature-content">
+                                        <h5 class="fw-semibold mb-1">Program Montessori 3-6 lat</h5>
+                                        <p class="text-muted mb-0" data-translate="only_best_point_1">
+                                            Pełen program akademicki Montessori dla dzieci 3-6 lat.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="feature-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-language text-primary"></i>
+                                    </div>
+                                    <div class="feature-content">
+                                        <h5 class="fw-semibold mb-1" data-translate="bilingual_title">Dwujęzyczność</h5>
+                                        <p class="text-muted mb-0" data-translate="only_best_point_2">
+                                            Codzienne zanurzenie w języku angielskim, program edukacyjny po polsku i angielsku.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="feature-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="300">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-user-tie text-primary"></i>
+                                    </div>
+                                    <div class="feature-content">
+                                        <h5 class="fw-semibold mb-1">Native Speaker</h5>
+                                        <p class="text-muted mb-0" data-translate="only_best_point_3">
+                                            Native speaker przez cały dzień.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="feature-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="400">
+                                    <div class="feature-icon me-3">
+                                        <i class="fas fa-heart text-primary"></i>
+                                    </div>
+                                    <div class="feature-content">
+                                        <h5 class="fw-semibold mb-1" data-translate="no_pressure_title">Bez presji</h5>
+                                        <p class="text-muted mb-0" data-translate="only_best_point_4">
+                                            Bez presji, z uważnością i szacunkiem.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Section: Grid Layout -->
-        <section class="grid-section" id="uniqueness">
+        <section class="grid-section py-5" id="uniqueness">
             <div class="container">
-                <div class="grid-buttons">
-                    <div class="button-row">
-                        <a href="#contact" class="btn-primary" data-translate="contact_us">Skontaktuj się z nami</a>
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <div class="section-badge mb-3">
+                        <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                            <i class="fas fa-sparkles me-1"></i>
+                            <span data-translate="uniqueness_badge">Nasza wyjątkowość</span>
+                        </span>
                     </div>
+                    <h2 class="display-5 fw-bold mb-4" data-translate="uniqueness_title">Co nas wyróżnia?</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 600px;" data-translate="uniqueness_subtitle">
+                        Poznaj trzy filary naszej edukacji, które czynią nas wyjątkowymi
+                    </p>
                 </div>
                 
-                <div class="grid-images">
-                    <div class="grid-image-item">
-                        <img src="assets/images/uniqueness_1.jpeg" alt="Education" />
-                        <h3 data-translate="grid_education_title">Edukacja oparta na wiedzy i zrozumieniu dziecka</h3>
-                        <p data-translate="grid_education_text">Realizujemy pełny program Montessori, wspierający rozwój poznawczy, emocjonalny i społeczny dzieci. Nasze klasy są wyposażone w oryginalne materiały Montessori, a wszechstronnie wykształceni nauczyciele codziennie towarzyszą dzieciom w ich indywidualnym rozwoju – bez pośpiechu, z uważnością i szacunkiem.</p>
+                <div class="grid-buttons text-center mb-5" data-aos="fade-up" data-aos-delay="200">
+                    <a href="#contact" class="btn btn-primary btn-lg px-5 py-3" data-translate="contact_us">
+                        <i class="fas fa-phone me-2"></i>
+                        Skontaktuj się z nami
+                    </a>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card h-100 border-0 shadow-lg hover-lift">
+                            <div class="card-img-top-wrapper">
+                                <img src="assets/images/uniqueness_1.jpeg" alt="Education" class="card-img-top" />
+                                <div class="card-img-overlay-icon">
+                                    <i class="fas fa-brain text-white"></i>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <h3 class="h4 fw-bold text-primary mb-3" data-translate="grid_education_title">
+                                    Edukacja oparta na wiedzy i zrozumieniu dziecka
+                                </h3>
+                                <p class="text-muted" data-translate="grid_education_text">
+                                    Realizujemy pełny program Montessori, wspierający rozwój poznawczy, emocjonalny i społeczny dzieci. Nasze klasy są wyposażone w oryginalne materiały Montessori, a wszechstronnie wykształceni nauczyciele codziennie towarzyszą dzieciom w ich indywidualnym rozwoju – bez pośpiechu, z uważnością i szacunkiem.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="grid-image-item">
-                        <img src="assets/images/uniqueness_2.png" alt="Authentic bilingualism" />
-                        <h3 data-translate="grid_authentic_title">Autentyczna dwujęzyczność</h3>
-                        <p data-translate="grid_authentic_text">Angielski przez cały dzień – naturalnie i bez presji. Dzieci codziennie funkcjonują w środowisku dwujęzycznym – polskiego i angielskiego. Nasi anglojęzyczni nauczyciele są obecni w grupie przez cały dzień, dzięki czemu język angielski przyswajany jest w sposób naturalny, poprzez relacje, zabawę i codzienne sytuacje. To zanurzenie, a nie lekcje.</p>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card h-100 border-0 shadow-lg hover-lift">
+                            <div class="card-img-top-wrapper">
+                                <img src="assets/images/uniqueness_2.png" alt="Authentic bilingualism" class="card-img-top" />
+                                <div class="card-img-overlay-icon">
+                                    <i class="fas fa-globe text-white"></i>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <h3 class="h4 fw-bold text-primary mb-3" data-translate="grid_authentic_title">
+                                    Autentyczna dwujęzyczność
+                                </h3>
+                                <p class="text-muted" data-translate="grid_authentic_text">
+                                    Angielski przez cały dzień – naturalnie i bez presji. Dzieci codziennie funkcjonują w środowisku dwujęzycznym – polskiego i angielskiego. Nasi anglojęzyczni nauczyciele są obecni w grupie przez cały dzień, dzięki czemu język angielski przyswajany jest w sposób naturalny, poprzez relacje, zabawę i codzienne sytuacje. To zanurzenie, a nie lekcje.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="grid-image-item">
-                        <img src="assets/images/uniqueness_3.png" alt="Relationships and closeness" />
-                        <h3 data-translate="grid_relationships_title">Podejście relacyjne i bliskościowe</h3>
-                        <p data-translate="grid_relationships_text">Bezpieczne relacje są fundamentem rozwoju. W centrum naszej pracy są relacje – z dzieckiem, z rodzicem, w zespole. Tworzymy przestrzeń, w której każde dziecko czuje się widziane, słyszane i ważne. Adaptacja, codzienne rytuały, rozwiązywanie konfliktów – wszystko opieramy na empatii, uważności i komunikacji bez przemocy (NVC).</p>
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card h-100 border-0 shadow-lg hover-lift">
+                            <div class="card-img-top-wrapper">
+                                <img src="assets/images/uniqueness_3.png" alt="Relationships and closeness" class="card-img-top" />
+                                <div class="card-img-overlay-icon">
+                                    <i class="fas fa-users text-white"></i>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <h3 class="h4 fw-bold text-primary mb-3" data-translate="grid_relationships_title">
+                                    Podejście relacyjne i bliskościowe
+                                </h3>
+                                <p class="text-muted" data-translate="grid_relationships_text">
+                                    Bezpieczne relacje są fundamentem rozwoju. W centrum naszej pracy są relacje – z dzieckiem, z rodzicem, w zespole. Tworzymy przestrzeń, w której każde dziecko czuje się widziane, słyszane i ważne. Adaptacja, codzienne rytuały, rozwiązywanie konfliktów – wszystko opieramy na empatii, uważności i komunikacji bez przemocy (NVC).
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section: Testimonials -->
-        <section class="testimonials-section" id="testimonials">
-            <div class="container">
-                <h2 class="testimonials-title" data-translate="testimonials_title">Prawdziwi ludzie, prawdziwe doświadczenia!</h2>
-                <p class="testimonials-subtitle" data-translate="testimonials_subtitle">Przez ponad 10 lat wypuściliśmy w świat setki szczęśliwych i świetnie przygotowanych do życia i do szkoły przedszkolaków!</p>
-                
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <h3 data-translate="testimonial_1_name">pani Joanna:</h3>
-                        <p data-translate="testimonial_1_text">Przygoda z przedszkolem Itsy Bitsy trwa już kilka lat - najpierw uczęszczała tam córka, a teraz żerówka kończy syn. I gdybym stała ponownie przed wyborem placówki to podjęłabym taką samą decyzję. Itsy Bitsy to najlepsze miejsce, do którego mogły trafić moje dzieci.</p>
-                        <p data-translate="testimonial_1_text_2">Zawsze mogliśmy liczyć na najlepszą opiekę, dużo ciepła i empatii - córka na tyle tego, że skończyła przedszkole prawie 2 lata temu chętnie tam wraca.</p>
-                        <p data-translate="testimonial_1_text_3">Itsy Bitsy świetnie przygotowuje dzieci do szkoły - nie tylko pod kątem merytorycznym, ale również emocjonalnym. Wszystko to za sprawą kadry - zarówno nauczycieli jak i Dyrekcji. Ogromnym plusem jest rodzinna atmosfera oraz native speaker, który jest bardzo naturalny z opiekunów każdej z grup - dzięki temu dzieci w naturalny sposób mogą uczyć się angielskiego. Efekt? Kończąc przedszkole dzieci nie tylko rozumieją, ale również potrafią się komunikować w tym języku.</p>
-                        <p data-translate="testimonial_1_text_4">Jeśli zastanawiacie się, czy to miejsce dla Was - przyjdźcie i sprawdźcie - jestem pewna, że dzieci pokochają to miejsce.</p>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <h3 data-translate="testimonial_2_name">pani Ilona:</h3>
-                        <p data-translate="testimonial_2_text">Do przedszkola od kilku lat chodzą dwójka moich dzieci - zawsze mogłam liczyć na najlepszą opiekę i zaangażowanie - wiem, co mówię bo mam porównanie z innymi placówkami. To co było dla mnie ważne, to to, że zespół Itsy Bitsy nie jest po to, żeby odpowiadać na potrzeby rodzica, tylko na potrzeby dziecka. Współpraca z rodzicem jest zawsze partnerska, a zespół - zawsze dostępny i otwarty. Moje dzieciaki kochają chodzić do Itsy Bitsy, gorąco polecam</p>
-                    </div>
-                    
-                    <div class="testimonial-card">
-                        <h3 data-translate="testimonial_3_name">pani Nadieżda:</h3>
-                        <p data-translate="testimonial_3_text">Chciałabym podkreślić naszą szczerą wdzięczność nauczycielom i dyrektorowi ItsyBitsy za życzliwość, profesjonalizm, opiekę i wsparcie, jakie zapewniliście naszej rodzinie w okresie adaptacyjnym. Przyjechaliśmy z innego kraju i doświadczyliśmy strasznego stresu i niepokoju, bariery językowej i niepewności we wszystkim, ale dzięki Wam i Waszej opiece nasza adaptacja była tak łatwa i komfortowa, jak to tylko możliwe. Nasza córka szybko się zaaklimatyzowała i poczuła się bezpiecznie.</p>
-                        <p data-translate="testimonial_3_text_2">Szczególnie poruszyła mnie miłość i uwaga, z jaką traktowaliście naszą córkę. Wasza życzliwość i profesjonalizm pomagały jej nie tylko pokonać trudności adaptacyjne, ale także nawiązać nowe przyjaźnie, rozwijać pewność siebie i zainteresowanie nauką.</p>
-                        <p data-translate="testimonial_3_text_3">System Montessori, z którego korzystacie w swoim przedszkolu, okazał się dla nas prawdziwym odkryciem. Widzimy, jak dzięki Waszym zajęciom nasza córka staje się coraz bardziej samodzielna, pracowita i przygotowana do nauki w szkole. To nieoceniony wkład w jej przyszłość, za co jesteśmy Państwu szczerze wdzięczni.</p>
-                        <p data-translate="testimonial_3_text_4">Z pełnym przekonaniem polecamy Państwa przedszkole wszystkim rodzicom, którzy szukają ciepłego, troskliwego i opiekuńczego środowiska dla swoich dzieci. Tworzycie niesamowitą atmosferę, w której każde dziecko czuje się wyjątkowo i kochane.</p>
-                        <p data-translate="testimonial_3_text_5">Na zawsze pozostaniemy w naszych sercach. Z miłością i wielką wdzięcznością ukochanej ItsyBitsy</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <!-- Section: Why Us -->
-        <section class="why-us-section">
+        <section class="why-us-section py-5">
             <div class="container">
-                <div class="why-us-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
                     <div class="why-us-video">
-                        <div class="video-container">
+                            <div class="video-container position-relative">
                             <video 
                                 controls 
                                 preload="auto"
                                 playsinline
-                                muted>
+                                    muted
+                                    class="w-100 rounded-4 shadow-lg">
                                 <source src="assets/videos/itsybitsy-short.mov" type="video/mp4">
                                 Twoja przeglądarka nie obsługuje elementu video.
                             </video>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
                     <div class="why-us-text">
-                        <h2 data-translate="why_us_title">Dlaczego właśnie my?</h2>
-                        <p class="why-us-subtitle subtitle" data-translate="why_us_subtitle">Bo chcesz tylko tego, co najlepsze dla swojego dziecka!</p>
-                        <ul class="why-us-list styled-list">
-                            <li data-translate="why_us_point_1">Pełen program akademicki Montessori– dzieci uczą się we własnym tempie, rozwijają kluczowe kompetencje przyszłości.</li>
-                            <li data-translate="why_us_point_2">Bliskość – budujemy relacje oparte na szacunku i i zaufaniu.</li>
-                            <li data-translate="why_us_point_3">Dwujęzyczność przez immersję – język angielski naturalnie towarzyszy dzieciom każdego dnia, przez cały dzień.</li>
-                            <li data-translate="why_us_point_4">Zespół z misją i sercem– doświadczona, stała i świetnie wykształcona kadra, która naprawdę lubi dzieci i swoją pracę</li>
-                            <li data-translate="why_us_point_5">Nauczyciel-native speaker w każdej grupie, komunikujący się wyłącznie po angielsku.</li>
-                            <li data-translate="why_us_point_6">Piękne, spokojne wnętrza – naturalne materiały, światło, harmonia i czystość.</li>
-                        </ul>
+                            <div class="section-badge mb-3">
+                                <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                                    <i class="fas fa-sparkles me-1"></i>
+                                    <span data-translate="why_us_badge">Dlaczego my</span>
+                                </span>
+                            </div>
+                            <h2 class="display-5 fw-bold mb-3" data-translate="why_us_title">
+                                Dlaczego właśnie <span class="text-primary">my?</span>
+                            </h2>
+                            <p class="lead text-primary fw-semibold mb-4" data-translate="why_us_subtitle">
+                                Bo chcesz tylko tego, co najlepsze dla swojego dziecka!
+                            </p>
+                            
+                            <div class="features-checklist">
+                                <div class="check-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="100">
+                                    <div class="check-icon me-3">
+                                        <i class="fas fa-check-circle text-primary"></i>
+                                    </div>
+                                    <p class="mb-0" data-translate="why_us_point_1">
+                                        Pełen program akademicki Montessori– dzieci uczą się we własnym tempie, rozwijają kluczowe kompetencje przyszłości.
+                                    </p>
+                                </div>
+                                <div class="check-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="200">
+                                    <div class="check-icon me-3">
+                                        <i class="fas fa-check-circle text-primary"></i>
+                                    </div>
+                                    <p class="mb-0" data-translate="why_us_point_2">
+                                        Bliskość – budujemy relacje oparte na szacunku i i zaufaniu.
+                                    </p>
+                                </div>
+                                <div class="check-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="300">
+                                    <div class="check-icon me-3">
+                                        <i class="fas fa-check-circle text-primary"></i>
+                                    </div>
+                                    <p class="mb-0" data-translate="why_us_point_3">
+                                        Dwujęzyczność przez immersję – język angielski naturalnie towarzyszy dzieciom każdego dnia, przez cały dzień.
+                                    </p>
+                                </div>
+                                <div class="check-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="400">
+                                    <div class="check-icon me-3">
+                                        <i class="fas fa-check-circle text-primary"></i>
+                                    </div>
+                                    <p class="mb-0" data-translate="why_us_point_4">
+                                        Zespół z misją i sercem– doświadczona, stała i świetnie wykształcona kadra, która naprawdę lubi dzieci i swoją pracę
+                                    </p>
+                                </div>
+                                <div class="check-item d-flex align-items-start mb-3" data-aos="fade-up" data-aos-delay="500">
+                                    <div class="check-icon me-3">
+                                        <i class="fas fa-check-circle text-primary"></i>
+                                    </div>
+                                    <p class="mb-0" data-translate="why_us_point_5">
+                                        Nauczyciel-native speaker w każdej grupie, komunikujący się wyłącznie po angielsku.
+                                    </p>
+                                </div>
+                                <div class="check-item d-flex align-items-start mb-4" data-aos="fade-up" data-aos-delay="600">
+                                    <div class="check-icon me-3">
+                                        <i class="fas fa-check-circle text-primary"></i>
+                                    </div>
+                                    <p class="mb-0" data-translate="why_us_point_6">
+                                        Piękne, spokojne wnętrza – naturalne materiały, światło, harmonia i czystość.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Section: Visit Us -->
-        <section class="visit-us-section">
+        <section class="visit-us-section py-5 bg-light">
             <div class="container">
-                <div class="visit-us-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
                     <div class="visit-us-text">
-                        <h2 data-translate="visit_us_title">Zajrzuj do nas!</h2>
-                        <p data-translate="visit_us_text">Zobacz, jak wygląda dzień w naszym przedszkolu. Nasza codzienność to zadowolone, bezpieczne, skupione dzieci, ciepłe relacje, spokojna przestrzeń i zaangażowani nauczyciele. Tak właśnie wygląda u nas edukacja w duchu Montessori i bliskości.</p>
-                        <p class="visit-us-question subtitle" data-translate="visit_us_question">Chcesz wiedzieć, czy to miejsce dla Was?</p>
-                        <p class="visit-us-cta subtitle" data-translate="visit_us_cta">Najlepiej zobaczyć wszystko na własne oczy!</p>
-                        <a href="#contact" class="btn-primary" data-translate="schedule_meeting">Umów spotkanie</a>
+                            <div class="section-badge mb-3">
+                                <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                                    <i class="fas fa-eye me-1"></i>
+                                    <span data-translate="visit_us_badge">Zajrzyj do nas</span>
+                                </span>
+                            </div>
+                            <h2 class="display-5 fw-bold mb-4" data-translate="visit_us_title">
+                                Zajrzuj do <span class="text-primary">nas!</span>
+                            </h2>
+                            <p class="lead mb-4" data-translate="visit_us_text">
+                                Zobacz, jak wygląda dzień w naszym przedszkolu. Nasza codzienność to zadowolone, bezpieczne, skupione dzieci, ciepłe relacje, spokojna przestrzeń i zaangażowani nauczyciele. Tak właśnie wygląda u nas edukacja w duchu Montessori i bliskości.
+                            </p>
+                            <div class="highlight-box bg-white p-4 rounded-4 shadow-sm mb-4">
+                                <p class="fw-semibold text-primary mb-2" data-translate="visit_us_question">
+                                    <i class="fas fa-question-circle me-2"></i>
+                                    Chcesz wiedzieć, czy to miejsce dla Was?
+                                </p>
+                                <p class="text-primary fw-semibold mb-0" data-translate="visit_us_cta">
+                                    <i class="fas fa-lightbulb me-2"></i>
+                                    Najlepiej zobaczyć wszystko na własne oczy!
+                                </p>
+                            </div>
+                            <a href="#contact" class="btn btn-primary btn-lg px-4 py-3" data-translate="schedule_meeting">
+                                <i class="fas fa-calendar-check me-2"></i>
+                                Umów spotkanie
+                            </a>
+                        </div>
                     </div>
-                    <div class="visit-us-video">
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
+                        <div class="visit-us-video position-relative">
                         <div class="video-container">
                             <video 
                                 controls 
                                 preload="auto"
                                 playsinline
-                                muted>
+                                    muted
+                                    class="w-100 rounded-4 shadow-lg">
                                 <source src="assets/videos/itsybitsy-cycle.mov" type="video/mp4">
                                 Twoja przeglądarka nie obsługuje elementu video.
                             </video>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -213,103 +436,330 @@
         </section>
 
         <!-- Section: Listen to Children -->
-        <section class="listen-children-section">
+        <section class="listen-children-section py-5">
             <div class="container">
-                <div class="listen-children-content">
-                    <div class="listen-children-video">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
+                        <div class="listen-children-video position-relative">
                         <div class="video-container">
                             <video 
                                 controls 
                                 preload="auto"
                                 playsinline
-                                muted>
+                                    muted
+                                    class="w-100 rounded-4 shadow-lg">
                                 <source src="assets/videos/itsybitsy-kids.mov" type="video/mp4">
                                 Twoja przeglądarka nie obsługuje elementu video.
                             </video>
+                            </div>
                         </div>
                     </div>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
                     <div class="listen-children-text">
-                        <h2 data-translate="listen_children_title">Posłuchaj dzieci!</h2>
-                        <p class="listen-children-subtitle subtitle" data-translate="listen_children_subtitle">Przedszkole widziane z najważniejszej perspektywy, z poziomu około 116cm!</p>
-                        <p data-translate="listen_children_text_1">To, co naprawdę liczy się w przedszkolu, najlepiej widać w spojrzeniu dziecka.</p>
-                        <p data-translate="listen_children_text_2">W radości odkrywania, w pewności siebie, gdy samo sięga po materiały, w swobodzie, z jaką wita nauczyciela.</p>
-                        <p data-translate="listen_children_text_3">To dzieci wiedzą najlepiej, co daje im poczucie bezpieczeństwa, co lubią najbardziej, gdzie czują się jak u siebie.</p>
-                        <p data-translate="listen_children_text_4">W tej przestrzeni nie ma przypadków – każde miejsce, materiał, rytuał i relacja wspiera ich naturalny rozwój.</p>
-                        <p data-translate="listen_children_text_5">A dzieci to czują.</p>
-                        <p class="listen-children-highlight subtitle" data-translate="listen_children_highlight">To nie tylko przedszkole. To ich miejsce mocy.</p>
-                        <a href="#contact" class="btn-primary" data-translate="contact_us">Zostaw kontakt, zadzwonimy!</a>
+                            <div class="section-badge mb-3">
+                                <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                                    <i class="fas fa-child me-1"></i>
+                                    <span data-translate="children_perspective_badge">Perspektywa dzieci</span>
+                                </span>
+                            </div>
+                            <h2 class="display-5 fw-bold mb-4" data-translate="listen_children_title">
+                                Posłuchaj <span class="text-primary">dzieci!</span>
+                            </h2>
+                            <p class="lead text-primary fw-semibold mb-4" data-translate="listen_children_subtitle">
+                                Przedszkole widziane z najważniejszej perspektywy, z poziomu około 116cm!
+                            </p>
+                            
+                            <div class="children-quote-box bg-light p-4 rounded-4 mb-4" style="border-left: 5px solid #FF6B35;">
+                                <div class="quote-content">
+                                    <p class="mb-2" data-translate="listen_children_text_1">
+                                        To, co naprawdę liczy się w przedszkolu, najlepiej widać w spojrzeniu dziecka.
+                                    </p>
+                                    <p class="mb-2" data-translate="listen_children_text_2">
+                                        W radości odkrywania, w pewności siebie, gdy samo sięga po materiały, w swobodzie, z jaką wita nauczyciela.
+                                    </p>
+                                    <p class="mb-0" data-translate="listen_children_text_3">
+                                        To dzieci wiedzą najlepiej, co daje im poczucie bezpieczeństwa, co lubią najbardziej, gdzie czują się jak u siebie.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <p class="mb-3" data-translate="listen_children_text_4">
+                                W tej przestrzeni nie ma przypadków – każde miejsce, materiał, rytuał i relacja wspiera ich naturalny rozwój.
+                            </p>
+                            <p class="fw-semibold mb-4" data-translate="listen_children_text_5">
+                                A dzieci to czują.
+                            </p>
+                            
+                            <div class="highlight-callout bg-light p-4 rounded-4 mb-4">
+                                <p class="h5 fw-bold text-primary mb-0" data-translate="listen_children_highlight">
+                                    <i class="fas fa-magic me-2"></i>
+                                    To nie tylko przedszkole. To ich miejsce mocy.
+                                </p>
+                            </div>
+                            
+                            <a href="#contact" class="btn btn-primary btn-lg px-4 py-3" data-translate="contact_us">
+                                <i class="fas fa-phone me-2"></i>
+                                Zostaw kontakt, zadzwonimy!
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Testimonials -->
+        <section class="testimonials-section py-5" id="testimonials">
+            <div class="container">
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <div class="section-badge mb-3">
+                        <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                            <i class="fas fa-quote-left me-1"></i>
+                            <span data-translate="testimonials_badge">Co mówią rodzice</span>
+                        </span>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-4" data-translate="testimonials_title">
+                        Opinie rodziców
+                    </h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 700px;" data-translate="testimonials_subtitle">
+                        Przez ponad 10 lat wypuściliśmy w świat setki szczęśliwych i świetnie przygotowanych do życia i do szkoły przedszkolaków!
+                    </p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-card h-100">
+                            <div class="card border-0 shadow-lg h-100">
+                                <div class="card-body p-4">
+                                    <div class="testimonial-header mb-3">
+                                        <div class="stars mb-2">
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                        </div>
+                                        <h5 class="fw-bold text-primary mb-0" data-translate="testimonial_1_name">Pani Joanna:</h5>
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <p class="text-muted mb-3" data-translate="testimonial_1_text">
+                                            Przygoda z przedszkolem Itsy Bitsy trwa już kilka lat - najpierw uczęszczała tam córka, a teraz żerówka kończy syn. I gdybym stała ponownie przed wyborem placówki to podjęłabym taką samą decyzję. Itsy Bitsy to najlepsze miejsce, do którego mogły trafić moje dzieci.
+                                        </p>
+                                        <p class="text-muted mb-3" data-translate="testimonial_1_text_2">
+                                            Zawsze mogliśmy liczyć na najlepszą opiekę, dużo ciepła i empatii - córka na tyle tego, że skończyła przedszkole prawie 2 lata temu chętnie tam wraca.
+                                        </p>
+                                        <p class="text-muted" data-translate="testimonial_1_text_3">
+                                            Itsy Bitsy świetnie przygotowuje dzieci do szkoły - nie tylko pod kątem merytorycznym, ale również emocjonalnym...
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="testimonial-card h-100">
+                            <div class="card border-0 shadow-lg h-100">
+                                <div class="card-body p-4">
+                                    <div class="testimonial-header mb-3">
+                                        <div class="stars mb-2">
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                        </div>
+                                        <h5 class="fw-bold text-primary mb-0" data-translate="testimonial_2_name">Pani Ilona:</h5>
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <p class="text-muted mb-3" data-translate="testimonial_2_text">
+                                            Do przedszkola od kilku lat chodzą dwójka moich dzieci - zawsze mogłam liczyć na najlepszą opiekę i zaangażowanie - wiem, co mówię bo mam porównanie z innymi placówkami.
+                                        </p>
+                                        <p class="text-muted mb-3" data-translate="testimonial_2_text_2">
+                                            To co było dla mnie ważne, to to, że zespół Itsy Bitsy nie jest po to, żeby odpowiadać na potrzeby rodzica, tylko na potrzeby dziecka.
+                                        </p>
+                                        <p class="text-muted" data-translate="testimonial_2_text_3">
+                                            Współpraca z rodzicem jest zawsze partnerska, a zespół - zawsze dostępny i otwarty. Moje dzieciaki kochają chodzić do Itsy Bitsy, gorąco polecam.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="testimonial-card h-100">
+                            <div class="card border-0 shadow-lg h-100">
+                                <div class="card-body p-4">
+                                    <div class="testimonial-header mb-3">
+                                        <div class="stars mb-2">
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                            <i class="fas fa-star text-primary"></i>
+                                        </div>
+                                        <h5 class="fw-bold text-primary mb-0" data-translate="testimonial_3_name">Pani Anna:</h5>
+                                    </div>
+                                    <div class="testimonial-content">
+                                        <p class="text-muted mb-3" data-translate="testimonial_3_text">
+                                            Chciałabym podkreślić naszą szczerą wdzięczność nauczycielom i dyrektorowi ItsyBitsy za życzliwość, profesjonalizm, opiekę i wsparcie.
+                                        </p>
+                                        <p class="text-muted mb-3" data-translate="testimonial_3_text_2">
+                                            Szczególnie poruszyła mnie miłość i uwaga, z jaką traktowaliście naszą córkę. Wasza życzliwość i profesjonalizm pomagały jej nie tylko pokonać trudności adaptacyjne.
+                                        </p>
+                                        <p class="text-muted" data-translate="testimonial_3_text_3">
+                                            System Montessori okazał się dla nas prawdziwym odkryciem. Z pełnym przekonaniem polecamy Państwa przedszkole wszystkim rodzicom.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Section: Let's Meet -->
-        <section class="lets-meet-section">
+        <section class="lets-meet-section py-5 bg-light">
             <div class="container">
-                <div class="lets-meet-content">
-                    <div class="lets-meet-image">
-                        <img src="assets/images/lets-know-each-other.png" alt="Teacher with children in Montessori classroom" />
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                        <div class="lets-meet-text">
+                            <div class="section-badge mb-3">
+                                <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                                    <i class="fas fa-handshake me-1"></i>
+                                    <span data-translate="welcome_badge">Zapraszamy</span>
+                                </span>
+                            </div>
+                            <h2 class="display-5 fw-bold mb-4" data-translate="lets_meet_title">
+                                Poznajmy <span class="text-primary">się</span>.
+                            </h2>
+                            
+                            <div class="offer-highlights mb-4">
+                                <div class="highlight-item d-flex align-items-center mb-3 p-3 bg-white rounded-3 shadow-sm">
+                                    <div class="highlight-icon me-3">
+                                        <i class="fas fa-child text-primary fs-4"></i>
+                                    </div>
+                                    <div class="highlight-content">
+                                        <h6 class="fw-bold mb-1" data-translate="workshop_title">Bezpłatny warsztat dla dziecka</h6>
+                                        <small class="text-muted" data-translate="workshop_subtitle">Poznaj nasze metody w praktyce</small>
+                                    </div>
+                                </div>
+                                <div class="highlight-item d-flex align-items-center mb-3 p-3 bg-white rounded-3 shadow-sm">
+                                    <div class="highlight-icon me-3">
+                                        <i class="fas fa-coffee text-primary fs-4"></i>
+                                    </div>
+                                    <div class="highlight-content">
+                                        <h6 class="fw-bold mb-1" data-translate="coffee_title">Kawa dla rodziców</h6>
+                                        <small class="text-muted" data-translate="coffee_subtitle">Relaksujący czas podczas zajęć</small>
+                                    </div>
+                                </div>
+                                <div class="highlight-item d-flex align-items-center mb-4 p-3 bg-white rounded-3 shadow-sm">
+                                    <div class="highlight-icon me-3">
+                                        <i class="fas fa-comments text-primary fs-4"></i>
+                                    </div>
+                                    <div class="highlight-content">
+                                        <h6 class="fw-bold mb-1" data-translate="conversation_title">Rozmowa z nauczycielami</h6>
+                                        <small class="text-muted" data-translate="conversation_subtitle">Odpowiemy na wszystkie pytania</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <p class="lead mb-4" data-translate="lets_meet_subtitle">
+                                Umów dziecko na bezpłatny warsztat i zrelaksuj się przy kawie!
+                            </p>
+                            
+                            <a href="#contact" class="btn btn-primary btn-lg px-5 py-3" data-translate="contact_us">
+                                <i class="fas fa-calendar-plus me-2"></i>
+                                Skontaktuj się z nami
+                            </a>
+                        </div>
                     </div>
-                    <div class="lets-meet-text">
-                        <h2 data-translate="lets_meet_title">Poznajmy się.</h2>
-                        <p data-translate="lets_meet_subtitle">Umów dziecko na bezpłatny warsztat i zrelaksuj się przy kawie!</p>
-                        <a href="#contact" class="btn-primary" data-translate="contact_us">Skontaktuj się z nami</a>
+                    <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left" data-aos-duration="800">
+                        <div class="lets-meet-image position-relative">
+                            <img src="assets/images/lets-know-each-other.png" alt="Teacher with children in Montessori classroom" class="img-fluid rounded-4 shadow" />
+                            <div class="image-float-badge position-absolute top-0 end-0 m-3">
+                                <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                                    <i class="fas fa-coffee me-1"></i>
+                                    <span data-translate="free_badge">Bezpłatnie</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Section: Contact -->
-        <section class="contact-section" id="contact">
+        <section class="contact-section py-5 bg-light" id="contact">
             <div class="container">
-                <div class="contact-content">
-                    <div class="contact-info">
-                        <h2 data-translate="contact_title">Skontaktuj się z nami!</h2>
-                        <p data-translate="contact_subtitle">Pierwszy krok jest prosty — napisz do nas. Z przyjemnością odpowiemy na Twoje pytania i pokażemy, jak wygląda dzień w naszym przedszkolu.</p>
-                        
+                <div class="text-center mb-5" data-aos="fade-up">
+                    <div class="section-badge mb-3">
+                        <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
+                            <i class="fas fa-envelope me-1"></i>
+                            <span data-translate="contact_badge">Skontaktuj się z nami</span>
+                        </span>
+                    </div>
+                    <h2 class="display-5 fw-bold mb-4" data-translate="contact_title">Kontakt</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 600px;" data-translate="contact_subtitle">
+                        Gotowi na rozmowę? Skontaktuj się z nami już dziś!
+                    </p>
+                </div>
+                
+                <div class="row g-5 mb-5">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                        <div class="contact-info h-100">
                         <div class="contact-details">
-                            <div class="contact-item">
-                                <div class="contact-icon">📧</div>
+                                <a href="mailto:kontakt@itsybitsy.pl" class="contact-item-btn btn btn-outline-primary w-100 mb-4 p-4 text-start hover-lift">
+                                    <div class="d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fas fa-envelope text-white"></i>
+                                        </div>
                                 <div class="contact-info-text">
-                                    <h4>Email</h4>
-                                    <a href="mailto:kontakt@itsybitsy.pl">kontakt@itsybitsy.pl</a>
+                                            <h5 class="fw-bold mb-1" data-translate="contact_email_label">Email</h5>
+                                            <span class="text-muted" data-translate="contact_email_value">kontakt@itsybitsy.pl</span>
                                 </div>
                             </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">📱</div>
+                                </a>
+                                
+                                <a href="tel:+48732980676" class="contact-item-btn btn btn-outline-primary w-100 mb-4 p-4 text-start hover-lift">
+                                    <div class="d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fas fa-phone text-white"></i>
+                                        </div>
                                 <div class="contact-info-text">
-                                    <h4>Telefon</h4>
-                                    <a href="tel:+48732980676">+48 732 980 676</a>
+                                            <h5 class="fw-bold mb-1" data-translate="contact_phone_label">Telefon</h5>
+                                            <span class="text-muted" data-translate="contact_phone_value">+48 732 980 676</span>
                                 </div>
                             </div>
-                            
-                            <div class="contact-item">
-                                <div class="contact-icon">📍</div>
+                                </a>
+                                
+                                <a href="https://maps.app.goo.gl/PepYUWrUPfqzJC7v8" target="_blank" rel="noopener" class="contact-item-btn btn btn-outline-primary w-100 mb-4 p-4 text-start hover-lift">
+                                    <div class="d-flex align-items-center">
+                                        <div class="contact-icon me-3">
+                                            <i class="fas fa-map-marker-alt text-white"></i>
+                                        </div>
                                 <div class="contact-info-text">
-                                    <h4>Adres</h4>
-                                    <p>ul. Cybernetyki 7D, Warszawa<br>(os. Mozaika Mokotów)</p>
+                                            <h5 class="fw-bold mb-1" data-translate="contact_address_label">Adres</h5>
+                                            <span class="text-muted" data-translate="contact_address_value">ul. Cybernetyki 7D, Warszawa<br>(os. Mozaika Mokotów)</span>
                                 </div>
                             </div>
+                                </a>
                             
-                            <div class="contact-item">
-                                <div class="contact-icon">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 0C5.374 0 0 5.373 0 12s5.374 12 12 12 12-5.373 12-12S18.626 0 12 0zm5.568 8.16c-.169 1.858-.896 3.605-2.068 4.963-1.235 1.431-2.873 2.207-4.615 2.207-1.846 0-3.491-.814-4.699-2.304-.362-.446-.644-.943-.841-1.47-.023-.06-.037-.123-.037-.188 0-.405.33-.734.736-.734.31 0 .575.193.69.464.15.35.353.678.602.973.835 1.004 1.989 1.564 3.236 1.564 1.353 0 2.581-.61 3.429-1.665.798-.993 1.275-2.204 1.388-3.477-.115-.127-.253-.235-.408-.317-.672-.355-1.441-.549-2.24-.549-2.581 0-4.668 2.086-4.668 4.668 0 .758.184 1.471.504 2.102.062.123.099.261.099.406 0 .405-.33.734-.736.734-.31 0-.575-.193-.69-.464-.425-.838-.645-1.778-.645-2.778 0-3.39 2.757-6.147 6.147-6.147 1.112 0 2.164.296 3.068.814.301.172.571.389.798.642.018-.058.029-.117.029-.179 0-.405.33-.734.736-.734.405 0 .735.329.735.734-.001.394-.156.753-.421 1.016z"/>
-                                    </svg>
+                                <div class="social-media-section">
+                                    <h5 class="fw-bold mb-3" data-translate="contact_social_label">Social Media</h5>
+                                    <div class="d-flex gap-3">
+                                        <a href="https://www.instagram.com/montessori_itsybitsy/" target="_blank" rel="noopener" 
+                                           class="btn btn-outline-primary social-btn p-4 flex-fill hover-lift" title="Instagram">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fab fa-instagram fs-2 mb-2"></i>
+                                                <span class="fw-semibold" data-translate="contact_instagram">Instagram</span>
                                 </div>
-                                <div class="contact-info-text">
-                                    <h4>Social Media</h4>
-                                    <div class="social-links">
-                                        <a href="https://www.instagram.com/montessori_itsybitsy/" target="_blank" rel="noopener" title="Instagram">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                                            </svg>
                                         </a>
-                                        <a href="https://www.facebook.com/przedszkolemontessoriitsybitsy/?locale=pl_PL" target="_blank" rel="noopener" title="Facebook">
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                                            </svg>
+                                        <a href="https://www.facebook.com/przedszkolemontessoriitsybitsy/?locale=pl_PL" target="_blank" rel="noopener" 
+                                           class="btn btn-outline-primary social-btn p-4 flex-fill hover-lift" title="Facebook">
+                                            <div class="d-flex flex-column align-items-center">
+                                                <i class="fab fa-facebook-f fs-2 mb-2"></i>
+                                                <span class="fw-semibold" data-translate="contact_facebook">Facebook</span>
+                                            </div>
                                         </a>
                                     </div>
                                 </div>
@@ -317,46 +767,108 @@
                         </div>
                     </div>
                     
-                    <div class="contact-form-container">
-                        <h3 data-translate="contact_form_title">Zostaw wiadomość</h3>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
+                        <div class="contact-form-container card border-0 shadow-lg h-100">
+                            <div class="card-body p-4">
+                                <h3 class="h4 fw-bold mb-4 text-center" data-translate="contact_form_title">
+                                    <i class="fas fa-paper-plane me-2 text-primary"></i>
+                                    Zostaw wiadomość
+                                </h3>
                         <form class="contact-form" id="contactForm">
-                            <div class="form-group">
-                                <label for="name" data-translate="form_name">Imię i nazwisko</label>
-                                <input type="text" id="name" name="name" required placeholder="Wprowadź swoje imię i nazwisko" data-translate="form_name_placeholder">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label fw-semibold" data-translate="form_name">Imię i nazwisko</label>
+                                        <input type="text" class="form-control" id="name" name="name" required 
+                                               placeholder="Wprowadź swoje imię i nazwisko" data-translate="form_name_placeholder">
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label fw-semibold" data-translate="form_email">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" required 
+                                               placeholder="Wprowadź swój adres email" data-translate="form_email_placeholder">
                             </div>
                             
-                            <div class="form-group">
-                                <label for="email" data-translate="form_email">Email</label>
-                                <input type="email" id="email" name="email" required placeholder="Wprowadź swój adres email" data-translate="form_email_placeholder">
+                                    <div class="mb-3">
+                                        <label for="phone" class="form-label fw-semibold" data-translate="form_phone">Telefon</label>
+                                        <input type="tel" class="form-control" id="phone" name="phone" 
+                                               placeholder="Wprowadź swój numer telefonu (opcjonalnie)" data-translate="form_phone_placeholder">
                             </div>
                             
-                            <div class="form-group">
-                                <label for="phone" data-translate="form_phone">Telefon</label>
-                                <input type="tel" id="phone" name="phone" placeholder="Wprowadź swój numer telefonu (opcjonalnie)" data-translate="form_phone_placeholder">
+                                    <div class="mb-4">
+                                        <label for="message" class="form-label fw-semibold" data-translate="form_message">Wiadomość</label>
+                                        <textarea class="form-control" id="message" name="message" rows="5" required 
+                                                  placeholder="Opisz w czym możemy Ci pomóc..." data-translate="form_message_placeholder"></textarea>
                             </div>
                             
-                            <div class="form-group">
-                                <label for="message" data-translate="form_message">Wiadomość</label>
-                                <textarea id="message" name="message" rows="5" required placeholder="Opisz w czym możemy Ci pomóc..." data-translate="form_message_placeholder"></textarea>
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 py-3" data-translate="form_submit">
+                                        <i class="fas fa-paper-plane me-2"></i>
+                                        Wyślij wiadomość
+                                    </button>
+                                </form>
                             </div>
-                            
-                            <button type="submit" class="btn-primary" data-translate="form_submit">Wyślij wiadomość</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="contact-map">
-                    <div class="map-container">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d873.3776944034128!2d20.996712798244435!3d52.17384382488476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4719332019247d5f%3A0x702045f7671189b8!2sPrivate%20Kindergarten%20Montessori%20ItsyBitsy!5e1!3m2!1sru!2spl!4v1752690581245!5m2!1sru!2spl" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="contact-map" data-aos="fade-up" data-aos-delay="200">
+                    <div class="text-center mb-4">
+                        <h4 class="fw-bold" data-translate="contact_map_title">Znajdź nas na mapie</h4>
+                    </div>
+                    <div class="map-container card border-0 shadow-lg overflow-hidden">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d873.3776944034128!2d20.996712798244435!3d52.17384382488476!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4719332019247d5f%3A0x702045f7671189b8!2sPrivate%20Kindergarten%20Montessori%20ItsyBitsy!5e1!3m2!1sru!2spl!4v1752690581245!5m2!1sru!2spl" 
+                                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
         </section>
         
     </main>
+    </div>
 
-    <script src="assets/js/translations.js"></script>
-    <script src="assets/js/mobile-menu.js"></script>
+    <!-- Scripts -->
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Main JavaScript -->
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/mobile-menu.js"></script>
+    <script src="assets/js/translations.js"></script>
+    
+    <!-- Initialize everything -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing...');
+            
+            // Initialize Landing Page Manager
+            if (typeof LandingPageManager !== 'undefined') {
+                new LandingPageManager();
+                console.log('LandingPageManager initialized');
+            }
+            
+            // Initialize Translations
+            if (typeof initializeTranslations === 'function') {
+                initializeTranslations();
+                console.log('Translations initialized');
+            }
+            
+            // Initialize AOS (handled by LandingPageManager)
+            if (typeof AOS !== 'undefined') {
+                // AOS will be initialized by LandingPageManager with proper scroll container support
+                console.log('AOS library detected - will be initialized by LandingPageManager');
+            } else {
+                console.log('AOS library not found - using fallback animations');
+            }
+            
+            // Debug: Check if hero elements exist
+            const heroSection = document.querySelector('.hero-section');
+            const parallaxBg = document.querySelector('.hero-parallax-bg');
+            console.log('Hero section found:', !!heroSection);
+            console.log('Parallax background found:', !!parallaxBg);
+            
+            if (parallaxBg) {
+                console.log('Parallax background styles:', getComputedStyle(parallaxBg).backgroundImage);
+            }
+        });
+    </script>
 </body>
 </html>

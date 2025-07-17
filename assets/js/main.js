@@ -24,6 +24,8 @@ class LandingPageManager {
         this.setupMobileMenuIntegration();
         this.setupLanguageSwitcher();
         this.setupNavigation();
+        this.setupParallax();
+        this.initializeAOS();
         this.checkUrlHash();
         
         // Set initial active state after a short delay
@@ -55,10 +57,38 @@ class LandingPageManager {
             link.addEventListener('click', this.handleAnchorClick.bind(this));
         });
 
-        // Window events
-        window.addEventListener('scroll', this.throttle(this.handleScroll.bind(this), 16));
+        // Scroll events - always bind to both for maximum compatibility
+        const scrollContainer = document.querySelector('#content-wrapper');
+        const scrollHandler = this.throttle(this.handleScroll.bind(this), 16);
+        
+        if (scrollContainer) {
+            // Primary scroll handler on content wrapper
+            scrollContainer.addEventListener('scroll', scrollHandler, { passive: true });
+            console.log('Scroll handler bound to content wrapper');
+        }
+        
+        // Also bind to window as fallback
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+        
         window.addEventListener('resize', this.debounce(this.handleResize.bind(this), 250));
         window.addEventListener('load', this.handleWindowLoad.bind(this));
+        
+        // Mobile-specific events for better scroll detection
+        if ('ontouchstart' in window) {
+            window.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: true });
+            window.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: true });
+        }
+        
+        // Enhanced mobile support
+        window.addEventListener('orientationchange', this.debounce(() => {
+            this.handleResize();
+            // Force refresh animations after orientation change
+            if (typeof AOS !== 'undefined') {
+                setTimeout(() => {
+                    AOS.refresh();
+                }, 300);
+            }
+        }, 300));
     }
 
     /**
@@ -120,41 +150,111 @@ class LandingPageManager {
         
         if (!langToggle || !currentLangSpan) return;
         
-        langToggle.addEventListener('click', () => {
+        // Remove any existing event listeners
+        langToggle.replaceWith(langToggle.cloneNode(true));
+        const newLangToggle = document.getElementById('langToggle');
+        const newCurrentLangSpan = newLangToggle?.querySelector('.current-lang');
+        
+        if (!newLangToggle || !newCurrentLangSpan) return;
+        
+        newLangToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Get current language from the translation manager if available
+            let currentLang = 'pl';
+            if (window.translationManager && window.translationManager.getCurrentLanguage) {
+                currentLang = window.translationManager.getCurrentLanguage();
+            } else {
+                currentLang = this.getStoredLanguage() || 'pl';
+            }
+            
             // Toggle between PL and EN
-            this.currentLanguage = this.currentLanguage === 'pl' ? 'en' : 'pl';
-            currentLangSpan.textContent = this.currentLanguage.toUpperCase();
+            const newLanguage = currentLang === 'pl' ? 'en' : 'pl';
             
-            // Dispatch language change event
-            const event = new CustomEvent('languageChanged', {
-                detail: { language: this.currentLanguage }
-            });
-            document.dispatchEvent(event);
+            // Update the display immediately
+            newCurrentLangSpan.textContent = newLanguage.toUpperCase();
             
-            // Store preference
-            try {
-                localStorage.setItem('preferredLanguage', this.currentLanguage);
-            } catch (error) {
-                document.cookie = `preferredLanguage=${this.currentLanguage}; path=/; max-age=31536000`;
+            // Use translation manager if available
+            if (window.translationManager && window.translationManager.switchLanguage) {
+                window.translationManager.switchLanguage(newLanguage);
+            } else {
+                // Fallback: store language and try again later
+                this.storeLanguage(newLanguage);
+                this.currentLanguage = newLanguage;
+                
+                // Retry with translation manager in a moment
+                setTimeout(() => {
+                    if (window.translationManager && window.translationManager.switchLanguage) {
+                        window.translationManager.switchLanguage(newLanguage);
+                    }
+                }, 100);
             }
         });
         
-        // Set initial language from storage or detected language
-        const initialLanguage = this.getStoredLanguage() || this.detectBrowserLanguage() || 'pl';
-        this.currentLanguage = initialLanguage;
+        // Initialize language display
+        this.initializeLanguageDisplay();
+    }
+    
+    /**
+     * Initialize language display
+     */
+    initializeLanguageDisplay() {
+        const currentLangSpan = document.querySelector('.current-lang');
+        if (!currentLangSpan) return;
         
-        // Update language button display
-        if (currentLangSpan) {
-            currentLangSpan.textContent = this.currentLanguage.toUpperCase();
+        // Try to get language from translation manager first
+        let initialLanguage = 'pl';
+        
+        if (window.translationManager && window.translationManager.getCurrentLanguage) {
+            initialLanguage = window.translationManager.getCurrentLanguage();
+        } else {
+            initialLanguage = this.getStoredLanguage() || this.detectBrowserLanguage() || 'pl';
         }
         
-        // Trigger initial translation
-        setTimeout(() => {
-            const event = new CustomEvent('languageChanged', {
-                detail: { language: this.currentLanguage }
-            });
-            document.dispatchEvent(event);
-        }, 100);
+        this.currentLanguage = initialLanguage;
+        currentLangSpan.textContent = this.currentLanguage.toUpperCase();
+        
+        // Set up a retry mechanism for translation initialization
+        this.setupTranslationRetry();
+    }
+    
+    /**
+     * Setup translation retry mechanism
+     */
+    setupTranslationRetry() {
+        let retries = 0;
+        const maxRetries = 10;
+        
+        const tryInitializeTranslations = () => {
+            if (window.translationManager && window.translationManager.switchLanguage) {
+                // Translation manager is ready, trigger translation
+                window.translationManager.switchLanguage(this.currentLanguage);
+                return true;
+            } else if (retries < maxRetries) {
+                // Not ready yet, try again
+                retries++;
+                setTimeout(tryInitializeTranslations, 200);
+                return false;
+            } else {
+                console.warn('Translation manager not available after maximum retries');
+                return false;
+            }
+        };
+        
+        // Start the retry process
+        setTimeout(tryInitializeTranslations, 100);
+    }
+    
+    /**
+     * Store language preference
+     */
+    storeLanguage(language) {
+        try {
+            localStorage.setItem('preferredLanguage', language);
+        } catch (error) {
+            document.cookie = `preferredLanguage=${language}; path=/; max-age=31536000`;
+        }
     }
     
     /**
@@ -233,7 +333,8 @@ class LandingPageManager {
             }
         }, {
             threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-            rootMargin: '-80px 0px -20% 0px'
+            rootMargin: '-80px 0px -20% 0px',
+            root: document.querySelector('#content-wrapper')
         });
         
         sections.forEach(section => observer.observe(section));
@@ -462,18 +563,32 @@ class LandingPageManager {
     }
 
     /**
-     * Setup intersection observer for animations
+     * Setup intersection observer for animations with mobile optimization
      */
     setupIntersectionObserver() {
+        // Check if Intersection Observer is supported
+        if (!('IntersectionObserver' in window)) {
+            console.warn('IntersectionObserver not supported, showing all elements');
+            this.showAllAnimatedElements();
+            return;
+        }
+
+        const isMobile = window.innerWidth < 768;
+        const scrollContainer = document.querySelector('#content-wrapper');
+        
+        // Observer options optimized for custom scroll container
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: isMobile ? [0, 0.05] : [0.05, 0.2],
+            rootMargin: isMobile ? '0px 0px -10px 0px' : '0px 0px -30px 0px',
+            root: scrollContainer // Use custom scroll container
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    // Immediate animation for better responsiveness
                     entry.target.classList.add('animate-in');
+                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
@@ -493,9 +608,87 @@ class LandingPageManager {
             '.join-us-content'
         ];
         
+        // Set up observer with error handling
+        let observedCount = 0;
+        animateElements.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+                try {
+                    observer.observe(el);
+                    observedCount++;
+                } catch (error) {
+                    console.warn(`Failed to observe element ${selector}:`, error);
+                    el.classList.add('animate-in');
+                }
+            });
+        });
+        
+        console.log(`Intersection Observer set up for ${observedCount} elements (mobile: ${isMobile})`);
+        
+        // Immediate check for visible elements
+        setTimeout(() => {
+            this.forceCheckVisibleElements(observer, animateElements);
+        }, 200);
+        
+        // Additional checks for mobile
+        if (isMobile) {
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    this.forceCheckVisibleElements(observer, animateElements);
+                }, 300);
+            });
+            
+            // Extra safety check for mobile
+            setTimeout(() => {
+                this.forceCheckVisibleElements(observer, animateElements);
+            }, 1000);
+        }
+    }
+    
+    /**
+     * Fallback method to show all animated elements immediately
+     */
+    showAllAnimatedElements() {
+        const animateElements = [
+            '.service-card', 
+            '.stat-item', 
+            '.about-content', 
+            '.contact-content',
+            '.grid-image-item',
+            '.testimonial-card',
+            '.why-us-text',
+            '.visit-us-text',
+            '.listen-children-text',
+            '.lets-meet-text',
+            '.join-us-content'
+        ];
+        
         animateElements.forEach(selector => {
             document.querySelectorAll(selector).forEach(el => {
-                observer.observe(el);
+                el.classList.add('animate-in');
+            });
+        });
+    }
+    
+    /**
+     * Force check for visible elements that may have been missed
+     */
+    forceCheckVisibleElements(observer, animateElements) {
+        animateElements.forEach(selector => {
+            document.querySelectorAll(selector).forEach(el => {
+                if (!el.classList.contains('animate-in')) {
+                    const rect = el.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    
+                    if (isVisible) {
+                        el.classList.add('animate-in');
+                        try {
+                            observer.unobserve(el);
+                        } catch (error) {
+                            // Element may not be observed, ignore error
+                        }
+                    }
+                }
             });
         });
     }
@@ -718,23 +911,46 @@ class LandingPageManager {
     }
 
     /**
-     * Handle scroll events
+     * Handle scroll events with mobile optimization
      */
     handleScroll() {
-        const scrollTop = window.pageYOffset;
+        // Get scroll position from content wrapper or window
+        const scrollContainer = document.querySelector('#content-wrapper');
+        const scrollTop = scrollContainer ? scrollContainer.scrollTop : window.pageYOffset;
         const header = document.querySelector('.header');
         
-        // Add scrolled class to header
-        if (scrollTop > 50) {
-            header.classList.add('scrolled');
-        } else {
+        // Header scroll effects (desktop only)
+        if (window.innerWidth >= 768 && header) {
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        } else if (header) {
             header.classList.remove('scrolled');
         }
 
-        // Parallax effect for hero background
-        const heroBackground = document.querySelector('.hero-bg-image');
-        if (heroBackground && scrollTop < window.innerHeight) {
-            heroBackground.style.transform = `translateY(${scrollTop * 0.5}px)`;
+        // Parallax effect for hero background (desktop only)
+        if (window.innerWidth >= 768) {
+            const heroBackground = document.querySelector('.hero-bg img');
+            if (heroBackground && scrollTop < window.innerHeight) {
+                heroBackground.style.transform = `translateY(${scrollTop * 0.3}px)`;
+            }
+        }
+        
+        // Enhanced animation checking
+        if (!this.scrollCheckTimeout) {
+            this.scrollCheckTimeout = setTimeout(() => {
+                // Check our custom animations
+                this.checkVisibleAnimations();
+                
+                // Also refresh AOS if available
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+                
+                this.scrollCheckTimeout = null;
+            }, window.innerWidth < 768 ? 100 : 50);
         }
     }
 
@@ -777,6 +993,57 @@ class LandingPageManager {
         
         // Trigger any load-dependent animations
         this.triggerLoadAnimations();
+    }
+
+    /**
+     * Handle touch start for mobile scroll detection
+     */
+    handleTouchStart(event) {
+        this.touchStartTime = Date.now();
+        this.touchStartY = event.touches[0].clientY;
+    }
+
+    /**
+     * Handle touch end for mobile scroll detection
+     */
+    handleTouchEnd(event) {
+        if (!this.touchStartTime || !this.touchStartY) return;
+        
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - this.touchStartTime;
+        const touchEndY = event.changedTouches[0].clientY;
+        const touchDistance = Math.abs(touchEndY - this.touchStartY);
+        
+        // If it was a significant scroll gesture, force check animations
+        if (touchDuration < 1000 && touchDistance > 50) {
+            setTimeout(() => {
+                // Force refresh AOS animations
+                if (typeof AOS !== 'undefined') {
+                    AOS.refresh();
+                }
+                
+                // Force check our custom animations
+                const animateElements = [
+                    '.service-card', 
+                    '.stat-item', 
+                    '.about-content', 
+                    '.contact-content',
+                    '.grid-image-item',
+                    '.testimonial-card',
+                    '.why-us-text',
+                    '.visit-us-text',
+                    '.listen-children-text',
+                    '.lets-meet-text',
+                    '.join-us-content'
+                ];
+                
+                this.forceCheckVisibleElements(null, animateElements);
+            }, 100);
+        }
+        
+        // Reset touch tracking
+        this.touchStartTime = null;
+        this.touchStartY = null;
     }
 
     /**
@@ -842,8 +1109,17 @@ class LandingPageManager {
      * Get translation for key
      */
     translate(key) {
-        // This would interface with the translations.js module
-        if (window.translations && window.translations[this.currentLanguage]) {
+        // Wait for translations to be loaded
+        if (!window.translations) {
+            // If translations aren't loaded yet, try to initialize them
+            if (window.TranslationManager) {
+                window.translationManager = new window.TranslationManager();
+            }
+            // Return the key as fallback
+            return key;
+        }
+        
+        if (window.translations[this.currentLanguage]) {
             return window.translations[this.currentLanguage][key] || key;
         }
         
@@ -1064,6 +1340,211 @@ class LandingPageManager {
                 func.apply(context, args);
             }, wait);
         };
+    }
+
+    /**
+     * Setup parallax scrolling effect for hero section
+     */
+    setupParallax() {
+        const heroBg = document.querySelector('.hero-bg');
+        const heroSection = document.querySelector('.hero-section');
+        
+        if (!heroBg || !heroSection) {
+            console.log('Hero elements not found');
+            return;
+        }
+        
+        const updateParallax = () => {
+            const scrollTop = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const heroHeight = heroSection.offsetHeight;
+            
+            // Only apply parallax when hero section is in view
+            if (scrollTop < heroHeight + windowHeight) {
+                const parallaxSpeed = 0.5;
+                const yPos = scrollTop * parallaxSpeed;
+                
+                // Apply transform
+                heroBg.style.transform = `translate3d(0, ${yPos}px, 0)`;
+            }
+        };
+        
+        // Throttled scroll handler
+        let ticking = false;
+        const handleScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+        
+        // Initialize
+        updateParallax();
+        
+        // Add event listeners
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('resize', updateParallax, { passive: true });
+        
+        console.log('Clean parallax initialized successfully');
+    }
+    
+    /**
+     * Initialize AOS (Animate On Scroll) library with custom scroll container
+     */
+    initializeAOS() {
+        // Check if AOS is available
+        if (typeof AOS === 'undefined') {
+            console.warn('AOS library not loaded');
+            this.setupFallbackAnimations();
+            return;
+        }
+        
+        // Get the custom scroll container
+        const scrollContainer = document.getElementById('content-wrapper');
+        const isMobile = window.innerWidth < 768;
+        
+        // AOS doesn't natively support custom scroll containers well,
+        // so we'll use a hybrid approach
+        AOS.init({
+            duration: isMobile ? 600 : 800,
+            once: true,
+            offset: isMobile ? 30 : 80,
+            delay: 0,
+            disable: false,
+            easing: 'ease-out-cubic',
+            mirror: false,
+            anchorPlacement: 'top-bottom',
+            debounceDelay: 50,
+            throttleDelay: 50
+        });
+        
+        // Setup custom scroll handling for AOS
+        if (scrollContainer) {
+            // Custom scroll handler for AOS
+            const handleCustomScroll = this.throttle(() => {
+                // Manually trigger AOS refresh
+                AOS.refresh();
+                
+                // Also check our custom animations
+                this.checkVisibleAnimations();
+            }, 16);
+            
+            scrollContainer.addEventListener('scroll', handleCustomScroll, { passive: true });
+            console.log('AOS initialized with custom scroll container');
+        } else {
+            console.log('AOS initialized with window scroll (fallback)');
+        }
+        
+        // Setup immediate animation check
+        this.setupImmediateAnimationCheck();
+        
+        // Force refresh on resize
+        window.addEventListener('resize', this.debounce(() => {
+            AOS.refresh();
+            this.checkVisibleAnimations();
+        }, 300));
+        
+        // Force initial refresh
+        setTimeout(() => {
+            AOS.refresh();
+            this.checkVisibleAnimations();
+        }, 100);
+    }
+    
+    /**
+     * Setup fallback animations if AOS fails
+     */
+    setupFallbackAnimations() {
+        console.log('Setting up fallback animations');
+        
+        // Show all AOS elements immediately
+        const aosElements = document.querySelectorAll('[data-aos]');
+        aosElements.forEach(element => {
+            element.style.opacity = '1';
+            element.style.transform = 'none';
+            element.classList.add('aos-animate');
+        });
+        
+        // Also trigger our custom animation system
+        this.setupImmediateAnimationCheck();
+    }
+    
+    /**
+     * Setup immediate animation check for visible elements
+     */
+    setupImmediateAnimationCheck() {
+        // Check animations immediately for visible elements
+        setTimeout(() => {
+            this.checkVisibleAnimations();
+        }, 50);
+        
+        // Setup periodic checks to catch any missed animations
+        const checkInterval = setInterval(() => {
+            this.checkVisibleAnimations();
+        }, 500);
+        
+        // Stop checking after 10 seconds
+        setTimeout(() => {
+            clearInterval(checkInterval);
+        }, 10000);
+    }
+    
+    /**
+     * Check and animate visible elements
+     */
+    checkVisibleAnimations() {
+        // Get scroll container or fallback to window
+        const scrollContainer = document.getElementById('content-wrapper');
+        const scrollTop = scrollContainer ? scrollContainer.scrollTop : window.pageYOffset;
+        const containerHeight = scrollContainer ? scrollContainer.clientHeight : window.innerHeight;
+        
+        // Check AOS elements
+        const aosElements = document.querySelectorAll('[data-aos]:not(.aos-animate)');
+        aosElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const elementTop = scrollContainer ? 
+                rect.top + scrollTop : 
+                rect.top + window.pageYOffset;
+            
+            // Check if element is in viewport
+            const isVisible = rect.top < containerHeight && rect.bottom > 0;
+            
+            if (isVisible) {
+                element.classList.add('aos-animate');
+                element.style.opacity = '1';
+                element.style.transform = 'none';
+            }
+        });
+        
+        // Check custom animation elements
+        const animateElements = [
+            '.service-card:not(.animate-in)', 
+            '.stat-item:not(.animate-in)', 
+            '.about-content:not(.animate-in)', 
+            '.contact-content:not(.animate-in)',
+            '.grid-image-item:not(.animate-in)',
+            '.testimonial-card:not(.animate-in)',
+            '.why-us-text:not(.animate-in)',
+            '.visit-us-text:not(.animate-in)',
+            '.listen-children-text:not(.animate-in)',
+            '.lets-meet-text:not(.animate-in)',
+            '.join-us-content:not(.animate-in)'
+        ];
+        
+        animateElements.forEach(selector => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                const isVisible = rect.top < containerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    element.classList.add('animate-in');
+                }
+            });
+        });
     }
 }
 
