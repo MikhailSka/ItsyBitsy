@@ -1,0 +1,43 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Tablet and Medium Screen Styles
+   Tablet devices and medium screens
+   ========================================================================= */
+
+/* Large Tablets and Small Desktops (768px-992px) */
+@media (max-width: 991.98px) and (min-width: 768px) {
+    .logo-img {
+        height: 45px;
+    }
+    
+    .nav-link {
+        padding: 0.6rem 0.8rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .language-switcher {
+        margin-left: 1rem !important;
+    }
+    
+    .lang-toggle-btn {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* Typography scaling */
+    .display-1 { font-size: 3rem; }
+    .display-2 { font-size: 2.5rem; }
+    .display-3 { font-size: 2.25rem; }
+    .display-4 { font-size: 2rem; }
+    .display-5 { font-size: 1.75rem; }
+    .display-6 { font-size: 1.5rem; }
+    
+    /* Sections */
+    section {
+        padding: 4rem 0 !important;
+    }
+    
+    .video-container {
+        max-height: none !important;
+        height: auto;
+    }
+} 

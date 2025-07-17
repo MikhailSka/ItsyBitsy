@@ -1,0 +1,92 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Desktop and Large Screen Styles
+   Desktop and Large Tablets (768px and up)
+   ========================================================================= */
+
+@media (min-width: 768px) {
+    /* Show desktop navigation */
+    .nav-menu {
+        position: static !important;
+        width: auto !important;
+        height: auto !important;
+        background: transparent !important;
+        flex-direction: row !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        padding: 0 !important;
+        gap: 1rem !important;
+        box-shadow: none !important;
+        transition: none !important;
+        z-index: auto !important;
+        overflow: visible !important;
+        right: 0 !important;
+    }
+    
+    .nav-link {
+        padding: 0.75rem 1rem !important;
+        margin: 0 !important;
+        border-radius: var(--border-radius-lg) !important;
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: var(--gray-text) !important;
+        background: transparent !important;
+        text-align: left !important;
+        border: none !important;
+        min-height: auto !important;
+        display: inline-block !important;
+        white-space: nowrap !important;
+    }
+    
+    .nav-link:hover, .nav-link:active {
+        background: var(--orange-light) !important;
+        color: var(--primary-orange) !important;
+        border: none !important;
+        transform: none !important;
+    }
+    
+    .nav-link.active {
+        background: var(--primary-gradient) !important;
+        color: white !important;
+        border: none !important;
+    }
+    
+    /* Language switcher for desktop */
+    .language-switcher {
+        margin: 0 0 0 1.5rem !important;
+        padding: 0 !important;
+        width: auto !important;
+    }
+    
+    .lang-toggle-btn {
+        width: auto !important;
+        padding: 0.5rem 1rem !important;
+        font-size: 0.95rem !important;
+        background: transparent !important;
+        color: var(--primary-orange) !important;
+        border: 2px solid var(--primary-orange) !important;
+        border-radius: var(--border-radius-lg) !important;
+        font-weight: 600 !important;
+        min-height: 44px !important;
+        min-width: 44px !important;
+    }
+    
+    .lang-toggle-btn:hover {
+        background: var(--primary-orange) !important;
+        color: white !important;
+        transform: scale(1.05) !important;
+    }
+    
+    /* Hide mobile menu toggle */
+    .mobile-menu-toggle {
+        display: none !important;
+    }
+    
+    /* Hero Statistics - Black Text for Desktop */
+    .hero-stats-external .stat-number-external {
+        color: #000000 !important;
+    }
+    
+    .hero-stats-external .stat-text-external {
+        color: #000000 !important;
+    }
+} 

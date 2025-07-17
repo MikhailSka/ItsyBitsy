@@ -1,0 +1,184 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Extra Small Mobile Styles
+   Small Mobile Devices (576px and down) - Extra Small Screens
+   ========================================================================= */
+
+@media (max-width: 575.98px) {
+    /* Extra small screen optimizations */
+    .header-content {
+        padding: 0 0.75rem;
+    }
+    
+    .navbar-brand .logo-img {
+        height: 35px;
+    }
+    
+    .mobile-menu-toggle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .mobile-menu-toggle span {
+        width: 24px;
+        height: 2px;
+    }
+    
+    /* Mobile menu narrower */
+    .nav-menu {
+        width: 260px;
+        padding: 4rem 1rem 2rem;
+    }
+    
+    .nav-link {
+        padding: 0.9rem 1rem;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    /* Typography Extra Small */
+    .display-1 { font-size: 2rem; }
+    .display-2 { font-size: 1.875rem; }
+    .display-3 { font-size: 1.75rem; }
+    .display-4 { font-size: 1.5rem; }
+    .display-5 { font-size: 1.375rem; }
+    .display-6 { font-size: 1.25rem; }
+    
+    h1 { font-size: 1.75rem; }
+    h2 { font-size: 1.5rem; }
+    h3 { font-size: 1.375rem; }
+    
+    /* Container tighter */
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+    
+    /* =================================================================
+       EXTRA SMALL MOBILE - SIMPLE TESTIMONIALS-LIKE CENTERING
+       ================================================================= */
+    
+    /* Tighter spacing and smaller containers for very small screens */
+    .col-lg-6,
+    .col-lg-4,
+    .col-md-6 {
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    /* Smaller max-widths for content containers */
+    .only-best-image,
+    .only-best-text,
+    .why-us-video,
+    .why-us-text,
+    .visit-us-text,
+    .visit-us-video,
+    .listen-children-video,
+    .listen-children-text,
+    .lets-meet-text,
+    .lets-meet-image,
+    .contact-info,
+    .contact-form-container {
+        max-width: 400px;
+    }
+    
+    /* Compact feature items and check items */
+    .feature-item,
+    .check-item {
+        max-width: 350px;
+        padding: 0.5rem;
+    }
+    
+    /* Compact highlight boxes */
+    .highlight-box,
+    .children-quote-box,
+    .highlight-callout,
+    .offer-highlights {
+        max-width: 350px;
+        padding: 1rem;
+        margin: 0.75rem auto;
+    }
+    
+    /* Compact contact details */
+    .contact-details {
+        max-width: 350px;
+    }
+    
+    /* Compact video containers */
+    .video-container {
+        max-width: 400px;
+    }
+    
+    /* Tighter button spacing */
+    .btn {
+        margin: 0.75rem auto;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    /* Reduce section padding on very small screens */
+    section.py-5 {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+    
+    /* Hero content smaller */
+    .hero-content-box {
+        padding: 1.5rem 1rem;
+        margin: 0.5rem 0;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
+    
+    .hero-badge .badge {
+        font-size: 0.8rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    /* Buttons smaller */
+    .btn {
+        min-height: 48px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn-lg {
+        min-height: 52px;
+        padding: 0.9rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    /* Sections tighter */
+    section {
+        padding: 2.5rem 0 !important;
+    }
+    
+    .py-5 {
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+    
+    /* Video container - Remove height restrictions */
+    .video-container {
+        max-height: none !important;
+        height: auto;
+    }
+    
+    /* Contact items smaller */
+    .contact-item-btn, .social-btn {
+        padding: 1rem !important;
+        min-height: 70px;
+        font-size: 0.95rem;
+    }
+    
+    .contact-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 1rem !important;
+    }
+} 

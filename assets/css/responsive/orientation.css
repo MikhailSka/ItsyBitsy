@@ -1,0 +1,36 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Orientation-Specific Styles
+   Landscape Mobile Orientation and Device-Specific Adjustments
+   ========================================================================= */
+
+/* Landscape Mobile Orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        min-height: auto;
+        padding: 1rem 0;
+    }
+    
+    .nav-menu {
+        padding: 3rem 1rem 1rem;
+        width: 250px;
+    }
+    
+    .nav-link {
+        padding: 0.6rem 1rem;
+        margin: 0.15rem 0;
+        min-height: 44px;
+    }
+    
+    .hero-content-box {
+        padding: 1rem 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    section {
+        padding: 2rem 0 !important;
+    }
+} 

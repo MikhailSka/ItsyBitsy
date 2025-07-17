@@ -1,0 +1,177 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Animation and Transition Styles
+   AOS animations, custom animations, and transition effects
+   ========================================================================= */
+
+/* Keyframe Animations */
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1.2); }
+    50% { transform: scale(1.4); }
+}
+
+/* Fallback animation for elements that don't animate in time */
+@keyframes fallback-show {
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes fallback-show-custom {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Complete AOS animations with mobile optimization and fallbacks */
+[data-aos="fade-up"] {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos="fade-up"].aos-animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+[data-aos="fade-left"] {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos="fade-left"].aos-animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+[data-aos="fade-right"] {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+[data-aos="fade-right"].aos-animate {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Fallback: Show all AOS elements after 3 seconds if not animated */
+[data-aos]:not(.aos-animate) {
+    animation: fallback-show 0.5s ease-out 3s forwards;
+}
+
+/* Custom animate-in class for Intersection Observer */
+.animate-in {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Initial state for elements that will be animated - with fallback */
+.service-card, 
+.stat-item, 
+.about-content, 
+.contact-content,
+.grid-image-item,
+.testimonial-card,
+.why-us-text,
+.visit-us-text,
+.listen-children-text,
+.lets-meet-text,
+.join-us-content {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    /* Fallback: Show after 2 seconds if not animated */
+    animation: fallback-show-custom 0.5s ease-out 2s forwards;
+}
+
+/* Animation classes with specific animations */
+.hero-badge .badge {
+    animation: pulse 2s infinite;
+}
+
+.image-decoration .decoration-circle {
+    animation: float 3s ease-in-out infinite;
+}
+
+.image-float-badge {
+    animation: bounce 2s infinite;
+}
+
+/* Mobile-specific animation optimizations */
+@media (max-width: 767.98px) {
+    [data-aos] {
+        transition-duration: 0.4s !important;
+    }
+    
+    [data-aos="fade-up"] {
+        transform: translateY(20px) !important;
+    }
+    
+    [data-aos="fade-left"] {
+        transform: translateX(20px) !important;
+    }
+    
+    [data-aos="fade-right"] {
+        transform: translateX(-20px) !important;
+    }
+    
+    .service-card, 
+    .stat-item, 
+    .about-content, 
+    .contact-content,
+    .grid-image-item,
+    .testimonial-card,
+    .why-us-text,
+    .visit-us-text,
+    .listen-children-text,
+    .lets-meet-text,
+    .join-us-content {
+        transform: translateY(15px);
+        transition-duration: 0.4s;
+    }
+}
+
+/* Respect user's motion preferences - Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    [data-aos],
+    .service-card, 
+    .stat-item, 
+    .about-content, 
+    .contact-content,
+    .grid-image-item,
+    .testimonial-card,
+    .why-us-text,
+    .visit-us-text,
+    .listen-children-text,
+    .lets-meet-text,
+    .join-us-content,
+    .hero-badge .badge,
+    .image-decoration .decoration-circle,
+    .image-float-badge {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+} 

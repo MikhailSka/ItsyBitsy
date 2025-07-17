@@ -1,0 +1,331 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Reusable Components
+   Cards, Badges, Buttons, Video Components, and Special Elements
+   ========================================================================= */
+
+/* Section Badges - ALL ORANGE */
+.section-badge .badge {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-full);
+    letter-spacing: 0.025em;
+    text-transform: uppercase;
+    background: var(--primary-gradient) !important;
+    color: white !important;
+}
+
+/* Card Components and Hover Effects */
+.card {
+    border: none;
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    transition: all var(--transition-base);
+    background: var(--white);
+}
+
+.hover-lift {
+    transition: all var(--transition-base);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Grid Cards */
+.card-img-top-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-top {
+    transition: all var(--transition-slow);
+    object-fit: cover;
+    height: 250px;
+}
+
+.card-img-top-wrapper:hover .card-img-top {
+    transform: scale(1.05);
+}
+
+.card-img-overlay-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 107, 53, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    backdrop-filter: blur(10px);
+    transition: all var(--transition-base);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+.card:hover .card-img-overlay-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Video Components - 9:16 ASPECT RATIO (Portrait) */
+.video-container {
+    position: relative;
+    width: 100% !important;
+    max-width: 393px !important; /* Max width to ensure 700px height at 9:16 ratio */
+    max-height: 700px !important;
+    border-radius: var(--border-radius-xl);
+    overflow: hidden;
+    background: #000;
+    margin: 0 auto; /* Center the container */
+}
+
+.video-container::before {
+    content: "";
+    display: block;
+    padding-bottom: 177.78% !important; /* 9:16 aspect ratio (16/9 = 1.7778) */
+}
+
+.video-container video {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important; /* Show full video without cropping */
+    border-radius: var(--border-radius-xl);
+}
+
+/* Highlight Boxes */
+.highlight-box {
+    border: 1px solid rgba(255, 107, 53, 0.2);
+    transition: all var(--transition-base);
+    background: var(--white);
+}
+
+.highlight-box:hover {
+    border-color: var(--primary-orange);
+    box-shadow: var(--shadow-md);
+}
+
+/* Quote Box Styling - Orange theme */
+.children-quote-box {
+    position: relative;
+    padding-left: 2rem !important;
+    background: #f8f9fa !important;
+    border-left: 5px solid #FF6B35 !important;
+}
+
+.children-quote-box::before {
+    content: '"';
+    position: absolute;
+    left: 0.75rem;
+    top: 0.5rem;
+    font-size: 3rem;
+    color: #FF6B35;
+    font-family: Georgia, serif;
+    line-height: 1;
+    opacity: 0.3;
+}
+
+.highlight-callout {
+    background: #f8f9fa !important;
+    border-left: 4px solid #FF6B35 !important;
+    padding-left: 1.5rem !important;
+}
+
+/* Stars always orange */
+.stars i {
+    color: var(--primary-orange) !important;
+}
+
+/* Contact Section Button Styles */
+.contact-item-btn {
+    border: 2px solid var(--primary-orange) !important;
+    background: white !important;
+    color: var(--gray-text) !important;
+    text-decoration: none !important;
+    transition: all var(--transition-base);
+    border-radius: var(--border-radius-xl) !important;
+}
+
+.contact-item-btn:hover,
+.contact-item-btn:focus {
+    background: var(--orange-lighter) !important;
+    border-color: var(--primary-orange) !important;
+    color: var(--black) !important;
+    text-decoration: none !important;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.contact-item-btn .contact-icon {
+    background: var(--primary-gradient) !important;
+}
+
+.contact-item-btn .contact-info-text h5 {
+    color: var(--black) !important;
+}
+
+.contact-item-btn .contact-info-text span {
+    color: var(--gray-text) !important;
+}
+
+.contact-item-btn:hover .contact-info-text h5 {
+    color: var(--primary-orange) !important;
+}
+
+/* Social Media Button Styles */
+.social-btn {
+    border: 2px solid var(--primary-orange) !important;
+    background: white !important;
+    color: var(--primary-orange) !important;
+    text-decoration: none !important;
+    transition: all var(--transition-base);
+    border-radius: var(--border-radius-xl) !important;
+    min-height: 120px;
+}
+
+.social-btn:hover,
+.social-btn:focus {
+    background: var(--primary-gradient) !important;
+    border-color: var(--primary-orange) !important;
+    color: white !important;
+    text-decoration: none !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.social-btn i {
+    color: inherit !important;
+}
+
+.social-btn span {
+    color: inherit !important;
+}
+
+/* Mobile responsive adjustments for buttons */
+@media (max-width: 575.98px) {
+    .social-btn {
+        min-height: 100px;
+        padding: 1rem !important;
+    }
+    
+    .social-btn i {
+        font-size: 1.5rem !important;
+    }
+    
+    .contact-item-btn {
+        padding: 1rem !important;
+    }
+} 
+
+/* =================================================================
+   FORM IMPROVEMENTS - RED DOTS (REQUIRED INDICATORS) FIX
+   ================================================================= */
+
+/* Form labels and required indicators */
+.form-label {
+    position: relative;
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* COMPLETELY REMOVE ALL RED DOTS AND REBUILD CLEAN */
+/* Remove all existing red dot CSS */
+.form-label::after,
+form label::after,
+.required::after,
+.text-danger,
+form .text-danger,
+*::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Clean form group styling */
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+/* ONLY add red asterisks to required fields - CLEAN IMPLEMENTATION */
+.form-label[data-translate="form_name"],
+.form-label[data-translate="form_email"], 
+.form-label[data-translate="form_message"] {
+    position: relative;
+    display: inline-block;
+}
+
+.form-label[data-translate="form_name"]::after,
+.form-label[data-translate="form_email"]::after,
+.form-label[data-translate="form_message"]::after {
+    content: " *";
+    color: #dc3545;
+    font-weight: bold;
+    margin-left: 4px;
+    font-size: 1.1em;
+    position: relative;
+    top: -1px;
+}
+
+/* Custom required indicator for better positioning */
+.form-required {
+    color: #dc3545;
+    font-weight: bold;
+    margin-left: 3px;
+}
+
+/* Form validation styling */
+.form-control.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control.is-valid {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Error message positioning */
+.invalid-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+}
+
+/* Mobile form improvements */
+@media (max-width: 767.98px) {
+    .form-label {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+    
+    /* Adjust required asterisk for mobile */
+    .form-label[data-translate="form_name"]::after,
+    .form-label[data-translate="form_email"]::after,
+    .form-label[data-translate="form_message"]::after {
+        font-size: 1.2em !important;
+        margin-left: 5px !important;
+        top: -2px !important;
+        font-weight: 900 !important;
+    }
+    
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+} 

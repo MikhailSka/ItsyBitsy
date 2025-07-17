@@ -1,0 +1,819 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Primary Mobile Styles
+   Tablet and Below (768px and down) - Primary Mobile Styles
+   ========================================================================= */
+
+@media (max-width: 767.98px) {
+    /* PREVENT HORIZONTAL SCROLLING */
+    html, body {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    /* Body padding for fixed header - REDUCE GAP */
+    #content-wrapper {
+        padding-top: 60px;
+    }
+    
+    /* Fix any elements that cause horizontal scroll */
+    * {
+        max-width: 100vw !important;
+        box-sizing: border-box !important;
+    }
+    
+    .container, .container-fluid {
+        max-width: 100% !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        overflow-x: hidden !important;
+    }
+    
+    .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100% !important;
+    }
+    
+    [class*="col-"] {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        max-width: 100% !important;
+    }
+    
+    /* NUCLEAR OPTION - Force header to stay put on mobile */
+    header,
+    .header,
+    .header.scrolled,
+    .navbar,
+    .navbar.scrolled,
+    header.header,
+    header.navbar {
+        position: fixed !important;
+        top: 0px !important;
+        left: 0px !important;
+        right: 0px !important;
+        width: 100vw !important;
+        height: auto !important;
+        z-index: 99999 !important;
+        transform: translate3d(0, 0, 0) !important;
+        transition: none !important;
+        animation: none !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        display: flex !important;
+        background: white !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+        padding: 0.5rem 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        will-change: auto !important;
+    }
+    
+    .header-content {
+        padding: 0 1rem !important;
+        position: relative !important;
+        z-index: 9999 !important;
+    }
+    
+    .navbar-brand .logo-img {
+        height: 40px;
+        transition: height var(--transition-base);
+    }
+    
+    /* Show mobile menu toggle */
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    /* Hide desktop navigation and setup mobile menu */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        padding: 5rem 1.5rem 2rem;
+        gap: 0;
+        box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+        transition: right 0.3s ease;
+        z-index: 1030;
+        overflow-y: auto;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-link {
+        padding: 1rem 1.5rem;
+        margin: 0.25rem 0;
+        border-radius: var(--border-radius-lg);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--gray-text) !important;
+        background: var(--light-gray);
+        text-align: center;
+        border: 2px solid transparent;
+        min-height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-link:hover, .nav-link:active {
+        background: var(--orange-light);
+        color: var(--primary-orange) !important;
+        border-color: var(--primary-orange);
+        transform: translateY(-2px);
+    }
+    
+    .nav-link.active {
+        background: var(--primary-gradient);
+        color: white !important;
+        border-color: var(--primary-orange);
+    }
+    
+    /* Language switcher in mobile menu */
+    .language-switcher {
+        margin: 2rem 0 0 0;
+        padding: 0;
+        width: 100%;
+    }
+    
+    .lang-toggle-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1.1rem;
+        background: var(--primary-gradient);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius-lg);
+        font-weight: 700;
+        min-height: 56px;
+    }
+    
+    .lang-toggle-btn:hover {
+        background: var(--dark-orange);
+        transform: none;
+    }
+    
+    /* Enhanced Typography for Mobile */
+    .display-1 { font-size: 2.5rem; line-height: 1.2; }
+    .display-2 { font-size: 2.25rem; line-height: 1.2; }
+    .display-3 { font-size: 2rem; line-height: 1.2; }
+    .display-4 { font-size: 1.75rem; line-height: 1.2; }
+    .display-5 { font-size: 1.5rem; line-height: 1.3; }
+    .display-6 { font-size: 1.25rem; line-height: 1.3; }
+    
+    h1 { font-size: 2rem; line-height: 1.2; }
+    h2 { font-size: 1.75rem; line-height: 1.3; }
+    h3 { font-size: 1.5rem; line-height: 1.3; }
+    h4 { font-size: 1.25rem; line-height: 1.4; }
+    h5 { font-size: 1.125rem; line-height: 1.4; }
+    h6 { font-size: 1rem; line-height: 1.4; }
+    
+    .lead { font-size: 1.125rem; line-height: 1.5; }
+    
+    /* Hero Section Mobile */
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 0;
+        padding-top: calc(80px + 2rem); /* Account for header */
+    }
+    
+    .hero-content-box {
+        padding: 2rem 1.5rem;
+        margin: 1rem 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: var(--border-radius-xl);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.3;
+        margin-bottom: 1.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .hero-badge .badge {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+    
+    /* Button Improvements */
+    .btn {
+        min-height: 50px;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border-radius: var(--border-radius-lg);
+        border: none;
+        transition: all var(--transition-base);
+    }
+    
+    .btn-lg {
+        min-height: 56px;
+        padding: 1rem 2rem;
+        font-size: 1.1rem;
+    }
+    
+    .btn-primary {
+        background: var(--primary-gradient);
+        box-shadow: var(--shadow-md);
+    }
+    
+    .btn-primary:hover {
+        background: var(--dark-orange);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+    
+    /* Section Spacing */
+    section {
+        padding: 3rem 0 !important;
+    }
+    
+    .py-5 {
+        padding-top: 3rem !important;
+        padding-bottom: 3rem !important;
+    }
+    
+    /* Container Optimization */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Card Enhancements */
+    .card {
+        margin-bottom: 1.5rem;
+        border-radius: var(--border-radius-xl);
+        box-shadow: var(--shadow-md);
+        border: none;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .card h3, .card h4 {
+        font-size: 1.25rem;
+        line-height: 1.3;
+    }
+    
+    /* Video Container Mobile - Remove height restrictions */
+    .video-container {
+        margin: 1rem 0;
+        max-height: none !important;
+        height: auto;
+    }
+    
+    /* Contact Section Mobile */
+    .contact-item-btn, .social-btn {
+        padding: 1.2rem !important;
+        min-height: 80px;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        border-radius: var(--border-radius-xl);
+    }
+    
+    .contact-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.2rem !important;
+    }
+    
+    /* Badge and Section Headers */
+    .section-badge .badge {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+    
+    /* Testimonial Cards */
+    .testimonial-card {
+        margin-bottom: 2rem;
+    }
+    
+    .testimonial-content p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    
+    /* Footer and Form Optimizations */
+    .form-control {
+        min-height: 50px;
+        padding: 0.8rem 1rem;
+        font-size: 1rem;
+        border-radius: var(--border-radius-lg);
+    }
+    
+    textarea.form-control {
+        min-height: 120px;
+    }
+
+    /* =================================================================
+       COMPREHENSIVE MOBILE CENTERING SOLUTION - CLEAN APPROACH
+       ================================================================= */
+    
+    /* RESET ALL BOOTSTRAP COLUMNS FOR MOBILE - CLEAN FOUNDATION */
+    .container .row [class*="col-"] {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative !important;
+        transform: none !important;
+        left: auto !important;
+        right: auto !important;
+    }
+
+    /* =================================================================
+       1. MISSION SECTION (only-best-section) - COMPLETE FIX
+       ================================================================= */
+    
+    .only-best-section .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .only-best-section .col-lg-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        max-width: 600px !important;
+        margin: 1rem auto !important;
+        width: 100% !important;
+    }
+    
+    /* Mission section image centering */
+    .only-best-section .only-best-image {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 auto 2rem auto !important;
+    }
+    
+    .only-best-section .only-best-image img {
+        width: 100% !important;
+        max-width: 350px !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+    
+    /* Mission section text centering */
+    .only-best-section .only-best-text {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 0 1rem !important;
+    }
+    
+    .only-best-section .features-list {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    .only-best-section .feature-item {
+        display: flex !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        max-width: 450px !important;
+        width: 100% !important;
+        margin: 0 auto 1rem auto !important;
+        padding: 0.5rem !important;
+    }
+
+    /* =================================================================
+       2. WHY CHOOSE US SECTION - STOP TEXT SLIDING & CENTER VIDEOS
+       ================================================================= */
+    
+    .why-us-section .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .why-us-section .col-lg-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        max-width: 600px !important;
+        margin: 1rem auto !important;
+        width: 100% !important;
+    }
+    
+    /* Fix video container - remove uneven gaps */
+    .why-us-section .why-us-video {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 auto 2rem auto !important;
+        padding: 0 !important;
+    }
+    
+    .why-us-section .video-container {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        position: relative !important;
+    }
+    
+    .why-us-section .video-container video {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+    
+    /* Fix text positioning - stop sliding */
+    .why-us-section .why-us-text {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 0 1rem !important;
+    }
+    
+    .why-us-section .features-checklist {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    .why-us-section .check-item {
+        display: flex !important;
+        align-items: flex-start !important;
+        text-align: left !important;
+        max-width: 450px !important;
+        width: 100% !important;
+        margin: 0 auto 1rem auto !important;
+        padding: 0.5rem !important;
+    }
+
+    /* =================================================================
+       3. VISIT US SECTION - COMPLETE CENTER + VIDEO FIRST ON MOBILE
+       ================================================================= */
+    
+    .visit-us-section .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .visit-us-section .col-lg-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        max-width: 600px !important;
+        margin: 1rem auto !important;
+        width: 100% !important;
+    }
+    
+    /* MOBILE ONLY: MAKE VIDEO APPEAR BEFORE TEXT */
+    .visit-us-section .col-lg-6:first-child {
+        order: 2 !important;
+    }
+    
+    .visit-us-section .col-lg-6:last-child {
+        order: 1 !important;
+        margin-bottom: 2rem !important;
+    }
+    
+    .visit-us-section .visit-us-text {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 0 1rem !important;
+    }
+    
+    .visit-us-section .visit-us-video {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+    
+    .visit-us-section .video-container {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .visit-us-section .video-container video {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* =================================================================
+       4. LISTEN TO CHILDREN SECTION - CENTER ALL
+       ================================================================= */
+    
+    .listen-children-section .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .listen-children-section .col-lg-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        max-width: 600px !important;
+        margin: 1rem auto !important;
+        width: 100% !important;
+    }
+    
+    .listen-children-section .listen-children-text {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 0 1rem !important;
+    }
+    
+    .listen-children-section .listen-children-video {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+    }
+    
+    .listen-children-section .video-container {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .listen-children-section .video-container video {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* =================================================================
+       5. WELCOME SECTION (lets-meet-section) - FIX SLIDING
+       ================================================================= */
+    
+    .lets-meet-section .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .lets-meet-section .col-lg-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        max-width: 600px !important;
+        margin: 1rem auto !important;
+        width: 100% !important;
+    }
+    
+    .lets-meet-section .lets-meet-text {
+        width: 100% !important;
+        max-width: 500px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        padding: 0 1rem !important;
+    }
+    
+    .lets-meet-section .lets-meet-image {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+    
+    .lets-meet-section .lets-meet-image img {
+        width: 100% !important;
+        max-width: 350px !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+
+    /* =================================================================
+       6. CONTACT SECTION - CENTER BUTTONS & FORM
+       ================================================================= */
+    
+    .contact-section .row {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .contact-section .col-lg-6 {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        max-width: 600px !important;
+        margin: 1rem auto !important;
+        width: 100% !important;
+    }
+    
+    /* BIGGER GAP BETWEEN "Ready to talk?" AND EMAIL BUTTON */
+    .contact-section .text-center.mb-5 {
+        margin-bottom: 4rem !important;
+    }
+    
+    /* Contact buttons styling */
+    .contact-section .contact-details {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        margin: 0 auto !important;
+    }
+    
+    .contact-section .contact-item-btn {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding: 1rem !important;
+        margin: 0 auto 1rem auto !important;
+        max-width: 350px !important;
+        width: 100% !important;
+        text-align: left !important;
+        border: 2px solid #FF6B35 !important;
+        border-radius: 12px !important;
+    }
+    
+    .contact-section .contact-icon {
+        flex-shrink: 0 !important;
+        width: 50px !important;
+        height: 50px !important;
+        margin-right: 15px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background: #FF6B35 !important;
+        border-radius: 50% !important;
+    }
+    
+    .contact-section .contact-info-text {
+        flex: 1 !important;
+        margin-left: 0 !important;
+    }
+    
+    .contact-section .contact-info-text h5 {
+        margin-bottom: 0.25rem !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+    }
+    
+    .contact-section .contact-info-text span {
+        font-size: 0.9rem !important;
+        line-height: 1.3 !important;
+    }
+    
+    /* SOCIAL MEDIA BUTTONS - FIX SIZE CONSISTENCY */
+    .contact-section .social-media-section {
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 1rem auto !important;
+        text-align: center !important;
+    }
+    
+    .contact-section .social-media-section .d-flex {
+        display: flex !important;
+        justify-content: center !important;
+        gap: 1rem !important;
+    }
+    
+    .contact-section .social-btn {
+        flex: 1 !important;
+        min-width: 120px !important;
+        max-width: 150px !important;
+        min-height: 100px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 1rem !important;
+        border: 2px solid #FF6B35 !important;
+        border-radius: 12px !important;
+        text-decoration: none !important;
+    }
+    
+    .contact-section .social-btn .d-flex {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    
+    .contact-section .social-btn i {
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
+        width: auto !important;
+        height: auto !important;
+    }
+    
+    .contact-section .social-btn span {
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        margin: 0 !important;
+    }
+    
+    /* CONTACT FORM MOBILE IMPROVEMENTS */
+    .contact-section .contact-form-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+        padding: 1.5rem !important;
+    }
+    
+    .contact-section .contact-form {
+        width: 100% !important;
+    }
+    
+    .contact-section .form-control {
+        width: 100% !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+        border: 2px solid #e5e5e5 !important;
+        border-radius: 8px !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .contact-section .form-control:focus {
+        border-color: #FF6B35 !important;
+        box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
+    }
+    
+    /* PREVENT HORIZONTAL OVERFLOW */
+    section {
+        overflow-x: hidden !important;
+        max-width: 100vw !important;
+    }
+    
+    /* HERO SECTION GAP FIX */
+    .hero-section {
+        margin-top: 0 !important;
+        padding-top: 1rem !important;
+    }
+    
+    /* HERO STATS - ENHANCED VISIBILITY ON MOBILE */
+    .hero-stats-external .stat-item-external {
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+        padding: 1.2rem 0.8rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-stats-external .stat-number-external {
+        font-size: 2.2rem !important;
+        color: #1a202c !important;
+        font-weight: 900 !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .hero-stats-external .stat-text-external {
+        font-size: 0.85rem !important;
+        color: #2d3748 !important;
+        font-weight: 700 !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+    }
+} 

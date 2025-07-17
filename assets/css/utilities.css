@@ -1,0 +1,88 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Utility Classes and Responsive Overrides
+   Utility classes, helper classes, and responsive adjustments
+   ========================================================================= */
+
+/* Utility Classes */
+.text-gradient-primary {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.border-primary-gradient {
+    border: 2px solid;
+    border-image: var(--primary-gradient) 1;
+}
+
+/* Responsive adjustments and mobile optimizations */
+@media (max-width: 768px) {
+    .feature-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+}
+
+/* Hero badge visibility improvements */
+@media (max-width: 767.98px) {
+    .hero-badge .badge {
+        font-size: 0.8rem !important;
+        padding: 0.5rem 1rem !important;
+    }
+    
+    .hero-badge .badge span {
+        font-weight: 700;
+    }
+    
+    .display-4 {
+        font-size: 1.75rem !important;
+        line-height: 1.2 !important;
+        font-weight: 800 !important;
+    }
+    
+    .hero-logo-overlay {
+        display: none; /* Hide overlay logo on very small screens */
+    }
+}
+
+@media (max-width: 575.98px) {
+    .hero-badge .badge {
+        font-size: 0.75rem !important;
+        padding: 0.4rem 0.8rem !important;
+    }
+    
+    .display-4 {
+        font-size: 1.5rem !important;
+    }
+    
+    .social-btn {
+        min-height: 100px;
+        padding: 1rem !important;
+    }
+    
+    .social-btn i {
+        font-size: 1.5rem !important;
+    }
+    
+    .contact-item-btn {
+        padding: 1rem !important;
+    }
+    
+    .contact-icon {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 0.9rem !important;
+    }
+} 

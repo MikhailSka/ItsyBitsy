@@ -1,0 +1,139 @@
+/* =========================================================================
+   ItsyBitsy Montessori Preschool - Bootstrap Overrides
+   ORANGE AND WHITE THEME ONLY
+   ========================================================================= */
+
+/* Override Bootstrap's primary color */
+.btn-primary {
+    background: var(--primary-gradient);
+    border-color: var(--primary-orange);
+    border: none;
+    font-weight: 600;
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active {
+    background: linear-gradient(135deg, var(--dark-orange) 0%, #ff7c47 100%);
+    border-color: var(--dark-orange);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    color: white !important;
+}
+
+.btn-outline-primary {
+    color: var(--primary-orange);
+    border-color: var(--primary-orange);
+    font-weight: 600;
+    transition: all var(--transition-base);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active {
+    background: var(--primary-gradient);
+    border-color: var(--primary-orange);
+    transform: translateY(-1px);
+    color: white !important;
+}
+
+/* Fix focus states to prevent blue colors */
+.btn:focus,
+.btn.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    color: white !important;
+    background-color: var(--primary-orange) !important;
+    border-color: var(--primary-orange) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
+}
+
+.btn-outline-primary:focus,
+.btn-outline-primary.focus {
+    color: white !important;
+    background-color: var(--primary-orange) !important;
+    border-color: var(--primary-orange) !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25) !important;
+}
+
+/* ALL GRADIENT CLASSES NOW USE ORANGE ONLY */
+.bg-primary-gradient,
+.bg-secondary-gradient,
+.bg-success-gradient,
+.bg-warning-gradient,
+.bg-info-gradient,
+.bg-danger-gradient,
+.bg-purple-gradient,
+.bg-teal-gradient,
+.bg-gradient-primary { 
+    background: var(--primary-gradient) !important; 
+}
+
+/* ALL BADGE COLORS NOW ORANGE */
+.badge.bg-success,
+.badge.bg-info,
+.badge.bg-warning,
+.badge.bg-danger,
+.badge.bg-primary,
+.badge.bg-secondary {
+    background: var(--primary-gradient) !important;
+    color: white !important;
+}
+
+/* Text color utilities */
+.text-muted {
+    color: #6c757d !important;
+}
+
+.text-primary {
+    color: var(--primary-orange) !important;
+}
+
+.text-success,
+.text-info,
+.text-warning,
+.text-danger {
+    color: var(--primary-orange) !important;
+}
+
+/* Ensure all sections have proper light backgrounds */
+section {
+    background: var(--white) !important;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+/* Form Enhancements */
+.form-control {
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius-md);
+    transition: all var(--transition-base);
+    font-family: var(--font-secondary);
+    background: var(--white);
+    color: var(--gray-text);
+}
+
+.form-control:focus {
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.15);
+    transform: translateY(-1px);
+    background: var(--white);
+    color: var(--gray-text);
+}
+
+.form-label {
+    color: var(--gray-text);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+} 
