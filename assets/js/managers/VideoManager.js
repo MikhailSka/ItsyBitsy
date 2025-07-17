@@ -89,7 +89,12 @@ class VideoManager {
                 video.id = videoId;
             }
             
-            this.setupVideo(videoId);
+            // Check if this is a lazy video
+            const isLazyVideo = video.hasAttribute('data-lazy-video');
+            
+            this.setupVideo(videoId, {
+                lazyLoad: isLazyVideo
+            });
         });
         
 
@@ -254,14 +259,32 @@ class VideoManager {
             video.poster = config.poster;
         }
 
+        // Handle lazy loading sources
+        const sources = video.querySelectorAll('source[data-src]');
+        if (sources.length > 0) {
+            sources.forEach(source => {
+                const dataSrc = source.getAttribute('data-src');
+                if (dataSrc) {
+                    source.src = dataSrc;
+                    source.removeAttribute('data-src');
+                }
+                
+                source.addEventListener('error', () => {
+                    console.warn(`Failed to load video source: ${source.src}`);
+                });
+            });
+        }
+
         // Ensure video is properly loaded
-        const sources = video.querySelectorAll('source');
+        const allSources = video.querySelectorAll('source');
 
         // Add error handling for each source
-        sources.forEach(source => {
-            source.addEventListener('error', () => {
-                console.warn(`Failed to load video source: ${source.src}`);
-            });
+        allSources.forEach(source => {
+            if (!source.hasAttribute('data-src')) {
+                source.addEventListener('error', () => {
+                    console.warn(`Failed to load video source: ${source.src}`);
+                });
+            }
         });
 
         // Force reload the video

@@ -1,0 +1,48 @@
+# PHP Email Configuration
+# Uncomment the line below if you have a production version with real credentials
+# api/contact.php
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Composer dependencies
+vendor/
+
+# Log files
+*.log
+error.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE/Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Cache files
+*.cache
+
+# Backup files
+*.bak
+*.backup
+
+# Configuration files with sensitive data
+config.php
+database.php
+smtp-config.php 

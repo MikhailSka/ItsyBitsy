@@ -13,7 +13,145 @@
     border-image: var(--primary-gradient) 1;
 }
 
-/* Responsive adjustments and mobile optimizations */
+/* Lazy Loading Styles */
+.lazy-loading {
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+    background-color: #f5f5f5;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.lazy-loaded {
+    opacity: 1;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.lazy-error {
+    opacity: 0.8;
+    filter: grayscale(100%);
+}
+
+/* Loading animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+/* Skeleton loading for cards */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+.skeleton-image {
+    background-color: #f0f0f0;
+    background-image: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 8px;
+}
+
+.skeleton-text {
+    height: 1em;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: 4px;
+    margin-bottom: 0.5em;
+}
+
+.skeleton-text:last-child {
+    margin-bottom: 0;
+    width: 80%;
+}
+
+/* Image loading states */
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(245, 245, 245, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+.image-loading-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color, #007cba);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Hero section specific optimizations */
+.hero-bg img.lazy-loading {
+    filter: blur(5px);
+    transform: scale(1.1);
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.hero-bg img.lazy-loaded {
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* Card image optimizations */
+.card-img-top.lazy-loading {
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
+                linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Responsive optimizations */
 @media (max-width: 768px) {
     .feature-item {
         margin-bottom: 1.5rem;
@@ -29,6 +167,17 @@
         width: 40px;
         height: 40px;
         font-size: 1rem;
+    }
+    
+    /* Reduce animation on mobile for better performance */
+    .lazy-loading {
+        animation: none;
+        background-color: #f8f9fa;
+    }
+    
+    .skeleton-image,
+    .skeleton-text {
+        animation-duration: 3s; /* Slower animation on mobile */
     }
 }
 
@@ -47,39 +196,5 @@
         font-size: 1.75rem !important;
         line-height: 1.2 !important;
         font-weight: 800 !important;
-    }
-    
-    .hero-logo-overlay {
-        display: none; /* Hide overlay logo on very small screens */
-    }
-}
-
-@media (max-width: 575.98px) {
-    .hero-badge .badge {
-        font-size: 0.75rem !important;
-        padding: 0.4rem 0.8rem !important;
-    }
-    
-    .display-4 {
-        font-size: 1.5rem !important;
-    }
-    
-    .social-btn {
-        min-height: 100px;
-        padding: 1rem !important;
-    }
-    
-    .social-btn i {
-        font-size: 1.5rem !important;
-    }
-    
-    .contact-item-btn {
-        padding: 1rem !important;
-    }
-    
-    .contact-icon {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 0.9rem !important;
     }
 } 

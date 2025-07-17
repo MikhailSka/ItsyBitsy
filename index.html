@@ -14,6 +14,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <!-- Preconnect for performance optimization -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/images/logo.png" as="image" type="image/png">
+    <link rel="preload" href="assets/images/hero.png" as="image" type="image/png">
+    
     <!-- Custom CSS Files - Modular Design Following SOLID Principles -->
     <link rel="stylesheet" href="assets/css/variables.css">
     <link rel="stylesheet" href="assets/css/bootstrap-overrides.css">
@@ -44,7 +52,7 @@
             <div class="header-content">
                 <!-- Logo -->
                 <a class="navbar-brand header-logo" href="#home" aria-label="ItsyBitsy Montessori Homepage">
-                    <img src="assets/images/logo.png" alt="ItsyBitsy Logo" class="logo-img" />
+                    <img src="assets/images/logo.png" alt="ItsyBitsy Logo" class="logo-img" data-priority-critical="true" />
                 </a>
                 
                 <!-- Desktop Navigation -->
@@ -87,7 +95,7 @@
         <!-- Hero Section -->
         <section class="hero-section" id="home">
             <div class="hero-bg">
-                <img src="assets/images/hero.png" alt="Montessori Classroom">
+                <img src="assets/images/hero.png" alt="Montessori Classroom" data-priority-critical="true">
             </div>
             <div class="container h-100">
                 <div class="row h-100 align-items-center">
@@ -158,7 +166,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
                         <div class="only-best-image position-relative">
-                            <img src="assets/images/with-flags.png" alt="Teacher with children holding flags" class="img-fluid rounded-4 shadow" />
+                            <img data-src="assets/images/with-flags.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY1ZjUiLz4KICAgIDxyZWN0IHg9IjIwJSIgeT0iNDUlIiB3aWR0aD0iNjAlIiBoZWlnaHQ9IjEwJSIgZmlsbD0iI2UwZTBlMCIgcng9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjUwJSIgY3k9IjMwJSIgcj0iOCUiIGZpbGw9IiNlMGUwZTAiLz4KPC9zdmc+" alt="Teacher with children holding flags" class="img-fluid rounded-4 shadow lazy-loading" />
                         </div>
                     </div>
                     <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
@@ -251,7 +259,7 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                         <div class="card h-100 border-0 shadow-lg hover-lift">
                             <div class="card-img-top-wrapper">
-                                <img src="assets/images/uniqueness_1.jpeg" alt="Education" class="card-img-top" />
+                                <img data-src="assets/images/uniqueness_1.jpeg" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY1ZjUiLz4KICAgIDxyZWN0IHg9IjIwJSIgeT0iNDUlIiB3aWR0aD0iNjAlIiBoZWlnaHQ9IjEwJSIgZmlsbD0iI2UwZTBlMCIgcng9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjUwJSIgY3k9IjMwJSIgcj0iOCUiIGZpbGw9IiNlMGUwZTAiLz4KPC9zdmc+" alt="Education" class="card-img-top lazy-loading" />
                                 <div class="card-img-overlay-icon">
                                     <i class="fas fa-brain text-white"></i>
                                 </div>
@@ -269,7 +277,7 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
                         <div class="card h-100 border-0 shadow-lg hover-lift">
                             <div class="card-img-top-wrapper">
-                                <img src="assets/images/uniqueness_2.png" alt="Authentic bilingualism" class="card-img-top" />
+                                <img data-src="assets/images/uniqueness_2.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY1ZjUiLz4KICAgIDxyZWN0IHg9IjIwJSIgeT0iNDUlIiB3aWR0aD0iNjAlIiBoZWlnaHQ9IjEwJSIgZmlsbD0iI2UwZTBlMCIgcng9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjUwJSIgY3k9IjMwJSIgcj0iOCUiIGZpbGw9IiNlMGUwZTAiLz4KPC9zdmc+" alt="Authentic bilingualism" class="card-img-top lazy-loading" />
                                 <div class="card-img-overlay-icon">
                                     <i class="fas fa-globe text-white"></i>
                                 </div>
@@ -287,7 +295,7 @@
                     <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
                         <div class="card h-100 border-0 shadow-lg hover-lift">
                             <div class="card-img-top-wrapper">
-                                <img src="assets/images/uniqueness_3.png" alt="Relationships and closeness" class="card-img-top" />
+                                <img data-src="assets/images/uniqueness_3.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY1ZjUiLz4KICAgIDxyZWN0IHg9IjIwJSIgeT0iNDUlIiB3aWR0aD0iNjAlIiBoZWlnaHQ9IjEwJSIgZmlsbD0iI2UwZTBlMCIgcng9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjUwJSIgY3k9IjMwJSIgcj0iOCUiIGZpbGw9IiNlMGUwZTAiLz4KPC9zdmc+" alt="Relationships and closeness" class="card-img-top lazy-loading" />
                                 <div class="card-img-overlay-icon">
                                     <i class="fas fa-users text-white"></i>
                                 </div>
@@ -317,11 +325,12 @@
                             <div class="video-container position-relative">
                             <video 
                                 controls 
-                                preload="auto"
+                                preload="none"
                                 playsinline
                                     muted
-                                    class="w-100 rounded-4 shadow-lg">
-                                <source src="assets/videos/itsybitsy-short.mov" type="video/mp4">
+                                    class="w-100 rounded-4 shadow-lg"
+                                    data-lazy-video="true">
+                                <source data-src="assets/videos/itsybitsy-short.mov" type="video/mp4">
                                 Twoja przeglądarka nie obsługuje elementu video.
                             </video>
                             </div>
@@ -437,11 +446,12 @@
                         <div class="video-container">
                             <video 
                                 controls 
-                                preload="auto"
+                                preload="none"
                                 playsinline
                                     muted
-                                    class="w-100 rounded-4 shadow-lg">
-                                <source src="assets/videos/itsybitsy-cycle.mov" type="video/mp4">
+                                    class="w-100 rounded-4 shadow-lg"
+                                    data-lazy-video="true">
+                                <source data-src="assets/videos/itsybitsy-cycle.mov" type="video/mp4">
                                 Twoja przeglądarka nie obsługuje elementu video.
                             </video>
                             </div>
@@ -460,11 +470,12 @@
                         <div class="video-container">
                             <video 
                                 controls 
-                                preload="auto"
+                                preload="none"
                                 playsinline
                                     muted
-                                    class="w-100 rounded-4 shadow-lg">
-                                <source src="assets/videos/itsybitsy-kids.mov" type="video/mp4">
+                                    class="w-100 rounded-4 shadow-lg"
+                                    data-lazy-video="true">
+                                <source data-src="assets/videos/itsybitsy-kids.mov" type="video/mp4">
                                 Twoja przeglądarka nie obsługuje elementu video.
                             </video>
                             </div>
@@ -549,7 +560,7 @@
                                     <div class="testimonial-header mb-3">
                                         <!-- User profile image placeholder -->
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="assets/images/person_1.png" alt="Reviewer" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.style.display='none';">
+                                            <img data-src="assets/images/person_1.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+CiAgICA8Y2lyY2xlIGN4PSI1MCUiIGN5PSI0MCUiIHI9IjE1JSIgZmlsbD0iI2UwZTBlMCIvPgogICAgPHBhdGggZD0iTTIwIDUwIFE0MCA0MCA2MCA1MCAiIHN0cm9rZT0iI2UwZTBlMCIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==" alt="Reviewer" class="rounded-circle me-3 lazy-loading" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.style.display='none';">
                                             <div>
                                                 <h5 class="fw-bold text-primary mb-0" data-translate="testimonial_1_name">Pani Joanna:</h5>
                                                 <a href="https://maps.app.goo.gl/jWjRLve733FsWwVE8" target="_blank" class="text-muted small text-decoration-none">
@@ -588,7 +599,7 @@
                                     <div class="testimonial-header mb-3">
                                         <!-- User profile image placeholder -->
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="assets/images/person_2.png" alt="Reviewer" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.style.display='none';">
+                                            <img data-src="assets/images/person_2.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+CiAgICA8Y2lyY2xlIGN4PSI1MCUiIGN5PSI0MCUiIHI9IjE1JSIgZmlsbD0iI2UwZTBlMCIvPgogICAgPHBhdGggZD0iTTIwIDUwIFE0MCA0MCA2MCA1MCAiIHN0cm9rZT0iI2UwZTBlMCIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==" alt="Reviewer" class="rounded-circle me-3 lazy-loading" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.style.display='none';">
                                             <div>
                                                 <h5 class="fw-bold text-primary mb-0" data-translate="testimonial_2_name">Pani Ilona:</h5>
                                                 <a href="https://maps.app.goo.gl/w9V6i3kBqm112LUw8" target="_blank" class="text-muted small text-decoration-none">
@@ -627,7 +638,7 @@
                                     <div class="testimonial-header mb-3">
                                         <!-- User profile image placeholder -->
                                         <div class="d-flex align-items-center mb-3">
-                                            <img src="assets/images/person_3.png" alt="Reviewer" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.style.display='none';">
+                                            <img data-src="assets/images/person_3.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjVmNWY1Ii8+CiAgICA8Y2lyY2xlIGN4PSI1MCUiIGN5PSI0MCUiIHI9IjE1JSIgZmlsbD0iI2UwZTBlMCIvPgogICAgPHBhdGggZD0iTTIwIDUwIFE0MCA0MCA2MCA1MCAiIHN0cm9rZT0iI2UwZTBlMCIgc3Ryb2tlLXdpZHRoPSIzIiBmaWxsPSJub25lIi8+Cjwvc3ZnPg==" alt="Reviewer" class="rounded-circle me-3 lazy-loading" style="width: 60px; height: 60px; object-fit: cover;" onerror="this.style.display='none';">
                                             <div>
                                                 <h5 class="fw-bold text-primary mb-0" data-translate="testimonial_3_name">Pani Anna:</h5>
                                                 <a href="https://maps.app.goo.gl/sqmvrkbxMMtj94gR6" target="_blank" class="text-muted small text-decoration-none">
@@ -721,7 +732,7 @@
                     </div>
                     <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-left" data-aos-duration="800">
                         <div class="lets-meet-image position-relative">
-                            <img src="assets/images/lets-know-each-other.png" alt="Teacher with children in Montessori classroom" class="img-fluid rounded-4 shadow" />
+                            <img data-src="assets/images/lets-know-each-other.png" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNmNWY1ZjUiLz4KICAgIDxyZWN0IHg9IjIwJSIgeT0iNDUlIiB3aWR0aD0iNjAlIiBoZWlnaHQ9IjEwJSIgZmlsbD0iI2UwZTBlMCIgcng9IjQiLz4KICAgIDxjaXJjbGUgY3g9IjUwJSIgY3k9IjMwJSIgcj0iOCUiIGZpbGw9IiNlMGUwZTAiLz4KPC9zdmc+" alt="Teacher with children in Montessori classroom" class="img-fluid rounded-4 shadow lazy-loading" />
                             <div class="image-float-badge position-absolute top-0 end-0 m-3">
                                 <span class="badge bg-primary-gradient text-white px-3 py-2 rounded-pill">
                                     <i class="fas fa-coffee me-1"></i>
@@ -845,6 +856,12 @@
                                                   placeholder="Opisz w czym możemy Ci pomóc..." data-translate="form_message_placeholder"></textarea>
                             </div>
                             
+                                    <!-- Honeypot field for spam protection (hidden) -->
+                                    <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
+                                        <label for="honeypot">Leave this field empty</label>
+                                        <input type="text" id="honeypot" name="honeypot" tabindex="-1" autocomplete="off">
+                                    </div>
+                            
                                     <button type="submit" class="btn btn-primary btn-lg w-100 py-3" data-translate="form_submit">
                                         <i class="fas fa-paper-plane me-2"></i>
                                         Wyślij wiadomość
@@ -880,6 +897,7 @@
     <script src="assets/js/managers/EventManager.js"></script>
     
     <!-- Landing Page Managers (in dependency order) -->
+    <script src="assets/js/managers/ImageManager.js"></script>
     <script src="assets/js/managers/VideoManager.js"></script>
     <script src="assets/js/managers/AnimationManager.js"></script>
     <script src="assets/js/managers/ScrollManager.js"></script>

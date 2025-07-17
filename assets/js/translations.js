@@ -54,9 +54,9 @@ class TranslationManager {
 
                 // Services Section
                 services_title: "Nasza wyjątkowość",
-        uniqueness_badge: "Nasza wyjątkowość",
-        uniqueness_title: "Co nas wyróżnia?",
-        uniqueness_subtitle: "Poznaj trzy filary naszej edukacji, które czynią nas wyjątkowymi",
+                uniqueness_badge: "Nasza wyjątkowość",
+                uniqueness_title: "Co nas wyróżnia?",
+                uniqueness_subtitle: "Poznaj trzy filary naszej edukacji, które czynią nas wyjątkowymi",
                 services_subtitle: "Co oferujemy Waszym dzieciom",
 
                 service_1_title: "Program Montessori 3-6 lat",

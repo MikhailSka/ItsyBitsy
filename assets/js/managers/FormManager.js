@@ -87,10 +87,13 @@ class FormManager {
         const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             this.setupForm('contactForm', {
-                submitEndpoint: window.ajaxurl || '/wp-admin/admin-ajax.php',
+                submitEndpoint: '/api/contact.php', // Placeholder PHP endpoint
                 successMessage: 'form_success',
                 errorMessage: 'form_error',
-                validationErrorMessage: 'form_validation_error'
+                validationErrorMessage: 'form_validation_error',
+                // Use custom PHP email handler
+                onSuccess: this.handleEmailSubmissionSuccess.bind(this),
+                onError: this.handleEmailSubmissionError.bind(this)
             });
         }
 
@@ -104,6 +107,241 @@ class FormManager {
                 this.setupForm(form.id);
             }
         });
+    }
+
+    /**
+     * PLACEHOLDER FUNCTION FOR PHP EMAIL INTEGRATION
+     * 
+     * This function handles successful email submissions.
+     * Developers should customize this based on their PHP backend response.
+     * 
+     * @param {Object} response - Server response from PHP script
+     * @param {HTMLFormElement} form - The contact form element
+     */
+    async handleEmailSubmissionSuccess(response, form) {
+        console.log('📧 Email submission successful:', response);
+        
+        // Parse PHP response (adjust based on your PHP script response format)
+        let responseData = response;
+        
+        // If response is a string, try to parse as JSON
+        if (typeof response === 'string') {
+            try {
+                responseData = JSON.parse(response);
+            } catch (e) {
+                // If not JSON, treat as plain text success message
+                responseData = { success: true, message: response };
+            }
+        }
+        
+        // Check if PHP script indicates success
+        if (responseData.success) {
+            // Show success message
+            this.showNotification(
+                responseData.message || 'Thank you! Your message has been sent successfully.',
+                'success'
+            );
+            
+            // Reset form
+            form.reset();
+            
+            // Remove any error states
+            form.querySelectorAll('.error').forEach(field => {
+                this.removeFieldError(field);
+            });
+            
+            // Optional: Track successful submission (for analytics)
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    event_category: 'Contact',
+                    event_label: 'Email Sent Successfully'
+                });
+            }
+            
+            // Emit success event for other parts of the application
+            this.eventManager.emit('emailSent', {
+                form,
+                response: responseData,
+                formId: 'contactForm'
+            });
+            
+        } else {
+            // PHP script returned failure
+            throw new Error(responseData.message || 'Email sending failed');
+        }
+    }
+    
+    /**
+     * PLACEHOLDER FUNCTION FOR PHP EMAIL ERROR HANDLING
+     * 
+     * This function handles email submission errors.
+     * Developers can customize error handling based on their needs.
+     * 
+     * @param {Error} error - Error object or response
+     * @param {HTMLFormElement} form - The contact form element
+     */
+    async handleEmailSubmissionError(error, form) {
+        console.error('📧 Email submission failed:', error);
+        
+        // Extract error message
+        let errorMessage = 'Sorry, there was an error sending your message. Please try again.';
+        
+        if (error.message) {
+            errorMessage = error.message;
+        } else if (typeof error === 'string') {
+            errorMessage = error;
+        }
+        
+        // Show error message to user
+        this.showNotification(errorMessage, 'error');
+        
+        // Optional: Track failed submission (for monitoring)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_error', {
+                event_category: 'Contact',
+                event_label: 'Email Send Failed',
+                value: error.message || 'Unknown error'
+            });
+        }
+        
+        // Emit error event for other parts of the application
+        this.eventManager.emit('emailError', {
+            form,
+            error,
+            formId: 'contactForm'
+        });
+        
+        // Optional: Send error to error tracking service
+        // if (window.errorTracker) {
+        //     window.errorTracker.captureException(error, {
+        //         context: 'contact_form_submission',
+        //         formData: new FormData(form)
+        //     });
+        // }
+    }
+
+    /**
+     * HELPER FUNCTION: Format form data for PHP email script
+     * 
+     * This function prepares form data in a format suitable for PHP processing.
+     * Can be customized based on PHP script requirements.
+     * 
+     * @param {FormData} formData - Raw form data
+     * @returns {Object} Formatted data object
+     */
+    formatDataForPHP(formData) {
+        const data = {};
+        
+        // Convert FormData to regular object
+        for (const [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+        
+        // Add additional data that PHP script might need
+        data.timestamp = new Date().toISOString();
+        data.userAgent = navigator.userAgent;
+        data.referrer = document.referrer;
+        data.currentUrl = window.location.href;
+        
+        // Optional: Add basic spam protection
+        data.honeypot = ''; // PHP should check this is empty
+        data.submitTime = Date.now(); // PHP can check submission speed
+        
+        return data;
+    }
+
+    /**
+     * Submit form data
+     * WordPress Compatible Version
+     */
+    async submitForm(formData, formType = 'contact') {
+        console.log('FormManager: Submitting form', { formType, data: formData });
+        
+        try {
+            // Show loading state
+            this.showLoadingState();
+            
+            // Special handling for contact form in WordPress environment
+            if (formType === 'contact') {
+                return await this.submitContactFormWordPress(formData);
+            }
+            
+            // Handle other form types here
+            throw new Error('Form type not supported yet');
+            
+        } catch (error) {
+            console.error('FormManager: Form submission error:', error);
+            this.handleEmailSubmissionError(error.message);
+            return false;
+        }
+    }
+
+    /**
+     * Submit contact form to WordPress AJAX handler
+     */
+    async submitContactFormWordPress(formData) {
+        // Check if we're in WordPress environment
+        const isWordPress = typeof itsybitsy_ajax !== 'undefined';
+        
+        if (isWordPress) {
+            // WordPress AJAX submission
+            const response = await fetch(itsybitsy_ajax.ajax_url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    action: itsybitsy_ajax.action,
+                    nonce: itsybitsy_ajax.nonce,
+                    ...this.formatDataForPHP(formData),
+                    submitTime: Date.now()
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                this.handleEmailSubmissionSuccess(result.data.message);
+                return true;
+            } else {
+                throw new Error(result.data.message || 'Failed to send message');
+            }
+        } else {
+            // Fallback to standalone PHP (non-WordPress)
+            console.warn('WordPress AJAX not detected, falling back to standalone PHP');
+            return await this.submitContactFormStandalone(formData);
+        }
+    }
+
+    /**
+     * Submit contact form to standalone PHP (non-WordPress fallback)
+     */
+    async submitContactFormStandalone(formData) {
+        const response = await fetch('api/contact.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: new URLSearchParams({
+                ...this.formatDataForPHP(formData),
+                submitTime: Date.now()
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Network error occurred');
+        }
+
+        const result = await response.json();
+        
+        if (result.success) {
+            this.handleEmailSubmissionSuccess(result.message);
+            return true;
+        } else {
+            throw new Error(result.message || 'Failed to send message');
+        }
     }
 
     /**
@@ -147,6 +385,18 @@ class FormManager {
         // Setup field validation attributes
         this.setupFormFields(form);
         
+        // Add form submission event listener
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            this.eventManager.emit('formSubmit', {
+                form,
+                formData,
+                originalEvent: event
+            });
+        });
+        
+        console.log(`FormManager: Setup form ${formId} with endpoint ${formConfig.submitEndpoint}`);
 
     }
 
@@ -486,33 +736,6 @@ class FormManager {
             if (formConfig.afterSubmit) {
                 await formConfig.afterSubmit(form, formData);
             }
-        }
-    }
-
-    /**
-     * Submit form data
-     * @param {Object} formConfig - Form configuration
-     * @param {FormData} formData - Form data
-     * @returns {Promise} Submission response
-     */
-    async submitForm(formConfig, formData) {
-        const response = await fetch(formConfig.submitEndpoint, {
-            method: formConfig.method,
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-            return response.json();
-        } else {
-            return response.text();
         }
     }
 

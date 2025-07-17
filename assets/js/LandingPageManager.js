@@ -22,6 +22,7 @@ class LandingPageManager {
         try {
             // Initialize managers in dependency order
             this.initializeEventManager();
+            this.initializeImageManager();
             this.initializeVideoManager();
             this.initializeAnimationManager();
             this.initializeScrollManager();
@@ -64,6 +65,21 @@ class LandingPageManager {
     }
 
 
+
+    /**
+     * Initialize ImageManager
+     */
+    initializeImageManager() {
+        if (typeof ImageManager === 'undefined') {
+            console.warn('ImageManager class not found. Image optimization will be limited.');
+            return;
+        }
+        
+        const imageManager = new ImageManager(this.getManager('event'));
+        this.managers.set('image', imageManager);
+        
+
+    }
 
     /**
      * Initialize VideoManager
@@ -363,6 +379,26 @@ class LandingPageManager {
         // Expose general debug function
         window.debugLandingPage = () => {
             return this.getDebugInfo();
+        };
+        
+        // Expose image debugging functions
+        window.debugImages = () => {
+            const imageManager = this.getManager('image');
+            if (imageManager) {
+                return imageManager.getDebugInfo();
+            } else {
+                console.error('ImageManager not available');
+                return null;
+            }
+        };
+        
+        window.forceLoadAllImages = () => {
+            const imageManager = this.getManager('image');
+            if (imageManager) {
+                imageManager.debugLoadAllImages();
+            } else {
+                console.error('ImageManager not available');
+            }
         };
         
 
