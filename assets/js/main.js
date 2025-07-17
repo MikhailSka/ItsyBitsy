@@ -285,7 +285,7 @@ class LandingPageManager {
     }
 
     /**
-     * Setup smooth navigation
+     * Setup smooth navigation with improved accuracy
      */
     setupNavigation() {
         // Add active state to nav links based on scroll position
@@ -300,44 +300,172 @@ class LandingPageManager {
         // Set initial active state
         this.setActiveNavLink(navLinks[0]);
         
-        const observer = new IntersectionObserver((entries) => {
-            // Find the section that's most visible in the viewport
-            let activeEntry = null;
-            let maxVisibility = 0;
-            
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Calculate how much of the section is visible
-                    const rect = entry.boundingClientRect;
-                    const viewportHeight = window.innerHeight;
-                    const headerHeight = 80;
-                    
-                    // Calculate visible portion considering header offset
-                    const visibleTop = Math.max(0, headerHeight - rect.top);
-                    const visibleBottom = Math.min(viewportHeight, rect.bottom);
-                    const visibleHeight = Math.max(0, visibleBottom - Math.max(headerHeight, rect.top));
-                    const visibility = visibleHeight / (rect.height || 1);
-                    
-                    if (visibility > maxVisibility) {
-                        maxVisibility = visibility;
-                        activeEntry = entry;
+        // Use a more accurate scroll-based approach instead of just Intersection Observer
+        this.setupScrollBasedNavigation(sections, navLinks);
+    }
+
+    /**
+     * Setup scroll-based navigation highlighting with better accuracy
+     */
+    setupScrollBasedNavigation(sections, navLinks) {
+        const scrollContainer = document.querySelector('#content-wrapper');
+        const headerHeight = 80;
+        
+        // Define section groups - sections that should be considered as one navigation group
+        const sectionGroups = {
+            'home': ['home'],
+            'about-us': ['about-us'],
+            'uniqueness': ['uniqueness'], // Will be extended with related sections
+            'reviews': ['reviews'],
+            'contact': ['contact']
+        };
+        
+        // Add sections without IDs that belong to specific navigation groups
+        const sectionGroupMapping = {
+            'uniqueness': [
+                '.why-us-section',
+                '.visit-us-section', 
+                '.listen-children-section'
+            ],
+            'reviews': [
+                '.lets-meet-section'  // "Let's get to know each other" belongs to reviews
+            ]
+        };
+        
+        // Apply grouping to sections
+        Object.entries(sectionGroupMapping).forEach(([navGroup, selectors]) => {
+            selectors.forEach(selector => {
+                const element = document.querySelector(selector);
+                if (element) {
+                    // Add a temporary ID for tracking
+                    if (!element.id) {
+                        element.setAttribute('data-nav-group', navGroup);
                     }
                 }
             });
+        });
+        
+        const updateActiveNavigation = () => {
+            // Get current scroll position
+            const scrollTop = scrollContainer ? scrollContainer.scrollTop : window.pageYOffset;
+            const containerHeight = scrollContainer ? scrollContainer.clientHeight : window.innerHeight;
             
-            if (activeEntry) {
-                const activeNavLink = document.querySelector(`.nav-menu a[href="#${activeEntry.target.id}"]`);
-                if (activeNavLink) {
+            // Special case: if we're at the very top, always highlight first section (Home)
+            if (scrollTop <= 50) {
+                this.setActiveNavLink(navLinks[0]);
+                return;
+            }
+            
+            // Get all sections to check (including grouped sections)
+            const allSectionsToCheck = [...sections];
+            
+            // Add grouped sections (sections without IDs that belong to navigation groups)
+            const groupedSections = document.querySelectorAll('[data-nav-group]');
+            groupedSections.forEach(section => {
+                if (!allSectionsToCheck.includes(section)) {
+                    allSectionsToCheck.push(section);
+                }
+            });
+            
+            // Find the section that should be active based on position
+            let activeSection = null;
+            let bestScore = -1;
+            let activeNavGroup = null;
+            
+            allSectionsToCheck.forEach((section, index) => {
+                if (!section) return;
+                
+                const rect = section.getBoundingClientRect();
+                const scrollContainerRect = scrollContainer ? scrollContainer.getBoundingClientRect() : { top: 0 };
+                
+                // Calculate section position relative to viewport
+                const sectionTop = rect.top - scrollContainerRect.top;
+                const sectionBottom = rect.bottom - scrollContainerRect.top;
+                const sectionHeight = rect.height;
+                
+                // Calculate how much of the section is in the "active zone"
+                // Active zone is the top 60% of the viewport, accounting for header
+                const activeZoneTop = headerHeight;
+                const activeZoneBottom = containerHeight * 0.6;
+                
+                // Calculate overlap with active zone
+                const overlapTop = Math.max(activeZoneTop, sectionTop);
+                const overlapBottom = Math.min(activeZoneBottom, sectionBottom);
+                const overlap = Math.max(0, overlapBottom - overlapTop);
+                
+                // Calculate score based on:
+                // 1. How much section is in active zone
+                // 2. How close the section top is to the ideal position (header + small offset)
+                const visibilityRatio = overlap / Math.min(sectionHeight, activeZoneBottom - activeZoneTop);
+                const positionScore = sectionTop <= activeZoneTop + 100 ? 1 : Math.max(0, 1 - Math.abs(sectionTop - activeZoneTop) / 200);
+                
+                // Combined score with bias towards sections that start near the top
+                let score = visibilityRatio * 0.7 + positionScore * 0.3;
+                
+                // Bonus for sections that are well-positioned
+                if (sectionTop <= activeZoneTop + 50 && sectionBottom >= activeZoneTop + 200) {
+                    score += 0.2;
+                }
+                
+                // Special handling for very large sections (like hero)
+                if (sectionHeight > containerHeight * 1.5 && sectionTop <= activeZoneTop) {
+                    score += 0.3;
+                }
+                
+                // Special bonus for grouped sections that are well-positioned
+                if (section.hasAttribute('data-nav-group') && overlap > 100) {
+                    score += 0.2; // Give grouped sections a boost when they're visible
+                }
+                
+                if (score > bestScore) {
+                    bestScore = score;
+                    activeSection = section;
+                    
+                    // Determine which navigation group this section belongs to
+                    if (section.id) {
+                        activeNavGroup = section.id;
+                    } else if (section.hasAttribute('data-nav-group')) {
+                        activeNavGroup = section.getAttribute('data-nav-group');
+                    }
+                }
+                
+                // Debug logging (only for significant score changes)
+                if (window.debugNavigation) {
+                    const sectionName = section.id || section.className || 'unknown';
+                    const navGroup = section.hasAttribute('data-nav-group') ? section.getAttribute('data-nav-group') : (section.id || 'none');
+                    console.log(`Section ${sectionName} (group: ${navGroup}): top=${Math.round(sectionTop)}, overlap=${Math.round(overlap)}, score=${score.toFixed(2)}`);
+                }
+            });
+            
+            // Update active navigation link only if it's actually changing
+            if (activeSection && activeNavGroup) {
+                const activeNavLink = document.querySelector(`.nav-menu a[href="#${activeNavGroup}"]`);
+                const currentActiveLink = document.querySelector('.nav-menu a.active');
+                
+                if (activeNavLink && activeNavLink !== currentActiveLink) {
+                    if (window.debugNavigation) {
+                        const sectionName = activeSection.id || activeSection.className || 'unknown';
+                        console.log(`Setting active nav group: ${activeNavGroup} (from section: ${sectionName}, score: ${bestScore.toFixed(2)})`);
+                    }
                     this.setActiveNavLink(activeNavLink);
                 }
             }
-        }, {
-            threshold: [0, 0.1, 0.25, 0.5, 0.75, 1],
-            rootMargin: '-80px 0px -20% 0px',
-            root: document.querySelector('#content-wrapper')
-        });
+        };
         
-        sections.forEach(section => observer.observe(section));
+        // Throttled scroll handler for better performance
+        const throttledUpdate = this.throttle(updateActiveNavigation, 50);
+        
+        // Attach scroll listener
+        if (scrollContainer) {
+            scrollContainer.addEventListener('scroll', throttledUpdate, { passive: true });
+        }
+        window.addEventListener('scroll', throttledUpdate, { passive: true });
+        
+        // Initial update
+        setTimeout(updateActiveNavigation, 100);
+        
+        // Update on resize
+        window.addEventListener('resize', this.debounce(updateActiveNavigation, 150));
     }
 
     /**
@@ -382,6 +510,8 @@ class LandingPageManager {
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
         
+        console.log('Navigation clicked:', href, 'Target element:', targetElement);
+        
         if (targetElement) {
             // Set active state immediately
             this.setActiveNavLink(target);
@@ -389,12 +519,37 @@ class LandingPageManager {
             // Get current header height
             const header = document.querySelector('.header');
             const headerHeight = header ? header.offsetHeight : 80;
-            const targetPosition = targetElement.offsetTop - headerHeight - 20;
             
-            window.scrollTo({
-                top: Math.max(0, targetPosition),
-                behavior: 'smooth'
-            });
+            // Use content wrapper for scrolling if it exists
+            const scrollContainer = document.querySelector('#content-wrapper');
+            
+            // Calculate target position relative to the scroll container
+            let targetPosition;
+            if (scrollContainer) {
+                // For content wrapper, we need to calculate position relative to the container
+                const containerRect = scrollContainer.getBoundingClientRect();
+                const elementRect = targetElement.getBoundingClientRect();
+                targetPosition = scrollContainer.scrollTop + elementRect.top - containerRect.top - headerHeight - 20;
+            } else {
+                // For window scroll, use offsetTop
+                targetPosition = targetElement.offsetTop - headerHeight - 20;
+            }
+            
+            console.log('Scrolling to position:', targetPosition, 'Header height:', headerHeight);
+            
+            if (scrollContainer) {
+                // Scroll the content wrapper
+                scrollContainer.scrollTo({
+                    top: Math.max(0, targetPosition),
+                    behavior: 'smooth'
+                });
+            } else {
+                // Fallback to window scroll
+                window.scrollTo({
+                    top: Math.max(0, targetPosition),
+                    behavior: 'smooth'
+                });
+            }
 
             // Update URL without triggering scroll
             history.pushState(null, null, href);
@@ -403,6 +558,8 @@ class LandingPageManager {
             if (this.mobileMenuManager) {
                 this.mobileMenuManager.closeMenu();
             }
+        } else {
+            console.warn('Target element not found for:', targetId);
         }
     }
 
@@ -1149,6 +1306,86 @@ class LandingPageManager {
     }
 
     /**
+     * Diagnostic function for debugging navigation
+     */
+    diagnoseNavigation(enableDebug = false) {
+        console.log('=== Navigation Diagnosis ===');
+        
+        // Enable/disable debug mode
+        window.debugNavigation = enableDebug;
+        console.log('Debug navigation logging:', enableDebug ? 'ENABLED' : 'DISABLED');
+        
+        // Check if sections exist
+        const sections = ['home', 'about-us', 'uniqueness', 'reviews', 'contact'];
+        sections.forEach(id => {
+            const element = document.getElementById(id);
+            console.log(`Section ${id}:`, element ? 'Found' : 'NOT FOUND', element);
+            if (element) {
+                const rect = element.getBoundingClientRect();
+                console.log(`  Position: top=${Math.round(rect.top)}, height=${Math.round(rect.height)}`);
+            }
+        });
+        
+        // Check grouped sections
+        console.log('\nGrouped sections:');
+        const groupedSections = document.querySelectorAll('[data-nav-group]');
+        const groupsByNav = {};
+        
+        groupedSections.forEach(section => {
+            const navGroup = section.getAttribute('data-nav-group');
+            const className = section.className.split(' ')[0];
+            const rect = section.getBoundingClientRect();
+            
+            if (!groupsByNav[navGroup]) {
+                groupsByNav[navGroup] = [];
+            }
+            groupsByNav[navGroup].push({
+                className,
+                top: Math.round(rect.top),
+                height: Math.round(rect.height)
+            });
+        });
+        
+        Object.entries(groupsByNav).forEach(([navGroup, sections]) => {
+            console.log(`  Navigation group "${navGroup}":`);
+            sections.forEach(section => {
+                console.log(`    - ${section.className}: top=${section.top}, height=${section.height}`);
+            });
+        });
+        
+        // Check navigation links
+        const navLinks = document.querySelectorAll('.nav-menu a[href^="#"]');
+        console.log('Navigation links found:', navLinks.length);
+        navLinks.forEach(link => {
+            const isActive = link.classList.contains('active');
+            console.log(`Nav link: ${link.getAttribute('href')} -> ${link.textContent.trim()} ${isActive ? '(ACTIVE)' : ''}`);
+        });
+        
+        // Check scroll container
+        const scrollContainer = document.querySelector('#content-wrapper');
+        console.log('Scroll container:', scrollContainer ? 'Found' : 'NOT FOUND');
+        if (scrollContainer) {
+            console.log(`  Scroll position: ${scrollContainer.scrollTop}`);
+            console.log(`  Container height: ${scrollContainer.clientHeight}`);
+        }
+        
+        // Check current scroll position
+        const currentScroll = scrollContainer ? scrollContainer.scrollTop : window.pageYOffset;
+        console.log('Current scroll position:', currentScroll);
+        
+        // Check if event listeners are attached
+        console.log('LandingPageManager instance:', this);
+        console.log('Mobile menu manager:', window.mobileMenuManager);
+        
+        console.log('=== End Diagnosis ===');
+        
+        if (enableDebug) {
+            console.log('Navigation debug mode enabled. Scroll to see detailed logs.');
+            console.log('To disable: diagnoseNavigation(false)');
+        }
+    }
+
+    /**
      * Show notification to user
      */
     showNotification(message, type = 'info') {
@@ -1186,12 +1423,27 @@ class LandingPageManager {
                     
                     const header = document.querySelector('.header');
                     const headerHeight = header ? header.offsetHeight : 80;
-                    const targetPosition = target.offsetTop - headerHeight - 20;
+                    const scrollContainer = document.querySelector('#content-wrapper');
                     
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+                    // Calculate target position relative to the scroll container
+                    let targetPosition;
+                    if (scrollContainer) {
+                        const containerRect = scrollContainer.getBoundingClientRect();
+                        const elementRect = target.getBoundingClientRect();
+                        targetPosition = scrollContainer.scrollTop + elementRect.top - containerRect.top - headerHeight - 20;
+                        
+                        scrollContainer.scrollTo({
+                            top: Math.max(0, targetPosition),
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        targetPosition = target.offsetTop - headerHeight - 20;
+                        
+                        window.scrollTo({
+                            top: Math.max(0, targetPosition),
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             }, 100);
         } else {
@@ -1550,7 +1802,19 @@ class LandingPageManager {
 
 // Initialize the landing page manager when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new LandingPageManager();
+    window.landingPageManager = new LandingPageManager();
+    console.log('LandingPageManager initialized and exposed globally');
+    
+    // Expose diagnostic function for debugging
+    window.diagnoseNavigation = (enableDebug = false) => {
+        if (window.landingPageManager) {
+            window.landingPageManager.diagnoseNavigation(enableDebug);
+        } else {
+            console.error('LandingPageManager not found');
+        }
+    };
+    
+    console.log('Navigation diagnostic available via: diagnoseNavigation() or diagnoseNavigation(true) for debug mode');
 });
 
 // WordPress integration

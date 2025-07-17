@@ -27,17 +27,17 @@
         <div class="container">
             <div class="header-content">
                 <!-- Logo -->
-                <a class="navbar-brand header-logo" href="#hero" aria-label="ItsyBitsy Montessori Homepage">
+                <a class="navbar-brand header-logo" href="#home" aria-label="ItsyBitsy Montessori Homepage">
                     <img src="assets/images/logo.png" alt="ItsyBitsy Logo" class="logo-img" />
                 </a>
                 
                 <!-- Desktop Navigation -->
                 <nav class="header-nav navbar-nav" id="headerNav" role="navigation" aria-label="Main navigation">
                     <div class="nav-menu" id="navMenu">
-                        <a class="nav-link" href="#hero" data-translate="nav_home" aria-label="Navigate to home section">Strona Główna</a>
-                        <a class="nav-link" href="#about" data-translate="nav_about" aria-label="Navigate to about section">O Nas</a>
+                        <a class="nav-link" href="#home" data-translate="nav_home" aria-label="Navigate to home section">Strona Główna</a>
+                        <a class="nav-link" href="#about-us" data-translate="nav_about" aria-label="Navigate to about section">O Nas</a>
                         <a class="nav-link" href="#uniqueness" data-translate="nav_services" aria-label="Navigate to services section">Nasza Wyjątkowość</a>
-                        <a class="nav-link" href="#testimonials" data-translate="nav_testimonials" aria-label="Navigate to testimonials section">Opinie</a>
+                        <a class="nav-link" href="#reviews" data-translate="nav_testimonials" aria-label="Navigate to testimonials section">Opinie</a>
                         <a class="nav-link" href="#contact" data-translate="nav_contact" aria-label="Navigate to contact section">Kontakt</a>
                         
                         <!-- Language Switcher (moved inside mobile menu) -->
@@ -69,7 +69,7 @@
     <!-- Main Content -->
     <main>
         <!-- Hero Section -->
-        <section class="hero-section" id="hero">
+        <section class="hero-section" id="home">
             <div class="hero-bg">
                 <img src="assets/images/hero.png" alt="Montessori Classroom">
             </div>
@@ -137,7 +137,7 @@
 
 
         <!-- Section: Only the Best -->
-        <section class="only-best-section py-5" id="about">
+        <section class="only-best-section py-5" id="about-us">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
@@ -508,7 +508,7 @@
         </section>
 
         <!-- Section: Testimonials -->
-        <section class="testimonials-section py-5" id="testimonials">
+        <section class="testimonials-section py-5" id="reviews">
             <div class="container">
                 <div class="text-center mb-5" data-aos="fade-up">
                     <div class="section-badge mb-3">
@@ -839,11 +839,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('DOM loaded, initializing...');
             
-            // Initialize Landing Page Manager
-            if (typeof LandingPageManager !== 'undefined') {
-                new LandingPageManager();
-                console.log('LandingPageManager initialized');
-            }
+            // LandingPageManager will be initialized by main.js
+            console.log('Waiting for LandingPageManager initialization from main.js');
             
             // Initialize Translations
             if (typeof initializeTranslations === 'function') {

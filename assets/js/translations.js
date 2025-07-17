@@ -184,7 +184,7 @@ class TranslationManager {
                 contact_phone_label: "Telefon",
                 contact_phone_value: "+48 732 980 676",
                 contact_address_label: "Adres",
-                contact_address_value: "ul. Cybernetyki 7D, Warszawa<br>(os. Mozaika Mokotów)",
+                contact_address_value: "ul. Cybernetyki 7D, Warszawa(os. Mozaika Mokotów)",
                 contact_social_label: "Social Media",
                 contact_instagram: "Instagram",
                 contact_facebook: "Facebook",

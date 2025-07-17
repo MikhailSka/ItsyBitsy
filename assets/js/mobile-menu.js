@@ -505,16 +505,19 @@ class MobileMenuManager {
         const target = event.target.closest('a');
         
         if (target && target.getAttribute('href') && target.getAttribute('href').startsWith('#')) {
-            // Smooth close menu
+            // Don't prevent default here - let the anchor click handler deal with it
+            console.log('Mobile menu navigation clicked:', target.getAttribute('href'));
+            
+            // Close menu first
             this.closeMenu();
             
-            // Add small delay for better UX
-            setTimeout(() => {
-                // Let the main scroll handler take over
-                if (window.landingPageManager && window.landingPageManager.handleAnchorClick) {
+            // Let the main navigation handler take over immediately
+            if (window.landingPageManager && window.landingPageManager.handleAnchorClick) {
+                // Small delay to ensure menu closes smoothly
+                setTimeout(() => {
                     window.landingPageManager.handleAnchorClick(event);
-                }
-            }, 150);
+                }, 100);
+            }
         }
     }
 
