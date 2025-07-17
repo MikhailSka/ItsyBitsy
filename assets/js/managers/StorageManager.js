@@ -1,7 +1,5 @@
 /**
  * Storage Manager - Handles localStorage and cookie storage operations
- * Follows Single Responsibility Principle by focusing solely on data persistence
- * File path: assets/js/managers/StorageManager.js
  */
 
 class StorageManager {
@@ -28,7 +26,7 @@ class StorageManager {
             this.setupStorageEventListeners();
             this.isInitialized = true;
             
-            console.log(`StorageManager initialized using ${this.storageType}`);
+    
         } catch (error) {
             console.error('StorageManager initialization failed:', error);
         }
@@ -520,7 +518,7 @@ class StorageManager {
                 }
             });
             
-            console.log('Data synced to localStorage');
+    
         } catch (error) {
             console.error('Failed to sync to localStorage:', error);
         }
@@ -538,7 +536,7 @@ class StorageManager {
                 }
             });
             
-            console.log('Data synced to cookies');
+    
         } catch (error) {
             console.error('Failed to sync to cookies:', error);
         }
@@ -571,7 +569,7 @@ class StorageManager {
                 localStorage.removeItem(oldKey);
                 this.deleteCookie(oldKey);
                 
-                console.log(`Migrated ${oldKey} to ${newKey}`);
+        
             }
         });
     }
@@ -601,7 +599,7 @@ class StorageManager {
             // Clean up references
             this.eventManager = null;
             
-            console.log('StorageManager destroyed successfully');
+    
         } catch (error) {
             console.error('Error destroying StorageManager:', error);
         }

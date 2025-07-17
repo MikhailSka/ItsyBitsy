@@ -1,9 +1,6 @@
-/* =========================================================================
-   ItsyBitsy Montessori Preschool - Base Styles
-   Global styles, typography, and HTML elements
-   ========================================================================= */
+/* Base Styles - Global styles and typography */
 
-/* Global Reset and Foundation */
+/* Global Reset */
 * {
     margin: 0;
     padding: 0;

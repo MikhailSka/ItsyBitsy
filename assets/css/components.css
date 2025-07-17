@@ -1,9 +1,6 @@
-/* =========================================================================
-   ItsyBitsy Montessori Preschool - Reusable Components
-   Cards, Badges, Buttons, Video Components, and Special Elements
-   ========================================================================= */
+/* Reusable Components - Cards, badges, buttons, video components */
 
-/* Section Badges - ALL ORANGE */
+/* Section Badges */
 .section-badge .badge {
     font-size: 0.875rem;
     font-weight: 600;

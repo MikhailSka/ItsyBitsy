@@ -1,9 +1,6 @@
-/* =========================================================================
-   ItsyBitsy Montessori Preschool - Retina and High DPI Optimization
-   High DPI and Retina Display Optimization
-   ========================================================================= */
+/* Retina and High DPI Optimization */
 
-/* High DPI and Retina Display Optimization */
+
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
     .logo-img, .hero-bg img {
         image-rendering: -webkit-optimize-contrast;

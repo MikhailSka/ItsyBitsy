@@ -1,7 +1,5 @@
 /**
  * Language Detection Manager - Handles browser language detection logic
- * Follows Single Responsibility Principle by focusing solely on language detection
- * File path: assets/js/managers/LanguageDetectionManager.js
  */
 
 class LanguageDetectionManager {
@@ -17,7 +15,7 @@ class LanguageDetectionManager {
     init() {
         try {
             this.isInitialized = true;
-            console.log('LanguageDetectionManager initialized successfully');
+    
         } catch (error) {
             console.error('LanguageDetectionManager initialization failed:', error);
         }
@@ -45,7 +43,7 @@ class LanguageDetectionManager {
 
     destroy() {
         this.eventManager = null;
-        console.log('LanguageDetectionManager destroyed successfully');
+
     }
 }
 

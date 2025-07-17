@@ -1,7 +1,5 @@
 /**
  * Translations Manager - ItsyBitsy Montessori Preschool
- * Polish and English translations based on Canva design
- * File path: assets/js/translations.js
  */
 
 class TranslationManager {
@@ -131,7 +129,7 @@ class TranslationManager {
                 why_us_point_6: "Piękne, spokojne wnętrza – naturalne materiały, światło, harmonia i czystość.",
                 
                 // Visit Us Section
-                visit_us_title: "Zajrzuj do nas!",
+                visit_us_title: "Zajrzyj do nas!",
         visit_us_badge: "Zajrzyj do nas",
                 visit_us_text: "Zobacz, jak wygląda dzień w naszym przedszkolu. Nasza codzienność to zadowolone, bezpieczne, skupione dzieci, ciepłe relacje, spokojna przestrzeń i zaangażowani nauczyciele. Tak właśnie wygląda u nas edukacja w duchu Montessori i bliskości.",
                 visit_us_question: "Chcesz wiedzieć, czy to miejsce dla Was?",
@@ -206,11 +204,14 @@ class TranslationManager {
                 // Form validation
                 error_name: "Imię musi mieć co najmniej 2 znaki",
                 error_email: "Proszę wprowadzić prawidłowy adres email",
-                error_message: "Wiadomość musi mieć co najmniej 10 znaków",
-                form_validation_error: "Proszę poprawić błędy w formularzu.",
-                form_sending: "Wysyłanie...",
-                form_success: "Dziękujemy! Twoja wiadomość została wysłana pomyślnie.",
-                form_error: "Przepraszamy, wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie."
+                                  error_message: "Wiadomość musi mieć co najmniej 10 znaków",
+                  form_validation_error: "Proszę poprawić błędy w formularzu.",
+                  form_sending: "Wysyłanie...",
+                  form_success: "Dziękujemy! Twoja wiadomość została wysłana pomyślnie.",
+                  form_error: "Przepraszamy, wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.",
+                  
+                  // Google Maps review link
+                  view_on_google: "Zobacz w Google"
             },
             
             en: {
@@ -403,7 +404,10 @@ class TranslationManager {
                 form_validation_error: "Please correct the errors in the form.",
                 form_sending: "Sending...",
                 form_success: "Thank you! Your message has been sent successfully.",
-                form_error: "Sorry, there was an error sending your message. Please try again."
+                form_error: "Sorry, there was an error sending your message. Please try again.",
+                
+                // Google Maps review link
+                view_on_google: "View on Google"
             }
         };
         

@@ -1,11 +1,8 @@
-/* =========================================================================
-   ItsyBitsy Montessori Preschool - CSS Variables and Root Styles
-   ORANGE AND WHITE THEME ONLY
-   ========================================================================= */
+/* CSS Variables - Orange and white theme */
 
-/* CSS Variables - Orange and White Only */
+
 :root {
-    /* Primary Brand Colors - ORANGE AND WHITE ONLY */
+    /* Primary Brand Colors */
     --primary-orange: #FF6B35;
     --light-orange: #FF8A50;
     --dark-orange: #e55a2b;

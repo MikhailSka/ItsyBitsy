@@ -1,7 +1,5 @@
 /**
- * Translation Manager - Orchestrates translation functionality using specialized managers
- * Follows Facade Pattern by coordinating StorageManager, ContentManager, and LanguageDetectionManager
- * File path: assets/js/TranslationManager.js
+ * Translation Manager - Orchestrates translation functionality
  */
 
 class TranslationManager {
@@ -18,7 +16,7 @@ class TranslationManager {
 
     async init() {
         try {
-            console.log('Initializing TranslationManager...');
+    
             
             // Load translations first
             this.loadTranslations();
@@ -33,7 +31,7 @@ class TranslationManager {
             this.setInitialLanguage();
             
             this.isInitialized = true;
-            console.log('TranslationManager initialized successfully');
+    
             
         } catch (error) {
             console.error('TranslationManager initialization failed:', error);
@@ -45,7 +43,7 @@ class TranslationManager {
             // Initialize StorageManager for preferences
             if (typeof StorageManager !== 'undefined') {
                 this.managers.storage = new StorageManager(this.eventManager);
-                console.log('StorageManager initialized');
+        
             } else {
                 console.warn('StorageManager not available');
             }
@@ -53,7 +51,7 @@ class TranslationManager {
             // Initialize ContentManager for DOM updates
             if (typeof ContentManager !== 'undefined') {
                 this.managers.content = new ContentManager(this.eventManager);
-                console.log('ContentManager initialized');
+        
             } else {
                 console.warn('ContentManager not available');
             }
@@ -61,7 +59,7 @@ class TranslationManager {
             // Initialize LanguageDetectionManager for browser detection
             if (typeof LanguageDetectionManager !== 'undefined') {
                 this.managers.languageDetection = new LanguageDetectionManager(this.eventManager);
-                console.log('LanguageDetectionManager initialized');
+        
             } else {
                 console.warn('LanguageDetectionManager not available');
             }
@@ -160,6 +158,9 @@ class TranslationManager {
         
         // Update document title
         document.title = this.getTranslation('page_title') || 'ItsyBitsy - Przedszkole Montessori';
+        
+        // Update Google Maps language
+        this.updateMapLanguage(language);
         
         // Store preference through StorageManager
         if (this.managers.storage) {
@@ -313,10 +314,28 @@ class TranslationManager {
             this.translations = {};
             this.eventManager = null;
             
-            console.log('TranslationManager destroyed successfully');
+    
         } catch (error) {
             console.error('Error destroying TranslationManager:', error);
         }
+    }
+    
+    updateMapLanguage(language) {
+        const mapIframe = document.getElementById('googleMap');
+        if (!mapIframe) return;
+        
+        // Map language codes (Google Maps uses different codes)
+        const mapLanguageCodes = {
+            'pl': 'pl',
+            'en': 'en'
+        };
+        
+        const mapLang = mapLanguageCodes[language] || 'en';
+        
+        // Base map URL with dynamic language
+        const baseMapUrl = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1503.7789242248487!2d20.9967128!3d52.1738438!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4719332019247d5f%3A0x702045f7671189b8!2sPrivate%20Kindergarten%20Montessori%20ItsyBitsy!5e1!3m2!1s' + mapLang + '!2spl!4v1752783947909!5m2!1s' + mapLang + '!2spl';
+        
+        mapIframe.src = baseMapUrl;
     }
 }
 

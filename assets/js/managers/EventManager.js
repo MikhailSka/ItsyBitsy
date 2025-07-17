@@ -1,7 +1,5 @@
 /**
  * EventManager - Centralized event handling and communication hub
- * Following Mediator Pattern and Single Responsibility Principle
- * File path: assets/js/managers/EventManager.js
  */
 
 class EventManager {
@@ -511,7 +509,7 @@ class EventManager {
         this.throttledFunctions.clear();
         this.debouncedFunctions.clear();
         
-        console.log('EventManager cleaned up');
+
     }
 }
 

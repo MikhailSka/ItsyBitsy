@@ -1,7 +1,5 @@
 /**
  * ScrollManager - Handles scroll events, parallax effects, and scroll-based UI changes
- * Following Single Responsibility Principle
- * File path: assets/js/managers/ScrollManager.js
  */
 
 class ScrollManager {
@@ -80,7 +78,7 @@ class ScrollManager {
             });
         });
 
-        console.log(`Setup ${this.parallaxElements.size} parallax elements`);
+
     }
 
     /**
@@ -621,7 +619,7 @@ class ScrollManager {
         this.parallaxElements.clear();
         this.scrollEffects.clear();
         
-        console.log('ScrollManager cleaned up');
+
     }
 }
 

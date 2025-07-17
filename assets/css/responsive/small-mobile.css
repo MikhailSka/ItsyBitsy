@@ -1,12 +1,24 @@
-/* =========================================================================
-   ItsyBitsy Montessori Preschool - Extra Small Mobile Styles
-   Small Mobile Devices (576px and down) - Extra Small Screens
-   ========================================================================= */
+/* Extra Small Mobile Styles - 576px and down */
 
 @media (max-width: 575.98px) {
     /* Extra small screen optimizations */
     .header-content {
         padding: 0 0.75rem;
+    }
+    
+    /* Hero responsive improvements for very small screens */
+    .hero-content-box {
+        padding: 1.5rem 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .hero-title {
+        font-size: clamp(1.4rem, 5vw, 1.8rem) !important;
+        line-height: 1.2 !important;
+    }
+    
+    .hero-subtitle {
+        font-size: clamp(0.85rem, 3vw, 1rem) !important;
     }
     
     .navbar-brand .logo-img {
@@ -181,4 +193,56 @@
         height: 35px !important;
         font-size: 1rem !important;
     }
+    
+    /* HERO BUTTONS - VERY SMALL SCREENS - STACK VERTICALLY WHEN NEEDED */
+    .hero-buttons-external {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    .hero-buttons-external .btn {
+        flex: none !important;
+        width: 100% !important;
+        min-width: auto !important;
+        max-width: 280px !important;
+        padding: 0.8rem 1rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    /* HERO STATS - EXTRA SMALL FOR TINY SCREENS - KEEP IN ONE ROW */
+    .hero-stats-external .row {
+        margin: 0 !important;
+        gap: 0.25rem !important;
+        justify-content: center !important;
+    }
+    
+    .hero-stats-external .col-4 {
+        flex: 1 !important;
+        max-width: none !important;
+        padding: 0 0.15rem !important;
+    }
+    
+    .hero-stats-external .stat-item-external {
+        padding: 0.3rem 0.2rem !important;
+        margin-bottom: 0.3rem !important;
+        border-radius: 6px !important;
+    }
+    
+    .hero-stats-external .stat-number-external {
+        font-size: 1rem !important;
+        margin-bottom: 0.1rem !important;
+        line-height: 1 !important;
+    }
+    
+    .hero-stats-external .stat-text-external {
+        font-size: 0.6rem !important;
+        line-height: 1 !important;
+        min-height: 1.8rem !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+
 } 

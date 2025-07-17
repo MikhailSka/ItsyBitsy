@@ -1,7 +1,5 @@
 /**
  * AnimationManager - Handles AOS and custom animations
- * Following Single Responsibility Principle
- * File path: assets/js/managers/AnimationManager.js
  */
 
 class AnimationManager {
@@ -72,7 +70,7 @@ class AnimationManager {
         // Setup custom scroll handling for AOS with custom scroll container
         this.setupAOSCustomScrolling();
         
-        console.log('AOS initialized with custom configuration');
+
     }
 
     /**
@@ -94,7 +92,7 @@ class AnimationManager {
             }, 16);
             
             scrollContainer.addEventListener('scroll', handleCustomScroll, { passive: true });
-            console.log('AOS setup with custom scroll container');
+    
         }
         
         // Force initial refresh
@@ -127,7 +125,7 @@ class AnimationManager {
      * Setup fallback animations if AOS fails
      */
     setupFallbackAnimations() {
-        console.log('Setting up fallback animations');
+
         
         // Show all AOS elements immediately with fallback
         const aosElements = document.querySelectorAll('[data-aos]');
@@ -171,7 +169,7 @@ class AnimationManager {
         // Start observing elements
         this.observeAnimationElements();
         
-        console.log(`Intersection Observer set up for custom animations (mobile: ${isMobile})`);
+
     }
 
     /**
@@ -299,7 +297,7 @@ class AnimationManager {
             });
         });
         
-        console.log(`Observing ${observedCount} elements for custom animations`);
+
     }
 
     /**
@@ -527,7 +525,7 @@ class AnimationManager {
             this.checkVisibleAnimations();
         }, 100);
         
-        console.log('AOS reinitialized for', isMobile ? 'mobile' : 'desktop');
+
     }
 
     /**
@@ -622,7 +620,7 @@ class AnimationManager {
         this.animatedElements.clear();
         this.customAnimations.clear();
         
-        console.log('AnimationManager cleaned up');
+
     }
 }
 

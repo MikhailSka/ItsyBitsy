@@ -1,7 +1,5 @@
 /**
  * VideoManager - Handles video loading, optimization, and analytics
- * Following Single Responsibility Principle
- * File path: assets/js/managers/VideoManager.js
  */
 
 class VideoManager {
@@ -94,7 +92,7 @@ class VideoManager {
             this.setupVideo(videoId);
         });
         
-        console.log(`VideoManager initialized for ${videos.length} videos`);
+
     }
 
     /**
@@ -147,7 +145,7 @@ class VideoManager {
         // Optimize for mobile
         this.optimizeVideoForDevice(video, videoConfig);
 
-        console.log(`Video ${videoId} setup complete`);
+
     }
 
     /**
@@ -158,17 +156,17 @@ class VideoManager {
     setupVideoHandlers(video, config) {
         // Loading events
         video.addEventListener('loadstart', (e) => {
-            console.log('Video loading started:', video.src);
+    
             this.trackVideoEvent('loadstart', video, e);
         });
 
         video.addEventListener('loadedmetadata', (e) => {
-            console.log('Video metadata loaded:', video.src);
+    
             this.trackVideoEvent('loadedmetadata', video, e);
         });
 
         video.addEventListener('canplay', (e) => {
-            console.log('Video can play:', video.src);
+    
             config.loaded = true;
             this.trackVideoEvent('canplay', video, e);
         });
@@ -275,7 +273,7 @@ class VideoManager {
         }
 
         config.loaded = true;
-        console.log('Video loaded:', video.src || video.id);
+
     }
 
     /**
@@ -577,7 +575,7 @@ class VideoManager {
 
         // Console logging for development
         if (window.location.hostname === 'localhost' || window.location.hostname.includes('dev')) {
-            console.log(`Video ${eventType}:`, videoData);
+    
         }
     }
 
@@ -669,7 +667,7 @@ class VideoManager {
         // Clear videos map
         this.videos.clear();
         
-        console.log('VideoManager cleaned up');
+
     }
 }
 

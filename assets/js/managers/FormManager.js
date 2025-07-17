@@ -1,7 +1,5 @@
 /**
  * FormManager - Handles form validation and submission
- * Following Single Responsibility Principle
- * File path: assets/js/managers/FormManager.js
  */
 
 class FormManager {
@@ -149,7 +147,7 @@ class FormManager {
         // Setup field validation attributes
         this.setupFormFields(form);
         
-        console.log(`Form ${formId} setup complete`);
+
     }
 
     /**

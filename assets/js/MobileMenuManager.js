@@ -1,7 +1,5 @@
 /**
- * Mobile Menu Manager - Orchestrates mobile menu functionality using specialized managers
- * Follows Facade Pattern by coordinating TouchManager, AccessibilityManager, and DeviceOptimizationManager
- * File path: assets/js/MobileMenuManager.js
+ * Mobile Menu Manager - Simple, lightweight mobile menu functionality
  */
 
 class MobileMenuManager {
@@ -10,7 +8,6 @@ class MobileMenuManager {
         this.isMenuOpen = false;
         this.isTransitioning = false;
         this.menuElements = {};
-        this.managers = {};
         this.scrollY = 0;
         this.isInitialized = false;
         
@@ -18,33 +15,19 @@ class MobileMenuManager {
     }
 
     /**
-     * Initialize mobile menu manager and all sub-managers
+     * Initialize mobile menu manager
      */
     async init() {
         try {
-            console.log('Initializing MobileMenuManager...');
-            
-            // Setup DOM elements first
             this.setupElements();
-            
-            // Initialize managers in dependency order
-            await this.initializeManagers();
-            
-            // Setup event coordination between managers
-            this.setupEventCoordination();
-            
-            // Setup menu-specific functionality
             this.setupMenuFunctionality();
-            
-            // Setup resize handling
+            this.setupEventListeners();
             this.setupResizeHandler();
             
             this.isInitialized = true;
-            console.log('MobileMenuManager initialized successfully');
-            
         } catch (error) {
             console.error('MobileMenuManager initialization failed:', error);
-            this.handleInitializationError(error);
+            this.setupBasicFallback();
         }
     }
 
@@ -65,8 +48,6 @@ class MobileMenuManager {
 
         // Create overlay
         this.createMenuOverlay();
-        
-        console.log('Mobile menu elements setup complete');
     }
 
     /**
@@ -98,88 +79,6 @@ class MobileMenuManager {
     }
 
     /**
-     * Initialize all specialized managers
-     */
-    async initializeManagers() {
-        try {
-            // Initialize TouchManager for gesture and touch handling
-            if (typeof TouchManager !== 'undefined') {
-                this.managers.touch = new TouchManager(this.eventManager);
-                console.log('TouchManager initialized');
-            } else {
-                console.warn('TouchManager not available');
-            }
-
-            // Initialize AccessibilityManager for a11y features
-            if (typeof AccessibilityManager !== 'undefined') {
-                this.managers.accessibility = new AccessibilityManager(this.eventManager);
-                console.log('AccessibilityManager initialized');
-            } else {
-                console.warn('AccessibilityManager not available');
-            }
-
-            // Initialize DeviceOptimizationManager for device-specific optimizations
-            if (typeof DeviceOptimizationManager !== 'undefined') {
-                this.managers.deviceOptimization = new DeviceOptimizationManager(this.eventManager);
-                console.log('DeviceOptimizationManager initialized');
-            } else {
-                console.warn('DeviceOptimizationManager not available');
-            }
-
-        } catch (error) {
-            console.error('Error initializing managers:', error);
-        }
-    }
-
-    /**
-     * Setup event coordination between managers
-     */
-    setupEventCoordination() {
-        // Listen for touch gestures to control menu
-        this.eventManager.on('swipeRight', (data) => {
-            if (data.canCloseMenu && this.isMenuOpen) {
-                this.closeMenu();
-            }
-        });
-
-        this.eventManager.on('swipeLeft', (data) => {
-            if (data.canOpenMenu && !this.isMenuOpen) {
-                this.openMenu();
-            }
-        });
-
-        // Listen for escape key to close menu
-        this.eventManager.on('escapePressed', () => {
-            if (this.isMenuOpen) {
-                this.closeMenu();
-            }
-        });
-
-        // Listen for accessibility events
-        this.eventManager.on('shortcutToggleMenu', () => {
-            this.toggleMenu();
-        });
-
-        // Listen for device optimization events
-        this.eventManager.on('orientationChanged', () => {
-            if (this.isMenuOpen && window.innerWidth >= 768) {
-                this.closeMenu();
-            }
-        });
-
-        // Listen for scroll prevention events
-        this.eventManager.on('scrollPreventionEnabled', () => {
-            document.body.style.overflow = 'hidden';
-        });
-
-        this.eventManager.on('scrollPreventionDisabled', () => {
-            document.body.style.overflow = '';
-        });
-
-        console.log('Event coordination setup complete');
-    }
-
-    /**
      * Setup menu-specific functionality
      */
     setupMenuFunctionality() {
@@ -202,8 +101,56 @@ class MobileMenuManager {
         this.menuElements.menu.addEventListener('click', (event) => {
             this.handleNavClick(event);
         });
+    }
 
-        console.log('Menu functionality setup complete');
+    /**
+     * Setup essential event listeners
+     */
+    setupEventListeners() {
+        // Escape key handler
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.isMenuOpen) {
+                this.closeMenu();
+            }
+        });
+
+        // Touch events for swipe gestures
+        if ('ontouchstart' in window) {
+            this.setupSwipeGestures();
+        }
+    }
+
+    /**
+     * Setup basic swipe gestures
+     */
+    setupSwipeGestures() {
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (!e.changedTouches) return;
+            
+            const touchEndX = e.changedTouches[0].clientX;
+            const touchEndY = e.changedTouches[0].clientY;
+            const deltaX = touchEndX - touchStartX;
+            const deltaY = touchEndY - touchStartY;
+            
+            // Check if it's a horizontal swipe (not vertical scroll)
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0 && touchStartX < 50 && !this.isMenuOpen) {
+                    // Swipe right from left edge - open menu
+                    this.openMenu();
+                } else if (deltaX < 0 && this.isMenuOpen) {
+                    // Swipe left when menu is open - close menu
+                    this.closeMenu();
+                }
+            }
+        }, { passive: true });
     }
 
     /**
@@ -233,8 +180,6 @@ class MobileMenuManager {
         
         if (this.isTransitioning) return;
         
-        console.log('Toggle menu called, current state:', this.isMenuOpen);
-        
         if (this.isMenuOpen) {
             this.closeMenu();
         } else {
@@ -243,31 +188,28 @@ class MobileMenuManager {
     }
 
     /**
-     * Open menu with coordinated manager actions
+     * Open menu
      */
     openMenu() {
         if (this.isMenuOpen || this.isTransitioning) return;
-
-        console.log('Opening menu...');
         
         this.isTransitioning = true;
         this.isMenuOpen = true;
         this.scrollY = window.scrollY;
         
-        // Enable scroll prevention through TouchManager
-        if (this.managers.touch) {
-            this.managers.touch.enableScrollPrevention();
-        }
-        
-        // Enable focus trap through AccessibilityManager
-        if (this.managers.accessibility) {
-            this.managers.accessibility.enableFocusTrap(this.menuElements.menu);
-        }
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${this.scrollY}px`;
+        document.body.style.width = '100%';
         
         // Add classes with RAF for smooth animation
         requestAnimationFrame(() => {
             this.menuElements.toggle.classList.add('active');
+            this.menuElements.toggle.setAttribute('aria-expanded', 'true');
+            
             this.menuElements.menu.classList.add('active');
+            this.menuElements.menu.setAttribute('aria-hidden', 'false');
             
             if (this.menuElements.overlay) {
                 this.menuElements.overlay.classList.add('active');
@@ -276,50 +218,42 @@ class MobileMenuManager {
             
             document.body.classList.add('menu-open');
             
-            // Update ARIA attributes through AccessibilityManager
-            if (this.managers.accessibility) {
-                this.managers.accessibility.updateAriaExpanded('mobileMenuToggle', true);
-                this.managers.accessibility.updateAriaHidden('navMenu', false);
-            }
-            
-            console.log('Menu opened successfully');
-            
             setTimeout(() => {
                 this.isTransitioning = false;
             }, 300);
         });
         
         // Dispatch event
-        this.eventManager.emit('menuOpened', {
-            menuElement: this.menuElements.menu,
-            toggleElement: this.menuElements.toggle
-        });
+        if (this.eventManager) {
+            this.eventManager.emit('menuOpened', {
+                menuElement: this.menuElements.menu,
+                toggleElement: this.menuElements.toggle
+            });
+        }
     }
 
     /**
-     * Close menu with coordinated manager actions
+     * Close menu
      */
     closeMenu() {
         if (!this.isMenuOpen || this.isTransitioning) return;
-
-        console.log('Closing menu...');
         
         this.isTransitioning = true;
         this.isMenuOpen = false;
         
-        // Disable scroll prevention through TouchManager
-        if (this.managers.touch) {
-            this.managers.touch.disableScrollPrevention();
-        }
-        
-        // Disable focus trap through AccessibilityManager
-        if (this.managers.accessibility) {
-            this.managers.accessibility.disableFocusTrap();
-        }
+        // Restore body scroll
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, this.scrollY);
         
         // Remove classes
         this.menuElements.toggle.classList.remove('active');
+        this.menuElements.toggle.setAttribute('aria-expanded', 'false');
+        
         this.menuElements.menu.classList.remove('active');
+        this.menuElements.menu.setAttribute('aria-hidden', 'true');
         
         if (this.menuElements.overlay) {
             this.menuElements.overlay.classList.remove('active');
@@ -328,21 +262,17 @@ class MobileMenuManager {
         
         document.body.classList.remove('menu-open');
         
-        // Update ARIA attributes through AccessibilityManager
-        if (this.managers.accessibility) {
-            this.managers.accessibility.updateAriaExpanded('mobileMenuToggle', false);
-            this.managers.accessibility.updateAriaHidden('navMenu', true);
-        }
-        
         setTimeout(() => {
             this.isTransitioning = false;
         }, 300);
         
         // Dispatch event
-        this.eventManager.emit('menuClosed', {
-            menuElement: this.menuElements.menu,
-            toggleElement: this.menuElements.toggle
-        });
+        if (this.eventManager) {
+            this.eventManager.emit('menuClosed', {
+                menuElement: this.menuElements.menu,
+                toggleElement: this.menuElements.toggle
+            });
+        }
     }
 
     /**
@@ -352,8 +282,6 @@ class MobileMenuManager {
         const target = event.target.closest('a');
         
         if (target && target.getAttribute('href') && target.getAttribute('href').startsWith('#')) {
-            console.log('Mobile menu navigation clicked:', target.getAttribute('href'));
-            
             // Close menu first
             this.closeMenu();
             
@@ -367,22 +295,10 @@ class MobileMenuManager {
     }
 
     /**
-     * Handle initialization errors gracefully
-     */
-    handleInitializationError(error) {
-        console.error('MobileMenuManager failed to initialize:', error);
-        
-        // Provide basic fallback functionality
-        this.setupBasicFallback();
-    }
-
-    /**
-     * Setup basic fallback functionality if managers fail
+     * Setup basic fallback functionality if initialization fails
      */
     setupBasicFallback() {
         if (!this.menuElements.toggle || !this.menuElements.menu) return;
-        
-        console.log('Setting up basic mobile menu fallback...');
         
         // Basic toggle functionality
         this.menuElements.toggle.addEventListener('click', (e) => {
@@ -404,24 +320,6 @@ class MobileMenuManager {
             isTransitioning: this.isTransitioning,
             elements: this.menuElements
         };
-    }
-
-    /**
-     * Get manager status
-     */
-    getManagerStatus() {
-        const status = {};
-        
-        Object.keys(this.managers).forEach(key => {
-            const manager = this.managers[key];
-            if (manager && typeof manager.getDebugInfo === 'function') {
-                status[key] = manager.getDebugInfo();
-            } else {
-                status[key] = { available: !!manager };
-            }
-        });
-        
-        return status;
     }
 
     /**
@@ -464,41 +362,28 @@ class MobileMenuManager {
         return {
             isInitialized: this.isInitialized,
             menuState: this.getMenuState(),
-            managerStatus: this.getManagerStatus(),
             elementCount: Object.keys(this.menuElements).length,
             eventManagerAvailable: !!this.eventManager
         };
     }
 
     /**
-     * Destroy mobile menu manager and all sub-managers
+     * Destroy mobile menu manager
      */
     destroy() {
         try {
-            console.log('Destroying MobileMenuManager...');
-            
             // Close menu if open
             if (this.isMenuOpen) {
                 this.forceClose();
             }
-            
-            // Destroy all managers
-            Object.values(this.managers).forEach(manager => {
-                if (manager && typeof manager.destroy === 'function') {
-                    manager.destroy();
-                }
-            });
             
             // Remove event listeners
             if (this.menuElements.toggle) {
                 this.menuElements.toggle.removeEventListener('click', this.toggleMenu);
             }
             
-            if (this.menuElements.overlay) {
-                this.menuElements.overlay.removeEventListener('click', this.closeMenu);
-                if (this.menuElements.overlay.parentNode) {
-                    this.menuElements.overlay.parentNode.removeChild(this.menuElements.overlay);
-                }
+            if (this.menuElements.overlay && this.menuElements.overlay.parentNode) {
+                this.menuElements.overlay.parentNode.removeChild(this.menuElements.overlay);
             }
             
             if (this.menuElements.menu) {
@@ -506,11 +391,8 @@ class MobileMenuManager {
             }
             
             // Clean up references
-            this.managers = {};
             this.menuElements = {};
             this.eventManager = null;
-            
-            console.log('MobileMenuManager destroyed successfully');
             
         } catch (error) {
             console.error('Error destroying MobileMenuManager:', error);
@@ -518,9 +400,9 @@ class MobileMenuManager {
     }
 }
 
-// Initialize mobile menu when DOM is ready (maintain compatibility)
+// Initialize mobile menu when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    // Only initialize if EventManager is available (from new architecture)
+    // Only initialize if EventManager is available
     if (window.eventManager) {
         window.mobileMenuManager = new MobileMenuManager(window.eventManager);
     } else {

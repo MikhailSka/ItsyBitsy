@@ -1,7 +1,5 @@
 /**
  * Content Manager - Handles DOM content updates with translations
- * Follows Single Responsibility Principle by focusing solely on content management
- * File path: assets/js/managers/ContentManager.js
  */
 
 class ContentManager {
@@ -15,7 +13,7 @@ class ContentManager {
     init() {
         try {
             this.isInitialized = true;
-            console.log('ContentManager initialized successfully');
+    
         } catch (error) {
             console.error('ContentManager initialization failed:', error);
         }
@@ -49,7 +47,7 @@ class ContentManager {
 
     destroy() {
         this.eventManager = null;
-        console.log('ContentManager destroyed successfully');
+
     }
 }
 

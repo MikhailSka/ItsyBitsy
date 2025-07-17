@@ -1,7 +1,5 @@
 /**
- * LandingPageManager - Main orchestrator following SOLID principles
- * Coordinates between specialized managers
- * File path: assets/js/LandingPageManager.js
+ * LandingPageManager - Main orchestrator for the landing page
  */
 
 class LandingPageManager {
@@ -24,7 +22,6 @@ class LandingPageManager {
         try {
             // Initialize managers in dependency order
             this.initializeEventManager();
-            this.initializePerformanceManager();
             this.initializeVideoManager();
             this.initializeAnimationManager();
             this.initializeScrollManager();
@@ -41,7 +38,7 @@ class LandingPageManager {
             this.finalizeInitialization();
             
             this.initialized = true;
-            console.log('LandingPageManager initialized successfully with', this.managers.size, 'managers');
+    
             
         } catch (error) {
             console.error('Failed to initialize LandingPageManager:', error);
@@ -63,23 +60,10 @@ class LandingPageManager {
         // Expose globally for other scripts
         window.eventManager = eventManager;
         
-        console.log('EventManager initialized');
+
     }
 
-    /**
-     * Initialize PerformanceManager
-     */
-    initializePerformanceManager() {
-        if (typeof PerformanceManager === 'undefined') {
-            console.warn('PerformanceManager class not found. Skipping performance optimizations.');
-            return;
-        }
-        
-        const performanceManager = new PerformanceManager(this.getManager('event'));
-        this.managers.set('performance', performanceManager);
-        
-        console.log('PerformanceManager initialized');
-    }
+
 
     /**
      * Initialize VideoManager
@@ -93,7 +77,7 @@ class LandingPageManager {
         const videoManager = new VideoManager(this.getManager('event'));
         this.managers.set('video', videoManager);
         
-        console.log('VideoManager initialized');
+
     }
 
     /**
@@ -108,7 +92,7 @@ class LandingPageManager {
         const animationManager = new AnimationManager(this.getManager('event'));
         this.managers.set('animation', animationManager);
         
-        console.log('AnimationManager initialized');
+
     }
 
     /**
@@ -123,7 +107,7 @@ class LandingPageManager {
         const scrollManager = new ScrollManager(this.getManager('event'));
         this.managers.set('scroll', scrollManager);
         
-        console.log('ScrollManager initialized');
+
     }
 
     /**
@@ -138,7 +122,7 @@ class LandingPageManager {
         const navigationManager = new NavigationManager(this.getManager('event'));
         this.managers.set('navigation', navigationManager);
         
-        console.log('NavigationManager initialized');
+
     }
 
     /**
@@ -156,7 +140,7 @@ class LandingPageManager {
         );
         this.managers.set('form', formManager);
         
-        console.log('FormManager initialized');
+
     }
 
     /**
@@ -177,13 +161,12 @@ class LandingPageManager {
         // Setup video events
         eventManager.on('videoEvent', this.handleVideoEvent.bind(this));
         
-        // Setup performance events
-        eventManager.on('performanceMetric', this.handlePerformanceMetric.bind(this));
+
         
         // Setup animation events
         eventManager.on('elementAnimated', this.handleElementAnimated.bind(this));
         
-        console.log('Manager communication setup complete');
+
     }
 
     /**
@@ -238,7 +221,7 @@ class LandingPageManager {
             this.switchLanguage(newLanguage);
         });
         
-        console.log('Language switcher setup complete');
+
     }
 
     /**
@@ -309,7 +292,7 @@ class LandingPageManager {
             });
         }
         
-        console.log('Language switched to:', newLanguage);
+
     }
 
     /**
@@ -382,14 +365,14 @@ class LandingPageManager {
             return this.getDebugInfo();
         };
         
-        console.log('Debug functions exposed: diagnoseNavigation(), debugLandingPage()');
+
     }
 
     /**
      * Handle mobile menu opened event
      */
     handleMobileMenuOpened(eventData) {
-        console.log('Mobile menu opened - coordinating managers');
+
         
         // Pause videos when menu opens
         const videoManager = this.getManager('video');
@@ -402,23 +385,14 @@ class LandingPageManager {
      * Handle mobile menu closed event
      */
     handleMobileMenuClosed(eventData) {
-        console.log('Mobile menu closed');
+
     }
 
     /**
      * Handle form submission success
      */
     handleFormSuccess(eventData) {
-        console.log('Form submission successful:', eventData.formId);
-        
         // Could trigger analytics events, notifications, etc.
-        const performanceManager = this.getManager('performance');
-        if (performanceManager) {
-            performanceManager.recordMetric('form_submission_success', {
-                formId: eventData.formId,
-                timestamp: Date.now()
-            });
-        }
     }
 
     /**
@@ -426,15 +400,6 @@ class LandingPageManager {
      */
     handleFormError(eventData) {
         console.error('Form submission error:', eventData.formId, eventData.error);
-        
-        const performanceManager = this.getManager('performance');
-        if (performanceManager) {
-            performanceManager.recordMetric('form_submission_error', {
-                formId: eventData.formId,
-                error: eventData.error.message,
-                timestamp: Date.now()
-            });
-        }
     }
 
     /**
@@ -442,28 +407,15 @@ class LandingPageManager {
      */
     handleVideoEvent(eventData) {
         // Could be used for analytics, performance monitoring, etc.
-        if (window.debugNavigation) {
-            console.log('Video event:', eventData.type, eventData.video.videoId);
-        }
     }
 
-    /**
-     * Handle performance metrics
-     */
-    handlePerformanceMetric(metric) {
-        // Could be used to send metrics to analytics service
-        if (metric.name === 'slow_resource' || metric.name === 'high_memory') {
-            console.warn('Performance issue detected:', metric);
-        }
-    }
+
 
     /**
      * Handle element animated events
      */
     handleElementAnimated(eventData) {
-        if (window.debugNavigation) {
-            console.log('Element animated:', eventData.selector, eventData.animationType);
-        }
+
     }
 
     /**
@@ -478,21 +430,15 @@ class LandingPageManager {
             currentLangSpan.textContent = this.currentLanguage.toUpperCase();
         }
         
-        console.log('Language changed to:', this.currentLanguage);
+
     }
 
     /**
      * Handle global errors
      */
     handleGlobalError(error) {
-        const performanceManager = this.getManager('performance');
-        if (performanceManager) {
-            performanceManager.recordMetric('global_error', {
-                message: error.message || 'Unknown error',
-                stack: error.stack || 'No stack trace',
-                timestamp: Date.now()
-            });
-        }
+        // Log global errors for debugging
+        console.error('Global application error:', error);
     }
 
     /**
@@ -650,14 +596,13 @@ class LandingPageManager {
      * Cleanup all managers
      */
     cleanup() {
-        console.log('Cleaning up LandingPageManager...');
+
         
         // Cleanup all managers
         this.managers.forEach((manager, name) => {
             if (manager && typeof manager.cleanup === 'function') {
                 try {
                     manager.cleanup();
-                    console.log(`${name} manager cleaned up`);
                 } catch (error) {
                     console.error(`Error cleaning up ${name} manager:`, error);
                 }
@@ -670,7 +615,7 @@ class LandingPageManager {
         // Reset state
         this.initialized = false;
         
-        console.log('LandingPageManager cleanup complete');
+
     }
 
     /**
@@ -688,7 +633,7 @@ class LandingPageManager {
 document.addEventListener('DOMContentLoaded', () => {
     try {
         window.landingPageManager = new LandingPageManager();
-        console.log('LandingPageManager initialized and exposed globally');
+
     } catch (error) {
         console.error('Failed to initialize LandingPageManager:', error);
     }
@@ -697,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // WordPress integration
 if (typeof jQuery !== 'undefined') {
     jQuery(document).ready(() => {
-        console.log('WordPress integration active');
+
     });
 }
 

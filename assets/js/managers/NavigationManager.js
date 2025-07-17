@@ -1,7 +1,5 @@
 /**
  * NavigationManager - Handles navigation, scrolling, and active states
- * Following Single Responsibility Principle
- * File path: assets/js/managers/NavigationManager.js
  */
 
 class NavigationManager {
@@ -263,7 +261,7 @@ class NavigationManager {
         const targetId = href.substring(1);
         const targetElement = document.getElementById(targetId);
         
-        console.log('Navigation clicked:', href, 'Target element:', targetElement);
+
         
         if (targetElement) {
             // Set active state immediately
@@ -288,7 +286,7 @@ class NavigationManager {
                 targetPosition = targetElement.offsetTop - headerHeight - 20;
             }
             
-            console.log('Scrolling to position:', targetPosition, 'Header height:', headerHeight);
+    
             
             if (scrollContainer) {
                 // Scroll the content wrapper
@@ -339,14 +337,14 @@ class NavigationManager {
      * Handle mobile menu opened event
      */
     handleMobileMenuOpened(event) {
-        console.log('Mobile menu opened - navigation handler');
+
     }
 
     /**
      * Handle mobile menu closed event
      */
     handleMobileMenuClosed(event) {
-        console.log('Mobile menu closed - navigation handler');
+
     }
 
     /**
