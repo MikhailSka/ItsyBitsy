@@ -33,7 +33,7 @@ class TranslationManager {
                 // Hero Section
                 hero_badge: "Przedszkole Montessori",
                 hero_title: "Międzynarodowe przedszkole dwujęzyczne Montessori. Zanurzenie w angielskim, przez cały dzień, codziennie.",
-                hero_subtitle: "Odkryj magię edukacji Montessori w dwujęzycznym środowisku, gdzie Twoje dziecko rozwija się naturalnie i z radością.",
+                hero_subtitle: "Odkryj moc edukacji Montessori w dwujęzycznym środowisku, gdzie Twoje dziecko rozwija się naturalnie i z radością.",
                 schedule_meeting: "Umów spotkanie",
                 learn_more: "Dowiedz się więcej",
                 
@@ -65,8 +65,8 @@ class TranslationManager {
                 service_2_title: "Dwujęzyczność",
                 service_2_description: "Dwujęzyczność - codzienne zanurzenie w języku angielskim, program edukacyjny w języku polskim i angielskim.",
 
-                service_3_title: "Native Speaker",
-                service_3_description: "Native speaker przez cały dzień.",
+                service_3_title: "Native speaker",
+                service_3_description: "Rodzimy użytkownik języka angielskiego w każdej grupie, przez cały dzień.",
 
                 service_4_title: "Bez presji",
                 service_4_description: "Bez presji, z uważnością i szacunkiem.",
@@ -75,7 +75,7 @@ class TranslationManager {
                 only_best_title: "Tylko to, co najlepsze dla Twojego dziecka!",
                 only_best_point_1: "Pełen program akademicki Montessori dla dzieci 3-6 lat.",
                 only_best_point_2: "Dwujęzyczność - codzienne zanurzenie w języku angielskim, program edukacyjny po polsku i angielsku.",
-                only_best_point_3: "Native speaker przez cały dzień.",
+                only_best_point_3: "Rodzimy użytkownik języka angielskiego w każdej grupie, przez cały dzień.",
                 only_best_point_4: "Bez presji, z uważnością i szacunkiem.",
                 
                 // Grid Section
@@ -86,7 +86,7 @@ class TranslationManager {
                 grid_education_title: "Edukacja oparta na wiedzy i zrozumieniu dziecka",
                 grid_education_text: "Realizujemy pełny program Montessori, wspierający rozwój poznawczy, emocjonalny i społeczny dzieci. Nasze klasy są wyposażone w oryginalne materiały Montessori, a wszechstronnie wykształceni nauczyciele codziennie towarzyszą dzieciom w ich indywidualnym rozwoju – bez pośpiechu, z uważnością i szacunkiem.",
                 grid_authentic_title: "Autentyczna dwujęzyczność",
-                grid_authentic_text: "Angielski przez cały dzień – naturalnie i bez presji. Dzieci codziennie funkcjonują w środowisku dwujęzycznym – polskiego i angielskiego. Nasi anglojęzyczni nauczyciele są obecni w grupie przez cały dzień, dzięki czemu język angielski przyswajany jest w sposób naturalny, poprzez relacje, zabawę i codzienne sytuacje. To zanurzenie, a nie lekcje.",
+                grid_authentic_text: "Angielski przez cały dzień – naturalnie i bez presji. Dzieci codziennie funkcjonują w środowisku dwujęzycznym – polskim i angielskim. Nasi anglojęzyczni nauczyciele są obecni w grupie przez cały dzień, dzięki czemu język angielski przyswajany jest w sposób naturalny, poprzez relacje, zabawę i codzienne sytuacje. To zanurzenie, a nie lekcje.",
                 grid_relationships_title: "Podejście relacyjne i bliskościowe",
                 grid_relationships_text: "Bezpieczne relacje są fundamentem rozwoju. W centrum naszej pracy są relacje – z dzieckiem, z rodzicem, w zespole. Tworzymy przestrzeń, w której każde dziecko czuje się widziane, słyszane i ważne. Adaptacja, codzienne rytuały, rozwiązywanie konfliktów – wszystko opieramy na empatii, uważności i komunikacji bez przemocy (NVC).",
                 
@@ -130,7 +130,7 @@ class TranslationManager {
                 
                 // Visit Us Section
                 visit_us_title: "Zajrzyj do nas!",
-        visit_us_badge: "Zajrzyj do nas",
+                visit_us_badge: "Zajrzyj do nas",
                 visit_us_text: "Zobacz, jak wygląda dzień w naszym przedszkolu. Nasza codzienność to zadowolone, bezpieczne, skupione dzieci, ciepłe relacje, spokojna przestrzeń i zaangażowani nauczyciele. Tak właśnie wygląda u nas edukacja w duchu Montessori i bliskości.",
                 visit_us_question: "Chcesz wiedzieć, czy to miejsce dla Was?",
                 visit_us_cta: "Najlepiej zobaczyć wszystko na własne oczy!",
@@ -204,14 +204,14 @@ class TranslationManager {
                 // Form validation
                 error_name: "Imię musi mieć co najmniej 2 znaki",
                 error_email: "Proszę wprowadzić prawidłowy adres email",
-                                  error_message: "Wiadomość musi mieć co najmniej 10 znaków",
-                  form_validation_error: "Proszę poprawić błędy w formularzu.",
-                  form_sending: "Wysyłanie...",
-                  form_success: "Dziękujemy! Twoja wiadomość została wysłana pomyślnie.",
-                  form_error: "Przepraszamy, wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.",
-                  
-                  // Google Maps review link
-                  view_on_google: "Zobacz w Google"
+                error_message: "Wiadomość musi mieć co najmniej 10 znaków",
+                form_validation_error: "Proszę poprawić błędy w formularzu.",
+                form_sending: "Wysyłanie...",
+                form_success: "Dziękujemy! Twoja wiadomość została wysłana pomyślnie.",
+                form_error: "Przepraszamy, wystąpił błąd podczas wysyłania wiadomości. Spróbuj ponownie.",
+                
+                // Google Maps review link
+                view_on_google: "Zobacz w Google"
             },
             
             en: {
@@ -228,9 +228,9 @@ class TranslationManager {
                 
                 // Hero Section
                 hero_badge: "Montessori Preschool",
-                hero_title: "International bilingual Montessori preschool. Immersion in English, all day, every day.",
-                hero_subtitle: "Discover the magic of Montessori education in a bilingual environment where your child grows naturally and joyfully.",
-                schedule_meeting: "Schedule meeting",
+                hero_title: "International Bilingual Montessori Preschool English immersion – all day, every day.",
+                hero_subtitle: "Experience the power of Montessori education in a nurturing, bilingual environment where your child grows with confidence, curiosity, and joy.",
+                schedule_meeting: "Schedule a meeting",
                 learn_more: "Learn more",
                 
                 // Hero Stats
@@ -251,45 +251,45 @@ class TranslationManager {
                 // Services Section
                 services_title: "Our uniqueness",
                 uniqueness_badge: "Our uniqueness",
-                uniqueness_title: "What makes us unique?",
-                uniqueness_subtitle: "Discover the three pillars of our education that make us unique",
+                uniqueness_title: "What Makes Us Unique",
+                uniqueness_subtitle: "Discover the three core pillars of our educational approach that set us apart.",
                 services_subtitle: "What we offer your children",
 
-                service_1_title: "Montessori Program 3-6 years",
-                service_1_description: "Full Montessori academic program for children 3-6 years old.",
+                service_1_title: "Montessori Curriculum for Children Aged 3–6",
+                service_1_description: "A full, authentic Montessori academic curriculum designed to support your child's natural development, independence, and love of learning during the most formative years.",
 
-                service_2_title: "Bilingualism",
-                service_2_description: "Bilingualism - daily immersion in English, educational program in Polish and English.",
+                service_2_title: "Bilingual Environment",
+                service_2_description: "Daily English immersion with educational program delivered in both Polish and English – supporting true bilingual development in a natural and engaging way.",
 
-                service_3_title: "Native Speaker",
-                service_3_description: "Native speaker all day long.",
+                service_3_title: "English the Natural Way",
+                service_3_description: "All-day interaction with native speakers supports confident, fluent language use from an early age.",
 
-                service_4_title: "No pressure",
-                service_4_description: "No pressure, with mindfulness and respect.",
+                service_4_title: "Mindful and Respectful Education",
+                service_4_description: "Learning without pressure, guided by attentiveness and genuine respect for the child.",
 
                 // Only the Best Section
                 only_best_title: "Only the best for your child!",
-                only_best_point_1: "Full Montessori academic program for children 3-6 years old.",
-                only_best_point_2: "Bilingualism - daily immersion in English, educational program in Polish and English.",
-                only_best_point_3: "Native speaker all day long.",
-                only_best_point_4: "No pressure, with mindfulness and respect.",
+                only_best_point_1: "A full, authentic Montessori academic curriculum designed to support your child's natural development, independence, and love of learning during the most formative years.",
+                only_best_point_2: "Daily English immersion with educational program delivered in both Polish and English – supporting true bilingual development in a natural and engaging way.",
+                only_best_point_3: "All-day interaction with native speakers supports confident, fluent language use from an early age.",
+                only_best_point_4: "Learning without pressure, guided by attentiveness and genuine respect for the child.",
                 
                 // Grid Section
                 call_us: "Call",
                 send_email: "Send email",
-                leave_contact_yourself: "Leave your contact",
+                leave_contact_yourself: "Let's Talk! Share your contact – we'll call you at your convenience.",
                 get_to_know_us: "Get to know us better",
-                grid_education_title: "Education based on knowledge and understanding of the child",
-                grid_education_text: "We implement a full Montessori program supporting children's cognitive, emotional and social development. Our classrooms are equipped with original Montessori materials, and comprehensively educated teachers accompany children in their individual development every day - without haste, with attention and respect.",
-                grid_authentic_title: "Authentic bilingualism",
-                grid_authentic_text: "English all day - naturally and without pressure. Children function daily in a bilingual environment - Polish and English. Our English-speaking teachers are present in the group all day, so English is acquired naturally, through relationships, play and everyday situations. It's immersion, not lessons.",
-                grid_relationships_title: "Relational approach and closeness",
-                grid_relationships_text: "Safe relationships are the foundation of development. At the center of our work are relationships - with the child, with the parent, in the team. We create a space where every child feels seen, heard and important. Adaptation, daily rituals, conflict resolution - we base everything on empathy, mindfulness and non-violent communication (NVC).",
+                grid_education_title: "Education Rooted in Understanding the Child",
+                grid_education_text: "We offer a full Montessori program that nurtures children's cognitive, emotional, and social development. Our classrooms are equipped with authentic Montessori materials, and our highly trained teachers support each child's individual growth every day — with patience, mindfulness, and deep respect.",
+                grid_authentic_title: "Authentic Bilingualism",
+                grid_authentic_text: "English all day – naturally and without pressure. Children thrive in a truly bilingual environment, where both Polish and English are part of everyday life. Native English-speaking teachers are present all day, so the language is acquired organically through relationships, play, and daily routines. It's full immersion, not formal lessons.",
+                grid_relationships_title: "Relational Approach and Emotional Closeness",
+                grid_relationships_text: "Safe, trusting relationships are the foundation of a child's development. At the heart of our work are meaningful connections – with the child, the parent, and within our team. We create a space where every child feels seen, heard, and valued. From the adaptation process to daily routines and conflict resolution, everything is rooted in empathy, mindfulness, and Nonviolent Communication (NVC).",
                 
                 // Testimonials Section
-                testimonials_title: "Parent reviews",
+                testimonials_title: "Parent Reviews",
                 testimonials_badge: "What parents say",
-                testimonials_subtitle: "For over 10 years we have released hundreds of happy children well prepared for life and school!",
+                testimonials_subtitle: "For over 10 years, we've guided hundreds of happy, confident children—well prepared for both school and life!",
                 
                 testimonial_1_name: "Mrs. Joanna:",
                 testimonial_1_text: "My son has been attending ItsyBitsy for 2 years and I am delighted with his progress in learning English. The Montessori method allows him to develop naturally.",
@@ -314,47 +314,47 @@ class TranslationManager {
                 testimonial_3_text_5: "We will always remain in our hearts. With love and great gratitude to beloved ItsyBitsy",
                 
                 // Why Us Section
-                why_us_title: "Why choose us?",
+                why_us_title: "Why Choose Us?",
                 why_us_badge: "Why us",
-                why_us_subtitle: "Because you want only the best for your child!",
-                why_us_point_1: "Full Montessori academic program - children learn at their own pace, developing key competencies for the future.",
-                why_us_point_2: "Closeness - we build relationships based on respect and trust.",
-                why_us_point_3: "Bilingualism through immersion - English naturally accompanies children every day, all day long.",
-                why_us_point_4: "A team with a mission and heart - experienced, permanent and well-educated staff who really like children and their work",
-                why_us_point_5: "Native speaker teacher in every group, communicating exclusively in English.",
-                why_us_point_6: "Beautiful, peaceful interiors - natural materials, light, harmony and cleanliness.",
+                why_us_subtitle: "Because you want the very best for your child.",
+                why_us_point_1: "Montessori Curriculum – Children learn at their own pace, developing essential skills and independence for life.",
+                why_us_point_2: "Close, Respectful Relationships – We build strong connections based on trust, empathy, and respect.",
+                why_us_point_3: "True Bilingualism Through Immersion – English is a natural part of every day, all day.",
+                why_us_point_4: "Dedicated Team with Heart – Experienced, well-educated teachers who genuinely care about children—and love what they do.",
+                why_us_point_5: "Native Speaker in Every Group – English is spoken consistently and naturally by native speakers.",
+                why_us_point_6: "Peaceful, Beautiful Interiors – Calm, harmonious spaces with natural materials, light, and order that support focus and well-being.",
                 
                 // Visit Us Section
-                visit_us_title: "Come visit us!",
+                visit_us_title: "Come Visit Us!",
                 visit_us_badge: "Come visit us",
-                visit_us_text: "See what a day at our preschool looks like. Our daily life consists of satisfied, safe, focused children, warm relationships, peaceful space and engaged teachers. This is exactly what education in the spirit of Montessori and closeness looks like.",
-                visit_us_question: "Do you want to know if this is the place for you?",
-                visit_us_cta: "It's best to see everything with your own eyes!",
+                visit_us_text: "Step into a day in the life of our preschool. You'll see calm, focused, and joyful children, nurturing relationships, peaceful spaces, and dedicated, present teachers. This is what education rooted in Montessori and emotional closeness truly looks like.",
+                visit_us_question: "Wondering if this is the right place for your family?",
+                visit_us_cta: "The best way to find out is to see it for yourself!",
                 
                 // Listen to Children Section
-                listen_children_title: "Listen to the children!",
+                listen_children_title: "Listen to the Children",
                 children_perspective_badge: "Children's perspective",
-                listen_children_subtitle: "Preschool seen from the most important perspective, from about 116cm height!",
-                listen_children_text_1: "What really matters in preschool is best seen in a child's eyes.",
-                listen_children_text_2: "In the joy of discovery, in self-confidence when they reach for materials themselves, in the freedom with which they greet the teacher.",
-                listen_children_text_3: "Children know best what gives them a sense of security, what they like most, where they feel at home.",
-                listen_children_text_4: "In this space there are no accidents – every place, material, ritual and relationship supports their natural development.",
-                listen_children_text_5: "And children feel it.",
-                listen_children_highlight: "It's not just a preschool. It's their place of power.",
+                listen_children_subtitle: "Preschool, as seen from the most important perspective — about 116 cm off the ground.",
+                listen_children_text_1: "What truly matters in early childhood education is best reflected in a child's eyes. In the joy of discovery.",
+                listen_children_text_2: "In the confidence they show when choosing materials on their own.",
+                listen_children_text_3: "In the ease with which they greet their teacher each morning. Children instinctively know what makes them feel safe, what brings them joy, and where they truly belong.",
+                listen_children_text_4: "In our environment, nothing is accidental — every space, material, routine, and relationship is thoughtfully designed to support their natural development.",
+                listen_children_text_5: "And children sense that.",
+                listen_children_highlight: "This isn't just a preschool. It's their place of strength.",
                 
                 // Let's Meet Section
-                lets_meet_title: "Let's get to know each other.",
-                lets_meet_subtitle: "Book your child for a free workshop and relax with coffee!",
-
+                lets_meet_title: "Let's Get to Know Each Other",
+                lets_meet_subtitle: "Join us for a free workshop — a gentle introduction to our preschool world.",
+                
                 // Workshop Section
                 free_badge: "Free",
                 welcome_badge: "Welcome",
-                workshop_title: "Free workshop for child",
-                workshop_subtitle: "Get to know our methods in practice",
+                workshop_title: "Free workshop for your child",
+                workshop_subtitle: "Experience our methods in action.",
                 coffee_title: "Coffee for parents",
-                coffee_subtitle: "Relaxing time during classes",
-                conversation_title: "Conversation with teachers",
-                conversation_subtitle: "We will answer all questions",
+                coffee_subtitle: "Enjoy a moment to relax while your child explores.",
+                conversation_title: "Meet our teachers",
+                conversation_subtitle: "Ask questions, share your thoughts, and get to know us.",
 
                 // Join Us Section
                 join_us_text: "Join our community today!",
@@ -365,7 +365,7 @@ class TranslationManager {
                 // Buttons
                 contact_us: "Leave contact, we'll call!",
                 book_workshop: "Call to book workshop",
-                contact_workshop: "Leave contact to book workshop",
+                contact_workshop: "Book a free workshop for your child — and enjoy a peaceful coffee while we take care of the rest!",
                 leave_contact: "Leave contact",
                 
                 // Contact Section

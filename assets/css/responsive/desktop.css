@@ -86,4 +86,13 @@
     .hero-stats-external .stat-text-external {
         color: #000000 !important;
     }
+    
+    /* Contact Section - Ensure proper bottom spacing for map visibility */
+    .contact-section {
+        padding-bottom: 8rem !important; /* Extra padding for desktop to ensure map is fully visible */
+    }
+    
+    .contact-map {
+        margin-bottom: 2rem !important; /* Additional margin for the map container */
+    }
 } 

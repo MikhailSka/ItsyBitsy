@@ -54,16 +54,18 @@
 
 /* Viewport and Layout Foundation */
 html {
-  height: calc(100 * var(--vh, 1vh));
+    height: 100vh; /* Fallback for browsers that don't support CSS custom properties */
+    height: calc(100 * var(--vh, 1vh));
 }
 
 body {
-  height: 100%;
-  overflow: hidden;
+    height: 100%;
+    overflow-x: hidden; /* Only hide horizontal overflow, allow vertical scrolling */
 }
 
 #content-wrapper {
-  height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem; /* Add some bottom padding to ensure content is not cut off */
 } 
